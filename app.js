@@ -108,6 +108,7 @@ function animalHasAlert(a){
 
 /* ---------------- Render ---------------- */
 function render(){
+  document.querySelectorAll('.overlay').forEach(el => el.remove());
   const app = document.getElementById('app');
   if(!currentUser){
     app.innerHTML = renderLoginScreen();
