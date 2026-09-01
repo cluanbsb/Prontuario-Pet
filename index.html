@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Prontuário — Registro de Animais</title>
+
+<!-- PWA: manifest + cor do tema -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2D6A4F">
+<meta name="mobile-web-app-capable" content="yes">
+
+<!-- Ícones -->
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+
+<!-- iOS: comportamento de app instalado ao adicionar à Tela de Início -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Prontuário Pet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Lora:wght@400;500;600&family=Quicksand:wght@500;600;700&family=Nunito:wght@400;600;700&family=Comfortaa:wght@500;600;700&family=Caveat:wght@500;600;700&family=Baloo+2:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app"></div>
+
+<!-- SDKs do Firebase (Authentication + Firestore) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+<!-- firebase-config.js: chaves do SEU projeto Firebase (edite este arquivo) -->
+<script src="js/firebase-config.js"></script>
+<!-- data.js: configurações de campos, temas, fontes e papéis de parede -->
+<script src="js/data.js"></script>
+<!-- app.js: estado, autenticação, persistência e renderização da aplicação -->
+<script src="js/app.js"></script>
+
+<!-- Registro do Service Worker (permite instalar como app / uso offline básico) -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    });
+  }
+</script>
+</body>
+</html>
