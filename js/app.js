@@ -44,6 +44,7 @@ function applySettings(s){
 
 let selectedId = null;
 let activeTab = 'perfil';
+let recordSearch = '';
 let modalState = null; // {entity, mode:'add'|'edit', animalId, recordId}
 let confirmState = null; // {message, onConfirm}
 let loaded = false;
@@ -137,6 +138,8 @@ async function saveData(){
     await Promise.all(sharedWithMeEdited.map(a => updateSharedAsRecipient(a)));
   }catch(e){
     console.error('Falha ao salvar dados', e);
+    toastMessage = 'Não foi possível salvar as alterações. Verifique sua conexão e tente novamente.';
+    render();
   }
 }
 
@@ -265,6 +268,15 @@ function medicationActive(m){
 }
 function animalHasAlert(a){
   return (a.vaccines||[]).some(v => vaccineStatus(v) === 'overdue');
+}
+function overdueVaccineAlerts(){
+  const alerts = [];
+  animals.forEach(a=>{
+    (a.vaccines||[]).forEach(v=>{
+      if(vaccineStatus(v)==='overdue') alerts.push({ animalId:a.id, animalName:a.name, vaccineName:v.name, nextDue:v.nextDue });
+    });
+  });
+  return alerts;
 }
 
 /* ---------------- Render ---------------- */
@@ -482,7 +494,7 @@ function renderSidebar(){
           <h1>Meus animais</h1>
           <p class="sub">${animals.length} cadastrado${animals.length!==1?'s':''}</p>
         </div>
-        <button class="icon-btn brand-menu-btn" data-action="toggle-user-menu" title="Menu da conta">⋮</button>
+        <button class="icon-btn brand-menu-btn" data-action="toggle-user-menu" aria-label="Menu da conta" title="Menu da conta">⋮</button>
       </div>
       ${userMenuOpen ? `
         <div class="user-menu-backdrop" data-action="close-user-menu"></div>
@@ -490,6 +502,7 @@ function renderSidebar(){
           <span class="user-email" title="${escapeAttr(currentUser.email||'')}">${escapeHtml(currentUser.email || 'Minha conta')}</span>
           <button class="menu-item" data-action="open-edit-account">✎ Editar cadastro</button>
           <button class="menu-item" data-action="open-customize">🎨 Personalizar</button>
+          <button class="menu-item" data-action="export-data">⬇️ Exportar dados (backup)</button>
           <button class="logout-link" data-action="logout">Sair</button>
         </div>
       ` : ''}
@@ -497,8 +510,18 @@ function renderSidebar(){
     <div class="sidebar-actions">
       <button class="btn-new" data-action="new-animal">+ Novo animal</button>
     </div>
+    ${(() => {
+      const alerts = overdueVaccineAlerts();
+      if(!alerts.length) return '';
+      const preview = alerts.slice(0,3).map(al => `${escapeHtml(al.animalName)} — ${escapeHtml(al.vaccineName)}`).join('; ');
+      const extra = alerts.length > 3 ? ` e mais ${alerts.length - 3}` : '';
+      return `
+      <div class="alert-banner" role="alert">
+        ⚠️ <strong>${alerts.length} vacina${alerts.length!==1?'s':''} atrasada${alerts.length!==1?'s':''}:</strong> ${preview}${extra}
+      </div>`;
+    })()}
     <div class="animal-picker-wrap">
-      <button class="animal-picker-btn" data-action="toggle-animal-picker">
+      <button class="animal-picker-btn" data-action="toggle-animal-picker" aria-label="Selecionar animal" aria-expanded="${animalPickerOpen}">
         ${pickerLabel}
         <span class="chevron">${animalPickerOpen ? '▴' : '▾'}</span>
       </button>
@@ -553,9 +576,9 @@ function renderDetail(){
         ${a.notes ? `<div class="profile-notes">${escapeHtml(a.notes)}</div>` : ''}
       </div>
       <div class="profile-actions">
-        <button class="icon-btn" data-action="edit-animal" title="Editar animal">✎</button>
-        ${!a.isShared ? `<button class="icon-btn" data-action="open-share" title="Compartilhar com outro usuário">🔗</button>` : ''}
-        ${!a.isShared ? `<button class="icon-btn" data-action="delete-animal" title="Excluir animal">🗑</button>` : ''}
+        <button class="icon-btn" data-action="edit-animal" aria-label="Editar animal" title="Editar animal">✎</button>
+        ${!a.isShared ? `<button class="icon-btn" data-action="open-share" aria-label="Compartilhar com outro usuário" title="Compartilhar com outro usuário">🔗</button>` : ''}
+        ${!a.isShared ? `<button class="icon-btn" data-action="delete-animal" aria-label="Excluir animal" title="Excluir animal">🗑</button>` : ''}
       </div>
     </div>
     ${a.isShared ? `<div class="shared-banner">🔗 Compartilhado por <strong>${escapeHtml(a.ownerEmail||'outro usuário')}</strong> · vocês dois podem editar</div>` : ''}
@@ -611,7 +634,9 @@ function renderPerfilTab(a){
 }
 
 function renderVaccinesTab(a, vaccines){
-  const sorted = vaccines.slice().sort((x,y)=> (y.dateApplied||'').localeCompare(x.dateApplied||''));
+  const q = recordSearch.trim().toLowerCase();
+  const filtered = q ? vaccines.filter(v => `${v.name||''} ${v.vet||''} ${v.lot||''} ${v.notes||''}`.toLowerCase().includes(q)) : vaccines;
+  const sorted = filtered.slice().sort((x,y)=> (y.dateApplied||'').localeCompare(x.dateApplied||''));
   const total = vaccines.reduce((sum,v)=> sum + (parseFloat(v.price)||0), 0);
   const readOnly = false; // compartilhamento agora permite edição por ambos
   return `
@@ -622,6 +647,7 @@ function renderVaccinesTab(a, vaccines){
       ${!readOnly ? `<button class="btn-add" data-action="add-record" data-entity="vaccine">+ Registrar vacina</button>` : ''}
     </div>
   </div>
+  ${vaccines.length > 3 ? `<input type="text" id="record-search" class="search-input" placeholder="Buscar por nome, lote, veterinário..." value="${escapeAttr(recordSearch)}">` : ''}
   ${sorted.length ? sorted.map(v=>{
     const status = vaccineStatus(v);
     const badge = status==='overdue' ? '<span class="badge overdue">Atrasada</span>' : status==='soon' ? '<span class="badge soon">Em breve</span>' : '';
@@ -637,15 +663,17 @@ function renderVaccinesTab(a, vaccines){
       </div>
       ${!readOnly ? `
       <div class="rec-actions">
-        <button class="icon-btn" data-action="edit-record" data-entity="vaccine" data-id="${v.id}" title="Editar">✎</button>
-        <button class="icon-btn" data-action="delete-record" data-entity="vaccine" data-id="${v.id}" title="Excluir">🗑</button>
+        <button class="icon-btn" data-action="edit-record" data-entity="vaccine" data-id="${v.id}" aria-label="Editar" title="Editar">✎</button>
+        <button class="icon-btn" data-action="delete-record" data-entity="vaccine" data-id="${v.id}" aria-label="Excluir" title="Excluir">🗑</button>
       </div>` : ''}
     </div>`;
-  }).join('') : `<div class="empty-tab">Nenhuma vacina registrada ainda.</div>`}`;
+  }).join('') : `<div class="empty-tab">${q ? 'Nenhum resultado para essa busca.' : 'Nenhuma vacina registrada ainda.'}</div>`}`;
 }
 
 function renderMedsTab(a, meds){
-  const sorted = meds.slice().sort((x,y)=> (y.startDate||'').localeCompare(x.startDate||''));
+  const q = recordSearch.trim().toLowerCase();
+  const filtered = q ? meds.filter(m => `${m.name||''} ${m.dose||''} ${m.frequency||''} ${m.purchaseLocation||''} ${m.notes||''}`.toLowerCase().includes(q)) : meds;
+  const sorted = filtered.slice().sort((x,y)=> (y.startDate||'').localeCompare(x.startDate||''));
   const total = meds.reduce((sum,m)=> sum + (parseFloat(m.price)||0), 0);
   const readOnly = false; // compartilhamento agora permite edição por ambos
   return `
@@ -656,6 +684,7 @@ function renderMedsTab(a, meds){
       ${!readOnly ? `<button class="btn-add" data-action="add-record" data-entity="medication">+ Registrar medicação</button>` : ''}
     </div>
   </div>
+  ${meds.length > 3 ? `<input type="text" id="record-search" class="search-input" placeholder="Buscar por nome, dose, local..." value="${escapeAttr(recordSearch)}">` : ''}
   ${sorted.length ? sorted.map(m=>{
     const active = medicationActive(m);
     return `
@@ -670,21 +699,24 @@ function renderMedsTab(a, meds){
       </div>
       ${!readOnly ? `
       <div class="rec-actions">
-        <button class="icon-btn" data-action="edit-record" data-entity="medication" data-id="${m.id}" title="Editar">✎</button>
-        <button class="icon-btn" data-action="delete-record" data-entity="medication" data-id="${m.id}" title="Excluir">🗑</button>
+        <button class="icon-btn" data-action="edit-record" data-entity="medication" data-id="${m.id}" aria-label="Editar" title="Editar">✎</button>
+        <button class="icon-btn" data-action="delete-record" data-entity="medication" data-id="${m.id}" aria-label="Excluir" title="Excluir">🗑</button>
       </div>` : ''}
     </div>`;
-  }).join('') : `<div class="empty-tab">Nenhuma medicação registrada ainda.</div>`}`;
+  }).join('') : `<div class="empty-tab">${q ? 'Nenhum resultado para essa busca.' : 'Nenhuma medicação registrada ainda.'}</div>`}`;
 }
 
 function renderHistoryTab(a, history){
   const readOnly = false; // compartilhamento agora permite edição por ambos
+  const q = recordSearch.trim().toLowerCase();
+  const filtered = q ? history.filter(h => `${h.type||''} ${h.description||''} ${h.vet||''}`.toLowerCase().includes(q)) : history;
   return `
   <div class="section-head">
     <h3>Histórico de saúde</h3>
     ${!readOnly ? `<button class="btn-add" data-action="add-record" data-entity="healthRecord">+ Novo registro</button>` : ''}
   </div>
-  ${history.length ? `<div class="timeline">${history.map(h=>`
+  ${history.length > 3 ? `<input type="text" id="record-search" class="search-input" placeholder="Buscar por tipo, descrição, veterinário..." value="${escapeAttr(recordSearch)}">` : ''}
+  ${filtered.length ? `<div class="timeline">${filtered.map(h=>`
     <div class="tl-item">
       <div class="tl-dot"></div>
       <div class="tl-head">
@@ -695,11 +727,11 @@ function renderHistoryTab(a, history){
       <div class="tl-foot">${h.weight? 'Peso: '+h.weight+' kg':''}${h.weight && h.vet? ' · ':''}${h.vet? escapeHtml(h.vet):''}</div>
       ${!readOnly ? `
       <div class="tl-actions">
-        <button class="icon-btn" data-action="edit-record" data-entity="healthRecord" data-id="${h.id}" title="Editar">✎</button>
-        <button class="icon-btn" data-action="delete-record" data-entity="healthRecord" data-id="${h.id}" title="Excluir">🗑</button>
+        <button class="icon-btn" data-action="edit-record" data-entity="healthRecord" data-id="${h.id}" aria-label="Editar" title="Editar">✎</button>
+        <button class="icon-btn" data-action="delete-record" data-entity="healthRecord" data-id="${h.id}" aria-label="Excluir" title="Excluir">🗑</button>
       </div>` : ''}
     </div>
-  `).join('')}</div>` : `<div class="empty-tab">Nenhum registro de saúde ainda.</div>`}`;
+  `).join('')}</div>` : `<div class="empty-tab">${q ? 'Nenhum resultado para essa busca.' : 'Nenhum registro de saúde ainda.'}</div>`}`;
 }
 
 /* ---------------- Peso & Dieta ---------------- */
@@ -764,8 +796,8 @@ function renderDietTab(a){
         ${entry.notes ? `<div class="rec-notes">${escapeHtml(entry.notes)}</div>` : ''}
       </div>
       <div class="rec-actions">
-        <button class="icon-btn" data-action="edit-record" data-entity="weightEntry" data-id="${entry.id}" title="Editar">✎</button>
-        <button class="icon-btn" data-action="delete-record" data-entity="weightEntry" data-id="${entry.id}" title="Excluir">🗑</button>
+        <button class="icon-btn" data-action="edit-record" data-entity="weightEntry" data-id="${entry.id}" aria-label="Editar" title="Editar">✎</button>
+        <button class="icon-btn" data-action="delete-record" data-entity="weightEntry" data-id="${entry.id}" aria-label="Excluir" title="Excluir">🗑</button>
       </div>
     </div>
   `).join('') : `<div class="empty-tab">Nenhuma pesagem registrada ainda.</div>`}
@@ -782,8 +814,8 @@ function renderDietTab(a){
         ${(p.kg || p.price) ? `<div class="rec-line">${p.kg ? parseFloat(p.kg).toFixed(1) + ' kg' : ''}${p.kg && p.price ? ' · ' : ''}${p.price ? 'R$ ' + parseFloat(p.price).toFixed(2) : ''}</div>` : ''}
       </div>
       <div class="rec-actions">
-        <button class="icon-btn" data-action="edit-record" data-entity="foodPurchase" data-id="${p.id}" title="Editar">✎</button>
-        <button class="icon-btn" data-action="delete-record" data-entity="foodPurchase" data-id="${p.id}" title="Excluir">🗑</button>
+        <button class="icon-btn" data-action="edit-record" data-entity="foodPurchase" data-id="${p.id}" aria-label="Editar" title="Editar">✎</button>
+        <button class="icon-btn" data-action="delete-record" data-entity="foodPurchase" data-id="${p.id}" aria-label="Excluir" title="Excluir">🗑</button>
       </div>
     </div>
   `).join('') : `<div class="empty-tab">Nenhuma compra registrada ainda.</div>`}
@@ -1122,9 +1154,29 @@ function attachEvents(){
   if(toggleUserMenuBtn) toggleUserMenuBtn.addEventListener('click', ()=>{ userMenuOpen = !userMenuOpen; render(); });
   const closeUserMenuBackdrop = document.querySelector('[data-action="close-user-menu"]');
   if(closeUserMenuBackdrop) closeUserMenuBackdrop.addEventListener('click', ()=>{ userMenuOpen = false; render(); });
+  const exportBtn = document.querySelector('[data-action="export-data"]');
+  if(exportBtn) exportBtn.addEventListener('click', ()=>{
+    try{
+      const payload = { exportadoEm: new Date().toISOString(), animais: animals };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `prontuario-pet-backup-${todayStr()}.json`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+      toastMessage = 'Backup baixado com sucesso.';
+    }catch(e){
+      toastMessage = 'Não foi possível gerar o backup.';
+    }
+    userMenuOpen = false;
+    render();
+  });
   document.querySelectorAll('[data-select]').forEach(el=>{
-    el.addEventListener('click', ()=>{ selectedId = el.dataset.select; activeTab='perfil'; animalPickerOpen=false; render(); });
-    el.addEventListener('keydown', e=>{ if(e.key==='Enter'){ selectedId = el.dataset.select; activeTab='perfil'; animalPickerOpen=false; render(); } });
+    el.addEventListener('click', ()=>{ selectedId = el.dataset.select; activeTab='perfil'; recordSearch=''; animalPickerOpen=false; render(); });
+    el.addEventListener('keydown', e=>{ if(e.key==='Enter'){ selectedId = el.dataset.select; activeTab='perfil'; recordSearch=''; animalPickerOpen=false; render(); } });
   });
   const toggleAnimalPickerBtn = document.querySelector('[data-action="toggle-animal-picker"]');
   if(toggleAnimalPickerBtn) toggleAnimalPickerBtn.addEventListener('click', ()=>{ animalPickerOpen = !animalPickerOpen; render(); });
@@ -1134,8 +1186,17 @@ function attachEvents(){
   if(newBtn) newBtn.addEventListener('click', ()=>{ modalState = {entity:'animal', mode:'add'}; render(); });
 
   document.querySelectorAll('[data-tab]').forEach(el=>{
-    el.addEventListener('click', ()=>{ activeTab = el.dataset.tab; render(); });
+    el.addEventListener('click', ()=>{ activeTab = el.dataset.tab; recordSearch=''; render(); });
   });
+
+  const recordSearchEl = document.getElementById('record-search');
+  if(recordSearchEl){
+    recordSearchEl.addEventListener('input', ()=>{ recordSearch = recordSearchEl.value; render(); });
+    if(document.activeElement !== recordSearchEl){
+      recordSearchEl.focus();
+      recordSearchEl.selectionStart = recordSearchEl.selectionEnd = recordSearchEl.value.length;
+    }
+  }
 
   const editAnimalBtn = document.querySelector('[data-action="edit-animal"]');
   if(editAnimalBtn) editAnimalBtn.addEventListener('click', ()=>{ modalState = {entity:'animal', mode:'edit'}; render(); });
