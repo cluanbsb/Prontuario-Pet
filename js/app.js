@@ -572,10 +572,10 @@ function renderDetail(){
         <span class="tab-icon">💊${meds.length ? `<span class="tab-badge">${meds.length}</span>` : ''}</span><span class="tab-label">Medicações</span>
       </button>
       <button class="tab ${activeTab==='historico'?'active':''}" data-tab="historico" title="Histórico">
-        <span class="tab-icon">📅${history.length ? `<span class="tab-badge">${history.length}</span>` : ''}</span><span class="tab-label">Histórico</span>
+        <span class="tab-icon">📋${history.length ? `<span class="tab-badge">${history.length}</span>` : ''}</span><span class="tab-label">Histórico</span>
       </button>
       <button class="tab ${activeTab==='dieta'?'active':''}" data-tab="dieta" title="Peso &amp; Dieta">
-        <span class="tab-icon">⚖️</span><span class="tab-label">Peso&nbsp;&amp;Dieta</span>
+        <span class="tab-icon">📊</span><span class="tab-label">Peso&nbsp;&amp;&nbsp;Dieta</span>
       </button>
     </div>
 
