@@ -248,7 +248,7 @@ async function saveEditAccount(){
 function getAnimal(id){ return animals.find(a=>a.id===id); }
 
 function getListKey(entity){
-  const map = { vaccine:'vaccines', medication:'medications', healthRecord:'healthRecords', weightEntry:'weightLog' };
+  const map = { vaccine:'vaccines', medication:'medications', healthRecord:'healthRecords', weightEntry:'weightLog', foodPurchase:'foodPurchases' };
   return map[entity] || 'healthRecords';
 }
 
@@ -748,6 +748,7 @@ function renderDietTab(a){
   const readOnly = false;
   const log = (a.weightLog || []).slice().sort((x,y)=> (y.date||'').localeCompare(x.date||''));
   const latestWeight = log.length ? parseFloat(log[0].weight) : (parseFloat(a.weight) || '');
+  const purchases = (a.foodPurchases || []).slice().sort((x,y)=> (y.purchaseDate||'').localeCompare(x.purchaseDate||''));
 
   return `
   <div class="section-head">
@@ -768,6 +769,24 @@ function renderDietTab(a){
       </div>
     </div>
   `).join('') : `<div class="empty-tab">Nenhuma pesagem registrada ainda.</div>`}
+
+  <div class="section-head" style="margin-top:24px;">
+    <h3>Compras de ração</h3>
+    <button class="btn-add" data-action="add-record" data-entity="foodPurchase">+ Registrar compra</button>
+  </div>
+  ${purchases.length ? purchases.map(p => `
+    <div class="rec-card">
+      <div class="rec-main">
+        <div class="rec-title-row"><span class="rec-title">${escapeHtml(p.brand||'')}</span></div>
+        <div class="rec-line">${fmtDate(p.purchaseDate)}${p.purchaseLocation ? ' · ' + escapeHtml(p.purchaseLocation) : ''}</div>
+        ${(p.kg || p.price) ? `<div class="rec-line">${p.kg ? parseFloat(p.kg).toFixed(1) + ' kg' : ''}${p.kg && p.price ? ' · ' : ''}${p.price ? 'R$ ' + parseFloat(p.price).toFixed(2) : ''}</div>` : ''}
+      </div>
+      <div class="rec-actions">
+        <button class="icon-btn" data-action="edit-record" data-entity="foodPurchase" data-id="${p.id}" title="Editar">✎</button>
+        <button class="icon-btn" data-action="delete-record" data-entity="foodPurchase" data-id="${p.id}" title="Excluir">🗑</button>
+      </div>
+    </div>
+  `).join('') : `<div class="empty-tab">Nenhuma compra registrada ainda.</div>`}
 
   <div class="field-section-label">Calculadora de porção diária</div>
   <div class="diet-calc">
@@ -794,14 +813,6 @@ function renderDietTab(a){
       partida — confirme com um(a) veterinário(a), especialmente para filhotes, gestantes ou
       condições de saúde específicas.
     </p>
-  </div>
-
-  <div class="field-section-label">Restrições alimentares e alergias</div>
-  <div class="rec-card" style="display:block;">
-    ${a.dietaryRestrictions
-      ? `<p style="font-size:13.5px;line-height:1.5;margin:0;">${escapeHtml(a.dietaryRestrictions)}</p>`
-      : `<p style="font-size:13.5px;color:var(--ink-soft);margin:0;">Nenhuma restrição registrada.</p>`}
-    <button class="btn-secondary" style="margin-top:12px;" data-action="edit-animal">✎ Editar no perfil</button>
   </div>`;
 }
 
@@ -1396,7 +1407,7 @@ function saveModal(){
 
   if(entity==='animal'){
     if(mode==='add'){
-      animals.push({ id: uid(), vaccines:[], medications:[], healthRecords:[], weightLog:[], ...values });
+      animals.push({ id: uid(), vaccines:[], medications:[], healthRecords:[], weightLog:[], foodPurchases:[], ...values });
       selectedId = animals[animals.length-1].id;
     }else{
       const a = getAnimal(selectedId);

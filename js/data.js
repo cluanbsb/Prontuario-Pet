@@ -22,7 +22,6 @@ const ENTITY_CONFIG = {
       {key:'castrado', label:'Castrado(a)', type:'checkbox', row:'r3'},
       {key:'color', label:'Cor / pelagem', type:'text', row:'r4'},
       {key:'microchip', label:'Nº do microchip', type:'text', row:'r4'},
-      {key:'dietaryRestrictions', label:'Restrições alimentares / alergias', type:'textarea', sectionBefore:'Dieta'},
       {key:'notes', label:'Observações gerais', type:'textarea', sectionBefore:'Observações'},
     ]
   },
@@ -67,6 +66,16 @@ const ENTITY_CONFIG = {
       {key:'date', label:'Data', type:'date', required:true, row:'r1'},
       {key:'weight', label:'Peso (kg)', type:'number', step:'0.01', required:true, row:'r1'},
       {key:'notes', label:'Observações', type:'text'},
+    ]
+  },
+  foodPurchase:{
+    title:'Compra de ração',
+    fields:[
+      {key:'purchaseDate', label:'Data da compra', type:'date', required:true, row:'r1'},
+      {key:'brand', label:'Marca da ração', type:'text', required:true, row:'r1'},
+      {key:'purchaseLocation', label:'Local da compra', type:'text', row:'r2'},
+      {key:'kg', label:'Quantidade (kg)', type:'number', step:'0.1', row:'r2'},
+      {key:'price', label:'Valor (R$)', type:'number', step:'0.01', row:'r3'},
     ]
   }
 };
