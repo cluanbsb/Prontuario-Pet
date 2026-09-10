@@ -29,16 +29,21 @@
 <body>
 <div id="app"></div>
 
-<!-- SDKs do Firebase (Authentication + Firestore) -->
+<!-- SDKs do Firebase (Authentication + Firestore + Storage) -->
 <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-storage-compat.js"></script>
 <!-- firebase-config.js: chaves do SEU projeto Firebase (edite este arquivo) -->
 <script src="js/firebase-config.js"></script>
 <!-- data.js: configurações de campos, temas, fontes e papéis de parede -->
 <script src="js/data.js"></script>
-<!-- app.js: estado, autenticação, persistência e renderização da aplicação -->
-<script src="js/app.js"></script>
+<!-- app.js dividido em módulos temáticos (mesma lógica de antes, só organizada) -->
+<script src="js/state.js"></script>
+<script src="js/auth-ui.js"></script>
+<script src="js/render-main.js"></script>
+<script src="js/render-modals.js"></script>
+<script src="js/events.js"></script>
 
 <!-- Registro do Service Worker (permite instalar como app / uso offline básico) -->
 <script>
