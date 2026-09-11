@@ -1,0 +1,83 @@
+========================================================================
+ PRONTUÁRIO PET — Regras do Cloud Firestore (banco de dados)
+========================================================================
+
+POR QUE VOCÊ ESTÁ VENDO "permission-denied"
+---------------------------------------------
+O app tentou ler seus dados em "usuarios/{seu-uid}" e o Firestore
+recusou o acesso. Isso normalmente acontece por um destes dois motivos:
+
+1. As regras de segurança do Firestore ainda não foram publicadas do
+   jeito que o app espera (só o dono lê/grava os próprios dados); ou
+
+2. O projeto foi criado em "modo de teste" no Firestore. Regras de
+   teste do Firebase têm uma DATA DE EXPIRAÇÃO (geralmente 30 dias) —
+   depois disso, o Firestore passa a bloquear TODA leitura e escrita
+   automaticamente, mesmo sem você mexer em nada. É a causa mais comum
+   quando o app "para do nada" depois de um tempo funcionando bem.
+
+Nenhuma mudança de código recente causou isso — é uma configuração do
+próprio projeto Firebase, separada do Storage (que você já configurou
+certinho).
+
+
+COMO CORRIGIR
+------------------------
+1. Acesse https://console.firebase.google.com
+2. Selecione o projeto "prontuario-pet"
+3. No menu à esquerda, clique em "Firestore Database"
+   (não confundir com "Storage" — são duas seções diferentes)
+4. Clique na aba "Regras" (Rules), no topo da página
+5. Apague o conteúdo atual e cole exatamente o bloco abaixo
+6. Clique em "Publicar" (Publish)
+
+
+REGRAS A COLAR
+------------------------------------------------------------------------
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Cada pessoa só lê/grava os PRÓPRIOS dados (seus animais, config)
+    match /usuarios/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Tabela de e-mail -> uid, usada para localizar quem vai receber
+    // um compartilhamento de prontuário
+    match /email_lookup/{email} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == request.resource.data.uid;
+    }
+
+    // Prontuários compartilhados: leitura/edição só para o dono e para
+    // quem recebeu o compartilhamento
+    match /compartilhados/{shareId} {
+      allow read: if request.auth != null &&
+        (request.auth.uid == resource.data.ownerUid || request.auth.uid == resource.data.sharedWithUid);
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.ownerUid;
+      allow update: if request.auth != null &&
+        (request.auth.uid == resource.data.ownerUid || request.auth.uid == resource.data.sharedWithUid);
+      allow delete: if request.auth != null && request.auth.uid == resource.data.ownerUid;
+    }
+  }
+}
+------------------------------------------------------------------------
+
+
+DEPOIS DE PUBLICAR
+--------------------
+- Volte no app e clique em "Tentar de novo" no aviso vermelho
+  (ou feche e abra o app de novo)
+- Seus dados devem aparecer imediatamente — nada foi perdido, eles
+  sempre estiveram salvos, só o acesso à leitura estava bloqueado
+
+
+CHECKLIST RÁPIDO
+------------------
+[ ] Abri "Firestore Database" (não "Storage") no console do Firebase
+[ ] Fui na aba "Regras"
+[ ] Colei as regras acima
+[ ] Cliquei em "Publicar"
+[ ] Testei no app — cliquei em "Tentar de novo"
+========================================================================
