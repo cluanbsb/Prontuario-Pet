@@ -5,7 +5,7 @@
    fez login antes. Os dados (Firestore) exigem internet.
    ========================================================== */
 
-const CACHE_NAME = 'prontuario-pet-v4';
+const CACHE_NAME = 'prontuario-pet-v5';
 const APP_SHELL = [
   './index.html',
   './manifest.json',
