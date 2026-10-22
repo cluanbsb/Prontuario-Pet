@@ -1,0 +1,29 @@
+name: Validar JavaScript
+
+on:
+  push:
+    branches:
+      - ui/dashboard-humanizado
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  syntax:
+    name: Verificar sintaxe dos arquivos JavaScript
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Validar sintaxe
+        shell: bash
+        run: |
+          set -e
+          for file in js/*.js; do
+            echo "Verificando $file"
+            node --check "$file"
+          done
