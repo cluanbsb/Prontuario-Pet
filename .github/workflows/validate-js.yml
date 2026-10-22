@@ -1,4 +1,4 @@
-name: Validar JavaScript
+name: Validar JavaScript e recursos locais
 
 on:
   push:
@@ -9,8 +9,8 @@ on:
       - main
 
 jobs:
-  syntax:
-    name: Verificar sintaxe dos arquivos JavaScript
+  validation:
+    name: Verificar sintaxe e recursos do aplicativo
     runs-on: ubuntu-latest
     steps:
       - name: Baixar código
@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Validar sintaxe
+      - name: Validar sintaxe JavaScript
         shell: bash
         run: |
           set -e
@@ -27,3 +27,26 @@ jobs:
             echo "Verificando $file"
             node --check "$file"
           done
+      - name: Verificar recursos locais do HTML
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const html = fs.readFileSync('index.html', 'utf8');
+          const refs = [...html.matchAll(/\b(?:src|href)=["']([^"']+)["']/g)]
+            .map(match => match[1])
+            .filter(ref => !/^(?:https?:|data:|#|\/\/)/i.test(ref));
+          const missing = [];
+          for (const ref of refs) {
+            const clean = decodeURIComponent(ref.split(/[?#]/)[0]);
+            if (!clean) continue;
+            if (!fs.existsSync(path.resolve(clean))) missing.push(ref);
+          }
+          if (missing.length) {
+            console.error('Recursos locais ausentes em index.html:');
+            for (const ref of missing) console.error(' - ' + ref);
+            process.exit(1);
+          }
+          console.log('Todos os ' + refs.length + ' recursos locais referenciados em index.html existem.');
+          NODE
