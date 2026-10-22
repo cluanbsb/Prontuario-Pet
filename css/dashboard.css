@@ -16,3 +16,7 @@
 @media(max-width:420px){.pet-grid{grid-template-columns:1fr}.pet-quick-link{flex-direction:row;align-items:center}.pet-quick-grid{grid-template-columns:1fr 1fr}}
 /* A home ocupa a largura disponível; o prontuário mantém a largura original. */
 .detail.home-detail{max-width:none!important;margin:0!important}
+
+/* Acessibilidade: foco de teclado visível e respeito à preferência por menos movimento. */
+.pet-home-card:focus-visible,.pet-add-card:focus-visible,.pet-quick-link:focus-visible,.brand-menu-btn:focus-visible,.btn-new:focus-visible{outline:3px solid #2d6a4f;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.pet-home-card,.pet-add-card,.pet-quick-link{transition:none!important}.pet-home-card:hover,.pet-add-card:hover,.pet-quick-link:hover{transform:none!important}}
