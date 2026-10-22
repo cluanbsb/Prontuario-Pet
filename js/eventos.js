@@ -42,8 +42,9 @@ function attachEvents(){
   if(toggleAnimalPickerBtn) toggleAnimalPickerBtn.addEventListener('click', ()=>{ animalPickerOpen = !animalPickerOpen; render(); });
   const closeAnimalPickerBackdrop = document.querySelector('[data-action="close-animal-picker"]');
   if(closeAnimalPickerBackdrop) closeAnimalPickerBackdrop.addEventListener('click', ()=>{ animalPickerOpen = false; render(); });
-  const newBtn = document.querySelector('[data-action="new-animal"]');
-  if(newBtn) newBtn.addEventListener('click', ()=>{ modalState = {entity:'animal', mode:'add'}; render(); });
+  document.querySelectorAll('[data-action="new-animal"]').forEach(newBtn=>{
+    newBtn.addEventListener('click', ()=>{ modalState = {entity:'animal', mode:'add'}; render(); });
+  });
 
   document.querySelectorAll('[data-home-tab]').forEach(el=>{
     el.addEventListener('click', ()=>{
