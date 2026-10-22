@@ -45,6 +45,16 @@ function attachEvents(){
   const newBtn = document.querySelector('[data-action="new-animal"]');
   if(newBtn) newBtn.addEventListener('click', ()=>{ modalState = {entity:'animal', mode:'add'}; render(); });
 
+  document.querySelectorAll('[data-home-tab]').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      if(!animals.length){ modalState = {entity:'animal', mode:'add'}; render(); return; }
+      if(!selectedId || !getAnimal(selectedId)) selectedId = animals[0].id;
+      activeTab = el.dataset.homeTab;
+      recordSearch = ''; searchOpen = false; animalPickerOpen = false;
+      render();
+    });
+  });
+
   document.querySelectorAll('[data-tab]').forEach(el=>{
     el.addEventListener('click', ()=>{ activeTab = el.dataset.tab; recordSearch=''; searchOpen=false; render(); });
   });
