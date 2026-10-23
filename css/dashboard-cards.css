@@ -485,3 +485,31 @@ html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card .pet-add-plu
   display:none!important;
   visibility:hidden!important;
 }
+
+
+/* Alinha o cabeçalho superior à mesma margem esquerda dos textos da área de pets. */
+.sidebar>.brand{
+  padding-left:clamp(8px,1.2vw,18px)!important;
+  padding-right:clamp(8px,1.2vw,18px)!important;
+  box-sizing:border-box!important;
+}
+.sidebar .brand .brand-top,
+.sidebar .brand .brand-top>div{
+  width:100%!important;
+  min-width:0!important;
+  text-align:left!important;
+  align-items:flex-start!important;
+}
+.sidebar .brand .brand-top .eyebrow,
+.sidebar .brand .brand-top h1,
+.sidebar .brand .brand-top .sub{
+  text-align:left!important;
+  margin-left:0!important;
+  padding-left:0!important;
+}
+@media(max-width:760px){
+  .sidebar>.brand{
+    padding-left:8px!important;
+    padding-right:8px!important;
+  }
+}
