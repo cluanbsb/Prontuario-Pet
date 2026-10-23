@@ -345,3 +345,31 @@ html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card .pet-add-plu
   text-indent:0!important;
   line-height:1.5!important;
 }
+
+
+/* Dá mais destaque às três frases principais da interface. */
+.sidebar .brand h1{
+  font-size:clamp(30px,3.4vw,38px)!important;
+  font-weight:800!important;
+  letter-spacing:-.045em!important;
+  color:var(--forest-dark,#1f4d39)!important;
+  text-shadow:0 1px 0 rgba(255,255,255,.55)!important;
+}
+.pet-section-head h2{
+  font-size:clamp(24px,2.4vw,30px)!important;
+  font-weight:800!important;
+  letter-spacing:-.035em!important;
+  color:var(--forest-dark,#1f4d39)!important;
+}
+.detail h2,
+.detail .section-title,
+.detail .detail-header h2,
+.detail .detail-title{
+  font-weight:800!important;
+  letter-spacing:-.025em!important;
+  color:var(--forest-dark,#1f4d39)!important;
+}
+@media(max-width:760px){
+  .sidebar .brand h1{font-size:30px!important;}
+  .pet-section-head h2{font-size:25px!important;}
+}
