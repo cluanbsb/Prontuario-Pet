@@ -50,3 +50,30 @@ jobs:
           }
           console.log('Todos os ' + refs.length + ' recursos locais referenciados em index.html existem.');
           NODE
+      - name: Verificar atalhos do painel e abas existentes
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const dashboard = fs.readFileSync('js/dashboard.js', 'utf8');
+          const main = fs.readFileSync('js/render-main.js', 'utf8');
+          const events = fs.readFileSync('js/eventos.js', 'utf8');
+          const expectedTabs = ['vacinas', 'medicacoes', 'historico', 'perfil'];
+          const errors = [];
+          for (const tab of expectedTabs) {
+            if (!dashboard.includes('data-home-tab="' + tab + '"')) {
+              errors.push('Atalho ausente no painel: ' + tab);
+            }
+            if (!main.includes('data-tab="' + tab + '"')) {
+              errors.push('Aba correspondente ausente na navegação: ' + tab);
+            }
+          }
+          if (!events.includes("document.querySelectorAll('[data-home-tab]')")) {
+            errors.push('Não foi encontrado o manipulador dos atalhos do painel.');
+          }
+          if (errors.length) {
+            console.error(errors.join('\n'));
+            process.exit(1);
+          }
+          console.log('Os quatro atalhos do painel correspondem a abas existentes e possuem manipulador de eventos.');
+          NODE
