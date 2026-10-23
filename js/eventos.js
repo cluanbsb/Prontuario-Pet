@@ -191,9 +191,12 @@ function attachEvents(){
   });
   document.querySelectorAll('[data-action="delete-record"]').forEach(el=>{
     el.addEventListener('click', ()=>{
+      if(!loaded || loadError){ toastMessage = 'Aguarde o carregamento dos dados antes de excluir um registro.'; render(); return; }
       const entity = el.dataset.entity, id = el.dataset.id;
       confirmState = { message:'Tem certeza que quer apagar este registro? Essa ação não pode ser desfeita.', onConfirm: ()=>{
+        if(!loaded || loadError){ toastMessage = 'Os dados não estão prontos para alteração. Tente carregar novamente antes de excluir.'; render(); return; }
         const a = getAnimal(selectedId);
+        if(!a) return;
         const listKey = getListKey(entity);
         a[listKey] = (a[listKey]||[]).filter(r=>r.id!==id);
         saveData();
