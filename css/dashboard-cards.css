@@ -373,3 +373,29 @@ html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card .pet-add-plu
   .sidebar .brand h1{font-size:30px!important;}
   .pet-section-head h2{font-size:25px!important;}
 }
+
+
+/* Alinha à esquerda o nome do app, a saudação e o texto de apoio. */
+.sidebar .brand .brand-top,
+.sidebar .brand .brand-top>div{
+  text-align:left!important;
+}
+.sidebar .brand .brand-top>div{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:flex-start!important;
+}
+.sidebar .brand .brand-top .eyebrow,
+.sidebar .brand .brand-top h1,
+.sidebar .brand .brand-top .sub{
+  display:block!important;
+  width:100%!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  padding-left:0!important;
+  text-align:left!important;
+  text-indent:0!important;
+  align-self:flex-start!important;
+}
+.sidebar .brand .brand-top .eyebrow{margin-top:0!important;}
