@@ -57,3 +57,22 @@
 }
 /* Cards informativos sem aparência ou foco de controle interativo. */
 .pet-quick-link:focus,.pet-quick-link:focus-visible{outline:none!important}
+
+
+/* Refinamento visual dos cards de pets */
+.pet-home-wrap .pet-home-card{border-radius:20px!important;border:1px solid rgba(71,112,93,.16)!important;box-shadow:0 5px 18px rgba(38,74,57,.06)!important;overflow:visible!important}
+.pet-home-wrap .pet-home-card:not(.active){padding:14px 16px!important}
+.pet-home-wrap .pet-home-card.active{padding:18px!important;border-color:rgba(45,106,79,.42)!important;box-shadow:0 12px 30px rgba(38,74,57,.11)!important}
+.pet-home-card-select{border-radius:13px!important}
+.pet-card-heading{min-width:0;flex:1}
+.pet-card-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
+.pet-home-wrap .pet-card-foot{display:none!important}
+.pet-home-wrap .pet-status{margin-top:0!important}
+.pet-home-wrap .pet-card-arrow{flex:none;width:30px!important;height:30px!important;border-radius:50%;background:rgba(255,255,255,.8);border:1px solid rgba(93,139,123,.18);font-size:22px!important;line-height:1}
+.pet-home-wrap .pet-color-menu{position:relative;display:flex;justify-content:flex-end;margin-top:10px}
+.pet-color-menu summary{list-style:none;cursor:pointer;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.85);border:1px solid rgba(93,139,123,.2);font-size:17px}
+.pet-color-menu summary::-webkit-details-marker{display:none}
+.pet-color-menu[open] .pet-color-picker{display:flex!important}
+.pet-color-menu .pet-color-picker{margin-top:8px;padding:10px;border:1px solid rgba(93,139,123,.18);border-radius:13px;background:rgba(255,255,255,.96);box-shadow:0 6px 18px rgba(38,74,57,.08)}
+.pet-color-menu .pet-color-picker:before{content:none!important}
+@media(max-width:760px){.pet-home-wrap .pet-home-card.active{padding:14px!important}.pet-card-meta{margin-top:9px}.pet-color-menu summary{width:32px;height:32px}}
