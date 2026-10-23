@@ -148,3 +148,32 @@ jobs:
           }
           console.log('Compartilhar e interromper compartilhamento verificam o carregamento e a existência do prontuário.');
           NODE
+      - name: Verificar retorno de falhas no salvamento e compartilhamento
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const state = fs.readFileSync('js/estado.js', 'utf8');
+          const events = fs.readFileSync('js/eventos.js', 'utf8');
+          const errors = [];
+          const saveStart = state.indexOf('async function saveData()');
+          const lookupStart = state.indexOf('async function lookupUidByEmail(');
+          const save = state.slice(saveStart, lookupStart);
+          const unshareStart = state.indexOf('async function unshareAnimal(');
+          const accountStart = state.indexOf('function openEditAccount(');
+          const unshare = state.slice(unshareStart, accountStart);
+          if (!save.includes('return true;') || !save.includes('return false;')) {
+            errors.push('saveData deve informar sucesso e falha para as ações que dependem do salvamento.');
+          }
+          if (!unshare.includes('if(!saved)') || !unshare.includes('catch(e)')) {
+            errors.push('A remoção do compartilhamento deve tratar falhas de salvamento e exclusão remota.');
+          }
+          if (!events.includes('const result = await unshareAnimal(shareState.animalId)') || !events.includes('if(result && result.ok)')) {
+            errors.push('A interface deve aguardar e verificar o resultado da remoção do compartilhamento.');
+          }
+          if (errors.length) {
+            console.error(errors.join('\\n'));
+            process.exit(1);
+          }
+          console.log('Salvamento e remoção do compartilhamento comunicam falhas às ações e à interface.');
+          NODE
