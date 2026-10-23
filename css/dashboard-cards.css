@@ -209,3 +209,7 @@ html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card .pet-add-plu
   .detail.home-detail .pet-quick-copy strong{font-size:10.5px!important}
   .detail.home-detail .pet-quick-copy small{font-size:9.5px!important}
 }
+
+
+/* Mantém o card de adicionar pet com a mesma altura dos cards de pets. */
+.pet-home-wrap .pet-add-card{min-height:112px!important;height:112px!important;max-height:112px!important;padding:14px 12px!important;box-sizing:border-box!important;justify-content:center!important;}
