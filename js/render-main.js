@@ -120,6 +120,7 @@ function renderDetail(){
       <img src="${a.photo}" alt="">
       <div class="profile-cover-scrim"></div>
       <div class="profile-cover-actions">
+        ${typeof window.renderPetColorControl==='function' ? window.renderPetColorControl(a,'cover') : ''}
         <button class="icon-btn-ghost" data-action="edit-animal" aria-label="Editar animal" title="Editar animal">✎</button>
         ${a.isShared ? `<span class="icon-btn-ghost icon-btn-ghost--active" style="cursor:default;" aria-label="Compartilhado por ${escapeAttr(a.ownerEmail||'outro usuário')}" title="Compartilhado por ${escapeAttr(a.ownerEmail||'outro usuário')} · vocês dois podem editar">🔗</span>` : ''}
         ${!a.isShared ? `<button class="icon-btn-ghost ${a.sharedWithUid ? 'icon-btn-ghost--active' : ''}" data-action="open-share" aria-label="${a.sharedWithUid ? `Compartilhado com ${a.sharedWithEmail||''}` : 'Compartilhar com outro usuário'}" title="${a.sharedWithUid ? `Compartilhado com ${a.sharedWithEmail||''} · toque para gerenciar` : 'Compartilhar com outro usuário'}">🔗</button>` : ''}
@@ -157,6 +158,7 @@ function renderDetail(){
         </div>
         ${!a.photo ? `
         <div class="profile-actions">
+          ${typeof window.renderPetColorControl==='function' ? window.renderPetColorControl(a,'plain') : ''}
           <button class="icon-btn" data-action="edit-animal" aria-label="Editar animal" title="Editar animal">✎</button>
           ${a.isShared ? `<span class="icon-btn icon-btn--active" style="cursor:default;" aria-label="Compartilhado por ${escapeAttr(a.ownerEmail||'outro usuário')}" title="Compartilhado por ${escapeAttr(a.ownerEmail||'outro usuário')} · vocês dois podem editar">🔗</span>` : ''}
           ${!a.isShared ? `<button class="icon-btn ${a.sharedWithUid ? 'icon-btn--active' : ''}" data-action="open-share" aria-label="${a.sharedWithUid ? `Compartilhado com ${a.sharedWithEmail||''}` : 'Compartilhar com outro usuário'}" title="${a.sharedWithUid ? `Compartilhado com ${a.sharedWithEmail||''} · toque para gerenciar` : 'Compartilhar com outro usuário'}">🔗</button>` : ''}
