@@ -1,0 +1,66 @@
+/* Cards informativos da página inicial: não selecionáveis e com layout uniforme. */
+.pet-quick-grid{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  align-items:stretch!important;
+  gap:14px!important;
+}
+.pet-quick-link{
+  display:grid!important;
+  grid-template-columns:44px minmax(0,1fr)!important;
+  align-items:center!important;
+  align-content:center!important;
+  gap:12px!important;
+  min-width:0!important;
+  min-height:100px!important;
+  height:100%!important;
+  box-sizing:border-box!important;
+  padding:16px!important;
+  cursor:default!important;
+  user-select:text!important;
+  transform:none!important;
+}
+.pet-quick-link:hover{
+  border-color:rgba(93,139,123,.16)!important;
+  transform:none!important;
+}
+.pet-quick-icon{
+  width:44px!important;
+  height:44px!important;
+  display:grid!important;
+  place-items:center!important;
+  flex:none!important;
+  margin:0!important;
+}
+.pet-quick-copy{min-width:0!important;display:block!important}
+.pet-quick-copy strong{
+  display:block!important;
+  margin:0!important;
+  font-size:13px!important;
+  line-height:1.35!important;
+  font-weight:700!important;
+  overflow-wrap:anywhere;
+}
+.pet-quick-copy small{
+  display:block!important;
+  margin-top:5px!important;
+  font-size:11px!important;
+  line-height:1.45!important;
+  overflow-wrap:anywhere;
+}
+@media(max-width:760px){
+  .pet-quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+  .pet-quick-link{
+    grid-template-columns:36px minmax(0,1fr)!important;
+    min-height:94px!important;
+    padding:12px!important;
+    gap:9px!important;
+  }
+  .pet-quick-icon{width:36px!important;height:36px!important;font-size:20px!important}
+}
+@media(max-width:360px){
+  .pet-quick-grid{grid-template-columns:minmax(0,1fr)!important}
+  .pet-quick-link{min-height:82px!important}
+}
+/* Os cards informativos não recebem foco nem aparência de controle interativo. */
+.pet-quick-link:focus,.pet-quick-link:focus-visible{outline:none!important}
