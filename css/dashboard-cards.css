@@ -76,3 +76,10 @@
 .pet-color-menu .pet-color-picker{margin-top:8px;padding:10px;border:1px solid rgba(93,139,123,.18);border-radius:13px;background:rgba(255,255,255,.96);box-shadow:0 6px 18px rgba(38,74,57,.08)}
 .pet-color-menu .pet-color-picker:before{content:none!important}
 @media(max-width:760px){.pet-home-wrap .pet-home-card.active{padding:14px!important}.pet-card-meta{margin-top:9px}.pet-color-menu summary{width:32px;height:32px}}
+
+
+/* Alinhamento dos cards "Cuidados em um só lugar" com as bordas laterais dos demais cards. */
+.detail.home-detail{padding-left:clamp(8px,1.2vw,18px)!important;padding-right:clamp(8px,1.2vw,18px)!important}
+.detail.home-detail .pet-quick-section{width:100%!important;max-width:none!important;margin-left:0!important;margin-right:0!important;box-sizing:border-box!important}
+.detail.home-detail .pet-quick-grid{width:100%!important;max-width:none!important;grid-template-columns:repeat(4,minmax(0,1fr))!important}
+@media(max-width:760px){.detail.home-detail .pet-quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
