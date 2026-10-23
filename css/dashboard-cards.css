@@ -168,3 +168,44 @@ html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card{
 }
 html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card span:last-child{color:#C5D1CA!important}
 html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card .pet-add-plus{color:#1F2E28!important}
+
+
+/* Padronização dos quatro cards de "Cuidados em um só lugar". */
+.detail.home-detail .pet-quick-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  grid-auto-rows:112px!important;
+  align-items:stretch!important;
+}
+.detail.home-detail .pet-quick-link{
+  display:grid!important;
+  grid-template-columns:36px minmax(0,1fr)!important;
+  align-items:center!important;
+  align-content:center!important;
+  gap:9px!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:112px!important;
+  height:112px!important;
+  max-height:112px!important;
+  padding:12px!important;
+  overflow:hidden!important;
+  box-sizing:border-box!important;
+}
+.detail.home-detail .pet-quick-icon{width:36px!important;height:36px!important;font-size:19px!important}
+.detail.home-detail .pet-quick-copy{min-width:0!important;display:flex!important;flex-direction:column!important;justify-content:center!important;gap:4px!important}
+.detail.home-detail .pet-quick-copy strong{font-size:12px!important;line-height:1.25!important;overflow-wrap:anywhere!important}
+.detail.home-detail .pet-quick-copy small{font-size:10px!important;line-height:1.3!important;overflow-wrap:anywhere!important}
+@media(max-width:760px){
+  .detail.home-detail .pet-quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:100px!important;gap:10px!important}
+  .detail.home-detail .pet-quick-link{grid-template-columns:30px minmax(0,1fr)!important;min-height:100px!important;height:100px!important;max-height:100px!important;padding:10px!important;gap:8px!important}
+  .detail.home-detail .pet-quick-icon{width:30px!important;height:30px!important;font-size:17px!important}
+  .detail.home-detail .pet-quick-copy strong{font-size:11px!important;line-height:1.25!important}
+  .detail.home-detail .pet-quick-copy small{font-size:10px!important;line-height:1.25!important}
+}
+@media(max-width:360px){
+  .detail.home-detail .pet-quick-grid{grid-auto-rows:104px!important}
+  .detail.home-detail .pet-quick-link{min-height:104px!important;height:104px!important;max-height:104px!important;grid-template-columns:26px minmax(0,1fr)!important;padding:8px!important;gap:6px!important}
+  .detail.home-detail .pet-quick-icon{width:26px!important;height:26px!important;font-size:16px!important}
+  .detail.home-detail .pet-quick-copy strong{font-size:10.5px!important}
+  .detail.home-detail .pet-quick-copy small{font-size:9.5px!important}
+}
