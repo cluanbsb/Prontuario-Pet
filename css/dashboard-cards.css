@@ -452,3 +452,18 @@ html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card .pet-add-plu
   }
   .pet-home-wrap .pet-home-card.active .pet-name{font-size:19px!important;}
 }
+
+
+/* A foto principal do prontuário não deve exibir o nome sobre a imagem. */
+.pet-home-wrap .pet-home-card.active .pet-avatar{
+  position:relative!important;
+}
+.pet-home-wrap .pet-home-card.active .pet-avatar img{
+  position:relative!important;
+  z-index:1!important;
+}
+.pet-home-wrap .pet-home-card.active .pet-avatar .pet-name,
+.pet-home-wrap .pet-home-card.active .pet-avatar [class*="name"],
+.pet-home-wrap .pet-home-card.active .pet-avatar [class*="label"]{
+  display:none!important;
+}
