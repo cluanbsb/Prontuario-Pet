@@ -150,3 +150,21 @@
 html[data-appearance-mode="dark"] .pet-home-wrap .pet-name{color:#1F2E28!important}
 html[data-appearance-mode="dark"] .pet-home-wrap .pet-breed{color:#405148!important}
 html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card-select{color:#1F2E28!important}
+
+
+/* Modo noturno: contraste reforçado nos cards informativos da página inicial. */
+html[data-appearance-mode="dark"] .detail.home-detail .pet-quick-link{
+  background:#222E28!important;
+  color:#F1F5F2!important;
+  border-color:#52665B!important;
+  box-shadow:0 5px 18px rgba(0,0,0,.2)!important;
+}
+html[data-appearance-mode="dark"] .detail.home-detail .pet-quick-copy strong{color:#F1F5F2!important}
+html[data-appearance-mode="dark"] .detail.home-detail .pet-quick-copy small{color:#C5D1CA!important}
+html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card{
+  background:#222E28!important;
+  color:#F1F5F2!important;
+  border-color:#789887!important;
+}
+html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card span:last-child{color:#C5D1CA!important}
+html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card .pet-add-plus{color:#1F2E28!important}
