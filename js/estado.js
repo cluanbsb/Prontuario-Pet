@@ -38,6 +38,7 @@ function applySettings(s){
   const font = FONTS.find(f=>f.id===s.font) || FONTS[0];
   const wallpaper = WALLPAPERS.find(w=>w.id===s.wallpaper) || WALLPAPERS[0];
   const root = document.documentElement.style;
+  ['--paper','--paper-card','--ink','--ink-soft','--line','--forest','--forest-dark','--forest-tint','--amber','--amber-tint','--rust','--rust-tint','--shadow'].forEach(k=>root.removeProperty(k));
   Object.entries(theme.vars).forEach(([k,v])=> root.setProperty(k, v));
   const darkMode = s.appearanceMode === 'dark';
   const appearanceVars = darkMode ? {'--paper':'#17211D','--paper-card':'#222E28','--ink':'#F1F5F2','--ink-soft':'#B7C5BD','--line':'#405148','--forest':'#8CC9A8','--forest-dark':'#A7D8BA','--forest-tint':'#2A4035','--amber':'#E6B765','--amber-tint':'#493B26','--rust':'#E58C80','--rust-tint':'#482D2A','--shadow':'0 1px 3px rgba(0,0,0,.22),0 5px 18px rgba(0,0,0,.2)'} : null;
