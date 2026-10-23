@@ -274,8 +274,17 @@ function renderCustomizeModal(){
         <button class="modal-close" data-action="cancel-customize">✕</button>
       </div>
 
+      <div class="customize-section appearance-mode-section">
+        <h3 class="customize-section-title">Modo de aparência</h3>
+        <p class="customize-section-help">Escolha a iluminação que fica mais confortável para você.</p>
+        <div class="appearance-mode-options">
+          <button type="button" class="appearance-mode-card ${s.appearanceMode !== 'dark' ? 'selected' : ''}" data-action="set-appearance-mode" data-value="light" aria-pressed="${s.appearanceMode !== 'dark'}"><span class="appearance-mode-icon" aria-hidden="true">☀️</span><span><strong>Modo claro</strong><small>Fundo claro e suave</small></span><span class="appearance-mode-check" aria-hidden="true">✓</span></button>
+          <button type="button" class="appearance-mode-card ${s.appearanceMode === 'dark' ? 'selected' : ''}" data-action="set-appearance-mode" data-value="dark" aria-pressed="${s.appearanceMode === 'dark'}"><span class="appearance-mode-icon" aria-hidden="true">🌙</span><span><strong>Modo escuro</strong><small>Fundo escuro e confortável</small></span><span class="appearance-mode-check" aria-hidden="true">✓</span></button>
+        </div>
+      </div>
+
       <div class="customize-section">
-        <h3 style="font-size:14px;margin:0 0 10px;">Cores</h3>
+        <h3 class="customize-section-title">Paleta de cores</h3>
         <div class="customize-grid">
           ${COLOR_THEMES.map(t => `
             <button type="button" class="swatch ${s.colorTheme===t.id?'selected':''}" data-action="set-theme" data-value="${t.id}">
@@ -291,7 +300,7 @@ function renderCustomizeModal(){
       </div>
 
       <div class="customize-section">
-        <h3 style="font-size:14px;margin:0 0 10px;">Fonte</h3>
+        <h3 class="customize-section-title">Tipografia</h3>
         <div class="customize-grid">
           ${FONTS.map(f => `
             <button type="button" class="swatch ${s.font===f.id?'selected':''}" data-action="set-font" data-value="${f.id}">
@@ -303,7 +312,7 @@ function renderCustomizeModal(){
       </div>
 
       <div class="customize-section">
-        <h3 style="font-size:14px;margin:0 0 10px;">Papel de parede</h3>
+        <h3 class="customize-section-title">Papel de parede</h3><p class="customize-section-help">Escolha um fundo e ajuste a intensidade para deixar os textos confortáveis de ler.</p>
         <div class="customize-grid">
           ${WALLPAPERS.map(w => `
             <button type="button" class="swatch ${s.wallpaper===w.id?'selected':''}" data-action="set-wallpaper" data-value="${w.id}">
