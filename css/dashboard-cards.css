@@ -258,3 +258,28 @@ html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card .pet-add-plu
   .pet-home-wrap .pet-home-card:not(.active),
   .pet-home-wrap .pet-add-card{height:100px!important;min-height:100px!important;max-height:100px!important;}
 }
+
+
+/* Posiciona o menu da conta no canto superior direito, o mais alto possível. */
+.sidebar>.brand{
+  position:relative!important;
+  padding-top:10px!important;
+}
+.sidebar .brand-top{
+  position:static!important;
+  align-items:flex-start!important;
+}
+.sidebar .brand-top>div{
+  padding-right:54px!important;
+}
+.sidebar .brand .brand-menu-btn{
+  position:absolute!important;
+  top:max(4px,env(safe-area-inset-top, 0px))!important;
+  right:0!important;
+  z-index:30!important;
+  margin:0!important;
+}
+@media(max-width:760px){
+  .sidebar>.brand{padding-top:10px!important;}
+  .sidebar .brand .brand-menu-btn{top:max(4px,env(safe-area-inset-top, 0px))!important;right:0!important;}
+}
