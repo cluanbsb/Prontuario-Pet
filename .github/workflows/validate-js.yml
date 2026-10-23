@@ -103,3 +103,24 @@ jobs:
           }
           console.log('Fluxos essenciais de carregamento, erro e salvamento encontrados.');
           NODE
+      - name: Verificar proteção de exclusões durante carregamento
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const events = fs.readFileSync('js/eventos.js', 'utf8');
+          const errors = [];
+          const animalDelete = events.slice(events.indexOf("const delAnimalBtn"), events.indexOf("document.querySelectorAll('[data-action=\"add-record\"]')"));
+          const recordDelete = events.slice(events.indexOf("document.querySelectorAll('[data-action=\"delete-record\"]')"), events.indexOf("document.querySelectorAll('[data-action=\"close-modal\"]')"));
+          if (!animalDelete.includes('if(!loaded || loadError)') || !animalDelete.includes('onConfirm')) {
+            errors.push('A exclusão do prontuário não possui proteção de carregamento e confirmação.');
+          }
+          if (!recordDelete.includes('if(!loaded || loadError)') || !recordDelete.includes('onConfirm')) {
+            errors.push('A exclusão de registros não possui proteção de carregamento e confirmação.');
+          }
+          if (errors.length) {
+            console.error(errors.join('\\n'));
+            process.exit(1);
+          }
+          console.log('Exclusões de prontuários e registros verificam o estado de carregamento e exigem confirmação.');
+          NODE
