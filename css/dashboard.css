@@ -43,3 +43,48 @@
 .pet-inline-detail .content-panel,.pet-inline-detail .profile-cover{width:100%;max-width:100%;box-sizing:border-box}
 @media(min-width:900px){.pet-grid{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}}
 @media(max-width:420px){.pet-grid{grid-template-columns:minmax(0,1fr)}}
+
+
+/* Largura máxima dos cartões: usa quase toda a tela disponível. */
+.pet-home-wrap{
+  width:100%!important;
+  max-width:none!important;
+  box-sizing:border-box!important;
+  padding-left:clamp(8px,1.2vw,18px)!important;
+  padding-right:clamp(8px,1.2vw,18px)!important;
+}
+.pet-home-wrap .pet-grid{
+  width:100%!important;
+  max-width:none!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:14px!important;
+}
+.pet-home-wrap .pet-home-card,
+.pet-home-wrap .pet-add-card{
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+.pet-home-wrap .pet-home-card.active{
+  grid-column:1!important;
+  width:100%!important;
+}
+.pet-home-wrap .pet-inline-detail,
+.pet-home-wrap .pet-inline-detail .detail{
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+.pet-home-wrap .pet-inline-detail .detail{
+  padding-left:0!important;
+  padding-right:0!important;
+}
+@media(max-width:760px){
+  .pet-home-wrap{
+    padding-left:8px!important;
+    padding-right:8px!important;
+  }
+  .pet-home-wrap .pet-grid{grid-template-columns:minmax(0,1fr)!important}
+}
