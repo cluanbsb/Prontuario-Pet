@@ -77,3 +77,29 @@ jobs:
           }
           console.log('Os quatro atalhos do painel correspondem a abas existentes e possuem manipulador de eventos.');
           NODE
+      - name: Verificar tratamento de falha e salvamento no Firebase
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const state = fs.readFileSync('js/estado.js', 'utf8');
+          const auth = fs.readFileSync('js/auth-ui.js', 'utf8');
+          const errors = [];
+          if (!state.includes("db.collection('usuarios').doc(currentUser.uid).get()")) {
+            errors.push('O carregamento dos dados do usuário não consulta o documento esperado.');
+          }
+          if (!state.includes("db.collection('usuarios').doc(currentUser.uid).set({ animals: ownAnimals }, { merge:true })")) {
+            errors.push('O salvamento principal não preserva os demais campos do documento (merge).');
+          }
+          if (!state.includes('loadError =') || !state.includes('loaded = true;') || !state.includes('render();')) {
+            errors.push('O fluxo de carregamento não aparenta tratar erro e finalizar a renderização.');
+          }
+          if (!auth.includes("if(!loaded)")) {
+            errors.push('A tela não possui estado de carregamento antes de exibir os dados.');
+          }
+          if (errors.length) {
+            console.error(errors.join('\n'));
+            process.exit(1);
+          }
+          console.log('Fluxos essenciais de carregamento, erro e salvamento encontrados.');
+          NODE
