@@ -134,3 +134,41 @@
  .pet-home-wrap .pet-inline-detail .profile-data-row{grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr)!important;gap:7px!important}
  .pet-home-wrap .pet-inline-detail .content-panel{padding-left:10px!important;padding-right:10px!important}
 }
+
+
+/* Ao abrir o prontuário, manter o cabeçalho do card com o mesmo tamanho do estado fechado. */
+.pet-home-wrap .pet-home-card,
+.pet-home-wrap .pet-home-card.active{
+  box-sizing:border-box!important;
+  padding:14px 16px!important;
+  transform:none!important;
+}
+.pet-home-wrap .pet-home-card.active:hover{transform:none!important}
+.pet-home-wrap .pet-home-card-select{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  text-align:left!important;
+  transform:none!important;
+}
+.pet-home-wrap .pet-home-card-select .pet-card-top{gap:14px!important}
+.pet-home-wrap .pet-home-card-select .pet-avatar{
+  width:72px!important;height:72px!important;min-width:72px!important;
+  flex:0 0 72px!important;font-size:32px!important;
+}
+.pet-home-wrap .pet-home-card-select .pet-name{font-size:19px!important;line-height:1.2!important}
+.pet-home-wrap .pet-home-card-select .pet-breed{font-size:12.5px!important;line-height:1.45!important}
+.pet-home-wrap .pet-home-card-select .pet-card-meta{margin-top:12px!important}
+@media(max-width:760px){
+  .pet-home-wrap .pet-home-card,
+  .pet-home-wrap .pet-home-card.active{padding:14px 16px!important}
+  .pet-home-wrap .pet-home-card-select .pet-avatar{
+    width:72px!important;height:72px!important;min-width:72px!important;flex-basis:72px!important;
+  }
+  .pet-home-wrap .pet-home-card-select .pet-card-meta{margin-top:9px!important}
+}
