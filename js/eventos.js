@@ -81,8 +81,11 @@ function attachEvents(){
 
   const delAnimalBtn = document.querySelector('[data-action="delete-animal"]');
   if(delAnimalBtn) delAnimalBtn.addEventListener('click', ()=>{
+    if(!loaded || loadError){ toastMessage = 'Aguarde o carregamento dos dados antes de excluir um prontuário.'; render(); return; }
     const a = getAnimal(selectedId);
+    if(!a) return;
     confirmState = { message:`Tem certeza? Isso vai apagar todo o prontuário de <b>${escapeHtml(petFirstName(a))}</b> — vacinas, medicações e histórico. Essa ação não pode ser desfeita.`, onConfirm: ()=>{
+      if(!loaded || loadError){ toastMessage = 'Os dados não estão prontos para alteração. Tente carregar novamente antes de excluir.'; render(); return; }
       animals = animals.filter(x=>x.id!==selectedId);
       selectedId = null;
       saveData();
