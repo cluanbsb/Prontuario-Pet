@@ -221,3 +221,19 @@ html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card .pet-add-plu
 .sidebar .brand .sub{font-size:14px!important;line-height:1.5!important;max-width:34rem!important;margin-top:8px!important;color:var(--ink-soft,#66766d)!important}
 .pet-section-head h2{letter-spacing:-.025em!important}
 .pet-section-head p{line-height:1.45!important}
+
+
+/* Padroniza o card de adicionar pet com os cards de pets recolhidos. */
+.pet-home-wrap .pet-home-card:not(.active),
+.pet-home-wrap .pet-add-card{
+  height:112px!important;
+  min-height:112px!important;
+  max-height:112px!important;
+  box-sizing:border-box!important;
+}
+.pet-home-wrap .pet-home-card:not(.active){overflow:hidden!important;}
+.pet-home-wrap .pet-add-card{display:flex!important;align-items:center!important;justify-content:center!important;}
+@media(max-width:760px){
+  .pet-home-wrap .pet-home-card:not(.active),
+  .pet-home-wrap .pet-add-card{height:112px!important;min-height:112px!important;max-height:112px!important;}
+}
