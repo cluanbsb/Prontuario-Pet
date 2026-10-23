@@ -35,7 +35,7 @@ function attachEvents(){
     render();
   });
   document.querySelectorAll('[data-select]').forEach(el=>{
-    el.addEventListener('click', ()=>{ selectedId = el.dataset.select; activeTab='perfil'; recordSearch=''; searchOpen=false; animalPickerOpen=false; render(); });
+    el.addEventListener('click', ()=>{ selectedId = selectedId === el.dataset.select ? null : el.dataset.select; activeTab='perfil'; recordSearch=''; searchOpen=false; animalPickerOpen=false; render(); });
     el.addEventListener('keydown', e=>{ if(el.tagName==='BUTTON') return; if(e.key==='Enter'||e.key===' '){ if(e.key===' ') e.preventDefault(); selectedId = el.dataset.select; activeTab='perfil'; recordSearch=''; searchOpen=false; animalPickerOpen=false; render(); } });
   });
   const toggleAnimalPickerBtn = document.querySelector('[data-action="toggle-animal-picker"]');
