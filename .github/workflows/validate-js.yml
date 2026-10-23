@@ -124,3 +124,27 @@ jobs:
           }
           console.log('Exclusões de prontuários e registros verificam o estado de carregamento e exigem confirmação.');
           NODE
+      - name: Verificar proteção do compartilhamento de prontuários
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const state = fs.readFileSync('js/estado.js', 'utf8');
+          const shareStart = state.indexOf('async function shareAnimal(');
+          const unshareStart = state.indexOf('async function unshareAnimal(');
+          const accountStart = state.indexOf('function openEditAccount(');
+          const share = state.slice(shareStart, unshareStart);
+          const unshare = state.slice(unshareStart, accountStart);
+          const errors = [];
+          if (shareStart < 0 || !share.includes('if(!loaded || loadError)') || !share.includes('if(!animal)')) {
+            errors.push('O compartilhamento não verifica carregamento e existência do prontuário.');
+          }
+          if (unshareStart < 0 || !unshare.includes('if(!loaded || loadError)') || !unshare.includes('if(!animal)')) {
+            errors.push('A interrupção do compartilhamento não verifica carregamento e existência do prontuário.');
+          }
+          if (errors.length) {
+            console.error(errors.join('\\n'));
+            process.exit(1);
+          }
+          console.log('Compartilhar e interromper compartilhamento verificam o carregamento e a existência do prontuário.');
+          NODE
