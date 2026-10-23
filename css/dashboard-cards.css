@@ -513,3 +513,27 @@ html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card .pet-add-plu
     padding-right:8px!important;
   }
 }
+
+
+/* Remove qualquer texto/etiqueta sobre a foto do pet no card aberto, sem ocultar o nome ao lado. */
+.pet-home-wrap .pet-home-card.active .pet-avatar:has(img)::before,
+.pet-home-wrap .pet-home-card.active .pet-avatar:has(img)::after,
+.pet-home-wrap .pet-home-card.active .pet-avatar:has(img) img::before,
+.pet-home-wrap .pet-home-card.active .pet-avatar:has(img) img::after{
+  content:none!important;
+  display:none!important;
+  background:none!important;
+}
+.pet-home-wrap .pet-home-card.active .pet-avatar:has(img) > :not(img),
+.pet-home-wrap .pet-home-card.active .pet-avatar:has(img) > *:not(img){
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+}
+.pet-home-wrap .pet-home-card.active .pet-avatar:has(img) [class*="name"],
+.pet-home-wrap .pet-home-card.active .pet-avatar:has(img) [class*="label"],
+.pet-home-wrap .pet-home-card.active .pet-avatar:has(img) [class*="title"],
+.pet-home-wrap .pet-home-card.active .pet-avatar:has(img) [class*="caption"]{
+  display:none!important;
+  visibility:hidden!important;
+}
