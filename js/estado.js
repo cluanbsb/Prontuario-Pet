@@ -140,8 +140,8 @@ async function loadUserData(){
 }
 async function saveData(){
   // Nunca grave uma lista incompleta após falha no carregamento do Firestore.
-  if(loadError){
-    toastMessage = 'Seus dados não foram carregados. Toque em “Tentar de novo” antes de salvar para evitar substituir informações existentes.';
+  if(!loaded || loadError){
+    toastMessage = 'Aguarde o carregamento dos seus dados. Se houver erro, toque em “Tentar de novo” antes de salvar para evitar substituir informações existentes.';
     render();
     return;
   }
