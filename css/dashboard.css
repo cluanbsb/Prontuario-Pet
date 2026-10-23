@@ -88,3 +88,52 @@
   }
   .pet-home-wrap .pet-grid{grid-template-columns:minmax(0,1fr)!important}
 }
+
+
+/* Correção definitiva: a barra lateral não deve limitar a largura dos cartões. */
+.sidebar{
+  padding:0!important;
+  width:100%!important;
+  max-width:none!important;
+  box-sizing:border-box!important;
+}
+.sidebar>.brand,
+.sidebar>.sidebar-actions{
+  width:100%!important;
+  max-width:1240px!important;
+  box-sizing:border-box!important;
+  padding-left:clamp(18px,4vw,64px)!important;
+  padding-right:clamp(18px,4vw,64px)!important;
+}
+.sidebar>.brand{
+  padding-top:28px!important;
+  padding-bottom:18px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.sidebar>.sidebar-actions{
+  padding-top:0!important;
+  padding-bottom:24px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.sidebar>.pet-home-wrap{
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  padding-left:clamp(8px,1.2vw,18px)!important;
+  padding-right:clamp(8px,1.2vw,18px)!important;
+}
+@media(max-width:760px){
+  .sidebar>.brand,
+  .sidebar>.sidebar-actions{
+    padding-left:18px!important;
+    padding-right:18px!important;
+  }
+  .sidebar>.pet-home-wrap{
+    padding-left:8px!important;
+    padding-right:8px!important;
+  }
+}
