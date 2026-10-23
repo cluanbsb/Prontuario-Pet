@@ -467,3 +467,19 @@ html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card .pet-add-plu
 .pet-home-wrap .pet-home-card.active .pet-avatar [class*="label"]{
   display:none!important;
 }
+
+
+/* Reforça a identidade visual do nome do aplicativo no cabeçalho. */
+.sidebar .brand .eyebrow{
+  font-size:clamp(19px,2.2vw,23px)!important;
+  line-height:1.2!important;
+  font-weight:900!important;
+  letter-spacing:.025em!important;
+  color:var(--forest-dark,#1f4d39)!important;
+  text-transform:uppercase!important;
+  text-shadow:0 1px 0 rgba(255,255,255,.65)!important;
+  margin-bottom:8px!important;
+}
+@media(max-width:760px){
+  .sidebar .brand .eyebrow{font-size:21px!important;}
+}
