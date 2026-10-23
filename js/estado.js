@@ -139,6 +139,12 @@ async function loadUserData(){
   render();
 }
 async function saveData(){
+  // Nunca grave uma lista incompleta após falha no carregamento do Firestore.
+  if(loadError){
+    toastMessage = 'Seus dados não foram carregados. Toque em “Tentar de novo” antes de salvar para evitar substituir informações existentes.';
+    render();
+    return;
+  }
   try{
     const ownAnimals = animals.filter(a => !a.isShared);
     await db.collection('usuarios').doc(currentUser.uid).set({ animals: ownAnimals }, { merge:true });
