@@ -473,6 +473,12 @@ function removePhoto(){
 }
 
 function saveModal(){
+  // Evita alterações quando a leitura inicial falhou e a lista pode estar incompleta.
+  if(loadError){
+    toastMessage = 'Não é possível salvar enquanto seus dados não forem carregados. Toque em “Tentar de novo” e aguarde a conclusão.';
+    render();
+    return;
+  }
   const { entity, mode, recordId } = modalState;
   const cfg = ENTITY_CONFIG[entity];
   const modalEl = document.querySelector('#overlay .modal');
