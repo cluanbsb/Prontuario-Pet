@@ -144,3 +144,9 @@
 .pet-home-wrap .pet-card-meta{justify-content:flex-start!important;margin-top:9px!important}
 .pet-home-wrap .pet-home-card:not(.active) .pet-card-arrow{flex-basis:26px!important;width:26px!important;height:26px!important}
 @media(max-width:760px){.pet-home-wrap .pet-card-arrow{flex-basis:28px!important;width:28px!important;height:28px!important}}
+
+
+/* Contraste consistente dos nomes dos animais, inclusive no modo escuro. */
+html[data-appearance-mode="dark"] .pet-home-wrap .pet-name{color:#1F2E28!important}
+html[data-appearance-mode="dark"] .pet-home-wrap .pet-breed{color:#405148!important}
+html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card-select{color:#1F2E28!important}
