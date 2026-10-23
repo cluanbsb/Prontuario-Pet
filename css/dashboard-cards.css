@@ -468,3 +468,20 @@ html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card .pet-add-plu
   display:none!important;
 }
 
+
+/* Garante que o nome do pet não seja sobreposto à foto no prontuário aberto. */
+.pet-home-wrap .pet-home-card.active .pet-avatar:has(img)::before,
+.pet-home-wrap .pet-home-card.active .pet-avatar:has(img)::after{
+  content:none!important;
+  display:none!important;
+}
+.pet-home-wrap .pet-home-card.active .pet-avatar:has(img) > :not(img){
+  display:none!important;
+  visibility:hidden!important;
+}
+.pet-home-wrap .pet-home-card.active .pet-avatar:has(img) .pet-name,
+.pet-home-wrap .pet-home-card.active .pet-avatar:has(img) [class*="name"],
+.pet-home-wrap .pet-home-card.active .pet-avatar:has(img) [class*="label"]{
+  display:none!important;
+  visibility:hidden!important;
+}
