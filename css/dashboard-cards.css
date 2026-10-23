@@ -328,3 +328,20 @@ html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card .pet-add-plu
     right:10px!important;
   }
 }
+
+
+/* Alinha o subtítulo com o início do título no cabeçalho. */
+.sidebar .brand .brand-top>div{
+  text-align:left!important;
+  align-items:flex-start!important;
+}
+.sidebar .brand .sub{
+  display:block!important;
+  width:100%!important;
+  max-width:34rem!important;
+  margin:8px 0 0!important;
+  padding:0!important;
+  text-align:left!important;
+  text-indent:0!important;
+  line-height:1.5!important;
+}
