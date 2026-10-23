@@ -7,13 +7,13 @@
   const v=a.vaccines||[], overdue=v.filter(x=>typeof vaccineStatus==='function'&&vaccineStatus(x)==='overdue').length, soon=v.filter(x=>typeof vaccineStatus==='function'&&vaccineStatus(x)==='soon').length;
   if(overdue)return {label:overdue+(overdue===1?' vacina atrasada':' vacinas atrasadas'),alert:true};
   if(soon)return {label:soon+(soon===1?' vacina em breve':' vacinas em breve'),alert:true};
-  return {label:'Cuidados em dia',alert:false};
+  return null;
  }
  function renderSidebar(){
   const cards=animals.map(a=>{const s=status(a),fallback=(typeof SPECIES_ICON!=='undefined'&&SPECIES_ICON[a.species])||'🐾',photo=a.photo?'<img src="'+escapeAttr(a.photo)+'" alt="Foto de '+escapeAttr(a.name)+'">':fallback;
    const breed=[a.species,a.breed].filter(Boolean).map(escapeHtml).join(' · ');
    const selected=a.id===selectedId;
-   const summary='<button type="button" class="pet-home-card-select" data-select="'+escapeAttr(a.id)+'" aria-pressed="'+selected+'"><div class="pet-card-top"><div class="pet-avatar">'+photo+'</div><div class="pet-card-heading"><div class="pet-name">'+escapeHtml(a.name)+'</div><div class="pet-breed">'+breed+'</div></div></div><div class="pet-card-meta"><span class="pet-status '+(s.alert?'alert':'')+'">'+escapeHtml(s.label)+'</span><span class="pet-card-arrow" aria-label="'+(selected?'Fechar prontuário':'Abrir prontuário')+'" title="'+(selected?'Fechar prontuário':'Abrir prontuário')+'" aria-hidden="true">'+(selected?'⌄':'›')+'</span></div></button>';
+   const summary='<button type="button" class="pet-home-card-select" data-select="'+escapeAttr(a.id)+'" aria-pressed="'+selected+'"><div class="pet-card-top"><div class="pet-avatar">'+photo+'</div><div class="pet-card-heading"><div class="pet-name">'+escapeHtml(a.name)+'</div><div class="pet-breed">'+breed+'</div></div><span class="pet-card-arrow" aria-label="'+(selected?'Fechar prontuário':'Abrir prontuário')+'" title="'+(selected?'Fechar prontuário':'Abrir prontuário')+'" aria-hidden="true">'+(selected?'⌄':'›')+'</span></div>'+(s&&s.alert?'<div class="pet-card-meta"><span class="pet-status alert">'+escapeHtml(s.label)+'</span></div>':'')+'</button>';
    return '<article class="pet-home-card '+(selected?'active':'')+'" style="--pet-card-tint:'+cardColorValue(a.cardColor)+'">'+summary+(selected&&typeof originalDetail==='function'?'<div class="pet-inline-detail">'+originalDetail()+'</div>':'')+'</article>';
   }).join('');
   const alerts=typeof overdueVaccineAlerts==='function'?overdueVaccineAlerts():[];
