@@ -315,3 +315,16 @@ html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card .pet-add-plu
     width:80px!important;height:80px!important;min-width:80px!important;min-height:80px!important;flex-basis:80px!important;
   }
 }
+
+
+/* Mantém o botão do menu com respiro igual no topo e na lateral direita. */
+.sidebar .brand .brand-menu-btn{
+  top:max(10px,env(safe-area-inset-top, 0px))!important;
+  right:10px!important;
+}
+@media(max-width:760px){
+  .sidebar .brand .brand-menu-btn{
+    top:max(10px,env(safe-area-inset-top, 0px))!important;
+    right:10px!important;
+  }
+}
