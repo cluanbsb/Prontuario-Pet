@@ -211,14 +211,15 @@ async function shareAnimal(animalId, email){
   return { ok:true };
 }
 async function unshareAnimal(animalId){
-  if(!loaded || loadError){ toastMessage = 'Aguarde o carregamento dos dados antes de alterar o compartilhamento.'; render(); return; }
+  if(!loaded || loadError){ toastMessage = 'Aguarde o carregamento dos dados antes de alterar o compartilhamento.'; render(); return { ok:false, error:toastMessage }; }
   const animal = getAnimal(animalId);
-  if(!animal) return;
+  if(!animal) return { ok:false, error:'Não foi possível localizar este prontuário. Atualize a tela e tente novamente.' };
   const shareId = `${currentUser.uid}_${animal.id}`;
   try{ await db.collection('compartilhados').doc(shareId).delete(); }catch(e){ /* ignora */ }
   delete animal.sharedWithUid;
   delete animal.sharedWithEmail;
-  saveData();
+  await saveData();
+  return { ok:true };
 }
 
 function openEditAccount(){
