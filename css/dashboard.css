@@ -148,3 +148,10 @@
 .pet-home-wrap .pet-home-card:not(.active) .pet-status{margin-top:8px!important;padding:4px 8px!important;font-size:11px!important}
 .pet-home-wrap .pet-home-card:not(.active) .pet-card-foot{margin-top:9px!important;padding-top:8px!important;font-size:11px!important}
 .pet-home-wrap .pet-home-card:not(.active) .pet-card-arrow{width:26px!important;height:26px!important}
+
+
+/* Cards informativos: sem ação de clique, ordem e textos alinhados de forma consistente. */
+.pet-quick-grid .pet-quick-link{display:flex;align-items:center;justify-content:flex-start;text-align:left;cursor:default;}
+.pet-quick-grid .pet-quick-copy{display:flex;flex:1;min-width:0;flex-direction:column;align-items:flex-start;text-align:left;gap:4px;}
+.pet-quick-grid .pet-quick-copy strong,.pet-quick-grid .pet-quick-copy small{display:block;width:100%;margin:0;text-align:left;line-height:1.35;}
+.pet-quick-grid .pet-quick-icon{flex:0 0 auto;}
