@@ -251,6 +251,9 @@ function attachEvents(){
   });
   const customizeOverlay = document.getElementById('customize-overlay');
   if(customizeOverlay) customizeOverlay.addEventListener('click', (e)=>{ if(e.target===customizeOverlay){ applySettings(settings); customizeOpen=false; pendingSettings=null; render(); } });
+  document.querySelectorAll('[data-action="set-appearance-mode"]').forEach(el=>{
+    el.addEventListener('click', ()=>{ pendingSettings.appearanceMode = el.dataset.value; applySettings(pendingSettings); render(); });
+  });
   document.querySelectorAll('[data-action="set-theme"]').forEach(el=>{
     el.addEventListener('click', ()=>{ pendingSettings.colorTheme = el.dataset.value; applySettings(pendingSettings); render(); });
   });
@@ -272,7 +275,7 @@ function attachEvents(){
   }
   const resetCustomizeBtn = document.querySelector('[data-action="reset-customize"]');
   if(resetCustomizeBtn) resetCustomizeBtn.addEventListener('click', ()=>{
-    pendingSettings = { colorTheme:'sapo', font:'classico', wallpaper:'none', wallpaperOpacity:1 };
+    pendingSettings = { colorTheme:'sapo', font:'classico', wallpaper:'none', wallpaperOpacity:1, appearanceMode:'light' };
     applySettings(pendingSettings); render();
   });
   const saveCustomizeBtn = document.querySelector('[data-action="save-customize"]');
