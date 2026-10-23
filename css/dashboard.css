@@ -137,3 +137,14 @@
     padding-right:8px!important;
   }
 }
+
+
+/* Cartões de pets compactos quando fechados; o cartão selecionado mantém espaço confortável. */
+.pet-home-wrap .pet-home-card:not(.active){padding:12px 14px!important}
+.pet-home-wrap .pet-home-card:not(.active) .pet-card-top{gap:11px!important}
+.pet-home-wrap .pet-home-card:not(.active) .pet-avatar{width:54px!important;height:54px!important;font-size:25px!important;border-width:3px!important}
+.pet-home-wrap .pet-home-card:not(.active) .pet-name{font-size:17px!important;line-height:1.15!important}
+.pet-home-wrap .pet-home-card:not(.active) .pet-breed{margin-top:3px!important;line-height:1.25!important}
+.pet-home-wrap .pet-home-card:not(.active) .pet-status{margin-top:8px!important;padding:4px 8px!important;font-size:11px!important}
+.pet-home-wrap .pet-home-card:not(.active) .pet-card-foot{margin-top:9px!important;padding-top:8px!important;font-size:11px!important}
+.pet-home-wrap .pet-home-card:not(.active) .pet-card-arrow{width:26px!important;height:26px!important}
