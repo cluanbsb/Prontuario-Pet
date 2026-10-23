@@ -20,3 +20,16 @@
 /* Acessibilidade: foco de teclado visível e respeito à preferência por menos movimento. */
 .pet-home-card:focus-visible,.pet-add-card:focus-visible,.pet-quick-link:focus-visible,.brand-menu-btn:focus-visible,.btn-new:focus-visible{outline:3px solid #2d6a4f;outline-offset:3px}
 @media(prefers-reduced-motion:reduce){.pet-home-card,.pet-add-card,.pet-quick-link{transition:none!important}.pet-home-card:hover,.pet-add-card:hover,.pet-quick-link:hover{transform:none!important}}
+
+/* O prontuário selecionado expande dentro do próprio cartão do pet. */
+.pet-home-card{align-self:start;cursor:default}
+.pet-home-card.active{grid-column:1/-1}
+.pet-home-card-select{display:block;width:100%;padding:0;border:0;background:transparent;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.pet-home-card-select:focus-visible{outline:3px solid #2d6a4f;outline-offset:4px;border-radius:12px}
+.pet-home-card-select:hover{background:transparent}
+.pet-inline-detail{margin-top:20px;padding-top:20px;border-top:1px solid rgba(93,139,123,.22);min-width:0}
+.pet-inline-detail .detail{max-width:none!important;margin:0!important;padding:0!important}
+.pet-inline-detail .profile-cover{border-radius:18px;overflow:hidden}
+.pet-inline-detail .content-panel{min-width:0}
+.pet-inline-detail .tabs{flex-wrap:wrap}
+@media(max-width:760px){.pet-home-card.active{grid-column:1/-1}.pet-inline-detail{margin-top:16px;padding-top:16px}}
