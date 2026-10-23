@@ -217,12 +217,25 @@ async function unshareAnimal(animalId){
   const animal = getAnimal(animalId);
   if(!animal) return { ok:false, error:'Não foi possível localizar este prontuário. Atualize a tela e tente novamente.' };
   const shareId = `${currentUser.uid}_${animal.id}`;
-  try{ await db.collection('compartilhados').doc(shareId).delete(); }catch(e){ /* ignora */ }
+  const previousUid = animal.sharedWithUid;
+  const previousEmail = animal.sharedWithEmail;
   delete animal.sharedWithUid;
   delete animal.sharedWithEmail;
   const saved = await saveData();
-  if(!saved) return { ok:false, error:toastMessage || 'Não foi possível salvar a alteração.' };
-  return { ok:true };
+  if(!saved){
+    if(previousUid) animal.sharedWithUid = previousUid;
+    if(previousEmail) animal.sharedWithEmail = previousEmail;
+    return { ok:false, error:toastMessage || 'Não foi possível salvar a alteração.' };
+  }
+  try{
+    await db.collection('compartilhados').doc(shareId).delete();
+    return { ok:true };
+  }catch(e){
+    console.error('Falha ao remover a cópia compartilhada', e);
+    toastMessage = 'A alteração foi salva, mas não foi possível remover a cópia compartilhada. Verifique a conexão e tente novamente.';
+    render();
+    return { ok:false, error:toastMessage };
+  }
 }
 
 function openEditAccount(){
