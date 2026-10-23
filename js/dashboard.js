@@ -1,6 +1,8 @@
 /* Nova home: preserva os fluxos existentes de autenticação e prontuário. */
 (function(){
  const originalDetail=window.renderDetail;
+ const cardColors=[{id:'menta',label:'Verde menta',value:'#dff1e7'},{id:'azul',label:'Azul',value:'#dceff5'},{id:'pessego',label:'Pêssego',value:'#fbe7d8'},{id:'lilas',label:'Lilás',value:'#eee8fa'},{id:'amarelo',label:'Amarelo suave',value:'#fff2c9'},{id:'rosa',label:'Rosa',value:'#f9e0e8'},{id:'branco',label:'Branco',value:'#ffffff'}];
+ function cardColorValue(id){const c=cardColors.find(x=>x.id===id);return c?c.value:'#ffffff';}
  function status(a){
   const v=a.vaccines||[], overdue=v.filter(x=>typeof vaccineStatus==='function'&&vaccineStatus(x)==='overdue').length, soon=v.filter(x=>typeof vaccineStatus==='function'&&vaccineStatus(x)==='soon').length;
   if(overdue)return {label:overdue+(overdue===1?' vacina atrasada':' vacinas atrasadas'),alert:true};
@@ -12,7 +14,8 @@
    const breed=[a.species,a.breed].filter(Boolean).map(escapeHtml).join(' · ');
    const selected=a.id===selectedId;
    const summary='<button type="button" class="pet-home-card-select" data-select="'+escapeAttr(a.id)+'" aria-pressed="'+selected+'"><div class="pet-card-top"><div class="pet-avatar">'+photo+'</div><div><div class="pet-name">'+escapeHtml(a.name)+'</div><div class="pet-breed">'+breed+'</div></div></div><span class="pet-status '+(s.alert?'alert':'')+'">'+escapeHtml(s.label)+'</span><div class="pet-card-foot"><span>'+(selected?'Prontuário aberto':'Ver prontuário')+'</span><span class="pet-card-arrow" aria-hidden="true">'+(selected?'⌄':'→')+'</span></div></button>';
-   return '<article class="pet-home-card '+(selected?'active':'')+'">'+summary+(selected&&typeof originalDetail==='function'?'<div class="pet-inline-detail">'+originalDetail()+'</div>':'')+'</article>';
+   const colorChoices='<div class="pet-color-picker" role="group" aria-label="Cor deste prontuário">'+cardColors.map(c=>'<button type="button" class="pet-color-swatch '+((a.cardColor||'branco')===c.id?'chosen':'')+'" data-card-color="'+c.id+'" data-animal-id="'+escapeAttr(a.id)+'" style="--swatch:'+c.value+'" aria-label="Cor '+c.label+'" title="'+c.label+'" aria-pressed="'+((a.cardColor||'branco')===c.id)+'"></button>').join('')+'</div>';
+   return '<article class="pet-home-card '+(selected?'active':'')+'" style="--pet-card-tint:'+cardColorValue(a.cardColor)+'">'+summary+colorChoices+(selected&&typeof originalDetail==='function'?'<div class="pet-inline-detail">'+originalDetail()+'</div>':'')+'</article>';
   }).join('');
   const alerts=typeof overdueVaccineAlerts==='function'?overdueVaccineAlerts():[];
   const alertBanner=alerts.length?'<div class="alert-banner" role="alert">🐾 <strong>'+(alerts.length===1?'Tem 1 vacina esperando':'Tem '+alerts.length+' vacinas esperando')+' uma visita ao vet:</strong> '+alerts.slice(0,3).map(al=>escapeHtml(al.animalName)+' — '+escapeHtml(al.vaccineName)).join('; ')+(alerts.length>3?' e mais '+(alerts.length-3):'')+'</div>':'';

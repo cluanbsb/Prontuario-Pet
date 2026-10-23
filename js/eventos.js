@@ -34,6 +34,17 @@ function attachEvents(){
     userMenuOpen = false;
     render();
   });
+  document.querySelectorAll('[data-card-color]').forEach(el=>{
+    el.addEventListener('click', e=>{
+      e.preventDefault(); e.stopPropagation();
+      if(!loaded || loadError){ toastMessage='Aguarde o carregamento dos dados antes de alterar a cor.'; render(); return; }
+      const animal=getAnimal(el.dataset.animalId);
+      if(!animal) return;
+      animal.cardColor=el.dataset.cardColor;
+      saveData();
+      render();
+    });
+  });
   document.querySelectorAll('[data-select]').forEach(el=>{
     el.addEventListener('click', ()=>{ selectedId = selectedId === el.dataset.select ? null : el.dataset.select; activeTab='perfil'; recordSearch=''; searchOpen=false; animalPickerOpen=false; render(); });
     el.addEventListener('keydown', e=>{ if(el.tagName==='BUTTON') return; if(e.key==='Enter'||e.key===' '){ if(e.key===' ') e.preventDefault(); selectedId = el.dataset.select; activeTab='perfil'; recordSearch=''; searchOpen=false; animalPickerOpen=false; render(); } });
