@@ -148,10 +148,17 @@ function attachEvents(){
     render();
   });
   const unshareBtn = document.querySelector('[data-action="unshare-animal"]');
-  if(unshareBtn) unshareBtn.addEventListener('click', ()=>{
-    unshareAnimal(shareState.animalId);
-    toastMessage = 'Compartilhamento removido.';
-    shareState = null;
+  if(unshareBtn) unshareBtn.addEventListener('click', async ()=>{
+    unshareBtn.disabled = true;
+    unshareBtn.textContent = 'Removendo...';
+    const result = await unshareAnimal(shareState.animalId);
+    if(result && result.ok){
+      toastMessage = 'Compartilhamento removido.';
+      shareState = null;
+      shareError = '';
+    }else{
+      shareError = (result && result.error) || toastMessage || 'Não foi possível remover o compartilhamento. Tente novamente.';
+    }
     render();
   });
 
