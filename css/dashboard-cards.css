@@ -108,3 +108,29 @@
 .sidebar .user-menu .logout-link .menu-item-icon{background:#fbefed;color:#a33e35}
 .sidebar .user-menu .menu-item:focus-visible,.sidebar .user-menu .logout-link:focus-visible{outline:2px solid #2d6a4f!important;outline-offset:2px}
 @media(max-width:760px){.sidebar .user-menu{top:74px!important;right:0!important;width:min(320px,calc(100vw - 36px))!important}.sidebar .brand-menu-btn{width:44px!important;height:44px!important;flex-basis:44px!important}}
+
+
+/* Ações da foto: manter os ícones empilhados no canto superior direito, como no layout original. */
+.profile-cover-actions{position:absolute!important;top:10px!important;right:10px!important;left:auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;gap:6px!important;z-index:3!important}
+.profile-cover-actions>.icon-btn-ghost,.profile-cover-actions>.pet-profile-color-control>.icon-btn-ghost{width:31px!important;height:31px!important;min-width:31px!important;flex:0 0 31px!important;padding:0!important;border-radius:9px!important;font-size:13px!important;box-sizing:border-box!important}
+.profile-cover-actions .pet-profile-color-picker{top:0!important;right:calc(100% + 6px)!important;width:128px!important;max-width:calc(100vw - 90px)!important;padding:8px!important;gap:6px!important}
+.profile-cover-actions .pet-profile-color-picker .pet-color-swatch{width:20px!important;height:20px!important;flex-basis:20px!important}
+
+/* Mais área útil para os dados do animal e valores sem cortes ou compressão. */
+.pet-home-wrap .pet-inline-detail .detail{padding-left:clamp(8px,1.4vw,24px)!important;padding-right:clamp(8px,1.4vw,24px)!important;max-width:none!important;width:100%!important;box-sizing:border-box!important}
+.pet-home-wrap .pet-inline-detail .content-panel{width:100%!important;max-width:none!important;min-width:0!important;box-sizing:border-box!important;padding:18px clamp(14px,2vw,26px) 24px!important}
+.pet-home-wrap .pet-inline-detail .profile-data-row{display:grid!important;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)!important;align-items:start!important;gap:14px!important;padding:11px 0!important;min-width:0!important}
+.pet-home-wrap .pet-inline-detail .profile-data-row>.rec-line{min-width:0!important;white-space:normal!important;overflow-wrap:anywhere!important;line-height:1.5!important}
+.pet-home-wrap .pet-inline-detail .profile-data-row>.mono{display:block!important;min-width:0!important;max-width:100%!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important;text-align:right!important;line-height:1.5!important}
+@media(max-width:600px){
+ .profile-cover-actions{top:8px!important;right:8px!important;gap:5px!important}
+ .profile-cover-actions>.icon-btn-ghost,.profile-cover-actions>.pet-profile-color-control>.icon-btn-ghost{width:29px!important;height:29px!important;min-width:29px!important;flex-basis:29px!important}
+ .pet-home-wrap .pet-inline-detail .detail{padding-left:6px!important;padding-right:6px!important}
+ .pet-home-wrap .pet-inline-detail .content-panel{padding:15px 13px 20px!important}
+ .pet-home-wrap .pet-inline-detail .profile-data-row{grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr)!important;gap:9px!important;padding:10px 0!important}
+ .pet-home-wrap .pet-inline-detail .profile-data-row>.mono{font-size:12px!important}
+}
+@media(max-width:360px){
+ .pet-home-wrap .pet-inline-detail .profile-data-row{grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr)!important;gap:7px!important}
+ .pet-home-wrap .pet-inline-detail .content-panel{padding-left:10px!important;padding-right:10px!important}
+}
