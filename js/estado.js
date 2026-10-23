@@ -143,7 +143,7 @@ async function saveData(){
   if(!loaded || loadError){
     toastMessage = 'Aguarde o carregamento dos seus dados. Se houver erro, toque em “Tentar de novo” antes de salvar para evitar substituir informações existentes.';
     render();
-    return;
+    return false;
   }
   try{
     const ownAnimals = animals.filter(a => !a.isShared);
@@ -154,10 +154,12 @@ async function saveData(){
     // Recebi compartilhado: minhas edições vão direto pro documento compartilhado
     const sharedWithMeEdited = animals.filter(a => a.isShared);
     await Promise.all(sharedWithMeEdited.map(a => updateSharedAsRecipient(a)));
+    return true;
   }catch(e){
     console.error('Falha ao salvar dados', e);
     toastMessage = 'Ops, não conseguimos salvar agora. Respira fundo, confere a conexão e tenta de novo? 🐾';
     render();
+    return false;
   }
 }
 
@@ -218,7 +220,8 @@ async function unshareAnimal(animalId){
   try{ await db.collection('compartilhados').doc(shareId).delete(); }catch(e){ /* ignora */ }
   delete animal.sharedWithUid;
   delete animal.sharedWithEmail;
-  await saveData();
+  const saved = await saveData();
+  if(!saved) return { ok:false, error:toastMessage || 'Não foi possível salvar a alteração.' };
   return { ok:true };
 }
 
