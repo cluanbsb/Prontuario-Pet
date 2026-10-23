@@ -474,7 +474,7 @@ function removePhoto(){
 
 function saveModal(){
   // Evita alterações quando a leitura inicial falhou e a lista pode estar incompleta.
-  if(loadError){
+  if(!loaded || loadError){
     toastMessage = 'Não é possível salvar enquanto seus dados não forem carregados. Toque em “Tentar de novo” e aguarde a conclusão.';
     render();
     return;
