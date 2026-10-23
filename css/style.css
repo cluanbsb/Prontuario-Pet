@@ -563,3 +563,17 @@
     .empty-state h2{ font-size:17px; }
     .empty-state p{ font-size:13px; }
   }
+
+
+/* Ações do prontuário alinhadas sobre a foto; seletor de cor integrado à mesma fileira. */
+.profile-cover-actions{flex-direction:row!important;align-items:center!important;gap:5px!important;top:10px!important;right:10px!important;z-index:3!important}
+.profile-cover-actions>.icon-btn-ghost,.profile-cover-actions>.pet-profile-color-control>.icon-btn-ghost{width:29px!important;height:29px!important;min-width:29px!important;padding:0!important;border-radius:8px!important;font-size:13px!important;box-sizing:border-box!important}
+.profile-cover-actions .pet-profile-color-control,.profile-actions .pet-profile-color-control{position:relative;display:inline-flex;flex:0 0 auto}
+.pet-profile-color-control>summary{list-style:none;cursor:pointer;display:grid;place-items:center}
+.pet-profile-color-control>summary::-webkit-details-marker{display:none}
+.pet-profile-color-control>summary svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.pet-profile-color-picker{position:absolute;top:calc(100% + 7px);right:0;z-index:20;display:flex;flex-wrap:wrap;gap:7px;width:142px;padding:9px;border:1px solid rgba(93,139,123,.25);border-radius:12px;background:#fff;box-shadow:0 8px 24px rgba(24,50,38,.2)}
+.pet-profile-color-picker .pet-color-swatch{width:21px!important;height:21px!important;flex:0 0 21px!important}
+.profile-actions{align-items:center!important;gap:5px!important}
+.profile-actions>.icon-btn,.profile-actions>.pet-profile-color-control>.icon-btn{width:29px!important;height:29px!important;min-width:29px!important;border-radius:8px!important;font-size:13px!important;box-sizing:border-box!important}
+@media(max-width:480px){.profile-cover-actions{top:8px!important;right:8px!important;gap:4px!important}.profile-cover-actions>.icon-btn-ghost,.profile-cover-actions>.pet-profile-color-control>.icon-btn-ghost{width:27px!important;height:27px!important;min-width:27px!important}.pet-profile-color-picker{width:128px;padding:8px;gap:6px}}
