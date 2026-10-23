@@ -36,14 +36,25 @@ function attachEvents(){
   });
   document.querySelectorAll('[data-select]').forEach(el=>{
     el.addEventListener('click', ()=>{ selectedId = el.dataset.select; activeTab='perfil'; recordSearch=''; searchOpen=false; animalPickerOpen=false; render(); });
-    el.addEventListener('keydown', e=>{ if(e.key==='Enter'){ selectedId = el.dataset.select; activeTab='perfil'; recordSearch=''; searchOpen=false; animalPickerOpen=false; render(); } });
+    el.addEventListener('keydown', e=>{ if(el.tagName==='BUTTON') return; if(e.key==='Enter'||e.key===' '){ if(e.key===' ') e.preventDefault(); selectedId = el.dataset.select; activeTab='perfil'; recordSearch=''; searchOpen=false; animalPickerOpen=false; render(); } });
   });
   const toggleAnimalPickerBtn = document.querySelector('[data-action="toggle-animal-picker"]');
   if(toggleAnimalPickerBtn) toggleAnimalPickerBtn.addEventListener('click', ()=>{ animalPickerOpen = !animalPickerOpen; render(); });
   const closeAnimalPickerBackdrop = document.querySelector('[data-action="close-animal-picker"]');
   if(closeAnimalPickerBackdrop) closeAnimalPickerBackdrop.addEventListener('click', ()=>{ animalPickerOpen = false; render(); });
-  const newBtn = document.querySelector('[data-action="new-animal"]');
-  if(newBtn) newBtn.addEventListener('click', ()=>{ modalState = {entity:'animal', mode:'add'}; render(); });
+  document.querySelectorAll('[data-action="new-animal"]').forEach(newBtn=>{
+    newBtn.addEventListener('click', ()=>{ modalState = {entity:'animal', mode:'add'}; render(); });
+  });
+
+  document.querySelectorAll('[data-home-tab]').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      if(!animals.length){ modalState = {entity:'animal', mode:'add'}; render(); return; }
+      if(!selectedId || !getAnimal(selectedId)) selectedId = animals[0].id;
+      activeTab = el.dataset.homeTab;
+      recordSearch = ''; searchOpen = false; animalPickerOpen = false;
+      render();
+    });
+  });
 
   document.querySelectorAll('[data-tab]').forEach(el=>{
     el.addEventListener('click', ()=>{ activeTab = el.dataset.tab; recordSearch=''; searchOpen=false; render(); });
@@ -70,8 +81,11 @@ function attachEvents(){
 
   const delAnimalBtn = document.querySelector('[data-action="delete-animal"]');
   if(delAnimalBtn) delAnimalBtn.addEventListener('click', ()=>{
+    if(!loaded || loadError){ toastMessage = 'Aguarde o carregamento dos dados antes de excluir um prontuário.'; render(); return; }
     const a = getAnimal(selectedId);
+    if(!a) return;
     confirmState = { message:`Tem certeza? Isso vai apagar todo o prontuário de <b>${escapeHtml(petFirstName(a))}</b> — vacinas, medicações e histórico. Essa ação não pode ser desfeita.`, onConfirm: ()=>{
+      if(!loaded || loadError){ toastMessage = 'Os dados não estão prontos para alteração. Tente carregar novamente antes de excluir.'; render(); return; }
       animals = animals.filter(x=>x.id!==selectedId);
       selectedId = null;
       saveData();
@@ -134,10 +148,17 @@ function attachEvents(){
     render();
   });
   const unshareBtn = document.querySelector('[data-action="unshare-animal"]');
-  if(unshareBtn) unshareBtn.addEventListener('click', ()=>{
-    unshareAnimal(shareState.animalId);
-    toastMessage = 'Compartilhamento removido.';
-    shareState = null;
+  if(unshareBtn) unshareBtn.addEventListener('click', async ()=>{
+    unshareBtn.disabled = true;
+    unshareBtn.textContent = 'Removendo...';
+    const result = await unshareAnimal(shareState.animalId);
+    if(result && result.ok){
+      toastMessage = 'Compartilhamento removido.';
+      shareState = null;
+      shareError = '';
+    }else{
+      shareError = (result && result.error) || toastMessage || 'Não foi possível remover o compartilhamento. Tente novamente.';
+    }
     render();
   });
 
@@ -177,9 +198,12 @@ function attachEvents(){
   });
   document.querySelectorAll('[data-action="delete-record"]').forEach(el=>{
     el.addEventListener('click', ()=>{
+      if(!loaded || loadError){ toastMessage = 'Aguarde o carregamento dos dados antes de excluir um registro.'; render(); return; }
       const entity = el.dataset.entity, id = el.dataset.id;
       confirmState = { message:'Tem certeza que quer apagar este registro? Essa ação não pode ser desfeita.', onConfirm: ()=>{
+        if(!loaded || loadError){ toastMessage = 'Os dados não estão prontos para alteração. Tente carregar novamente antes de excluir.'; render(); return; }
         const a = getAnimal(selectedId);
+        if(!a) return;
         const listKey = getListKey(entity);
         a[listKey] = (a[listKey]||[]).filter(r=>r.id!==id);
         saveData();
@@ -462,6 +486,12 @@ function removePhoto(){
 }
 
 function saveModal(){
+  // Evita alterações quando a leitura inicial falhou e a lista pode estar incompleta.
+  if(!loaded || loadError){
+    toastMessage = 'Não é possível salvar enquanto seus dados não forem carregados. Toque em “Tentar de novo” e aguarde a conclusão.';
+    render();
+    return;
+  }
   const { entity, mode, recordId } = modalState;
   const cfg = ENTITY_CONFIG[entity];
   const modalEl = document.querySelector('#overlay .modal');

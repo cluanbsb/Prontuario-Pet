@@ -1,0 +1,179 @@
+name: Validar JavaScript e recursos locais
+
+on:
+  push:
+    branches:
+      - ui/dashboard-humanizado
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validation:
+    name: Verificar sintaxe e recursos do aplicativo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Validar sintaxe JavaScript
+        shell: bash
+        run: |
+          set -e
+          for file in js/*.js; do
+            echo "Verificando $file"
+            node --check "$file"
+          done
+      - name: Verificar recursos locais do HTML
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const html = fs.readFileSync('index.html', 'utf8');
+          const refs = [...html.matchAll(/\b(?:src|href)=["']([^"']+)["']/g)]
+            .map(match => match[1])
+            .filter(ref => !/^(?:https?:|data:|#|\/\/)/i.test(ref));
+          const missing = [];
+          for (const ref of refs) {
+            const clean = decodeURIComponent(ref.split(/[?#]/)[0]);
+            if (!clean) continue;
+            if (!fs.existsSync(path.resolve(clean))) missing.push(ref);
+          }
+          if (missing.length) {
+            console.error('Recursos locais ausentes em index.html:');
+            for (const ref of missing) console.error(' - ' + ref);
+            process.exit(1);
+          }
+          console.log('Todos os ' + refs.length + ' recursos locais referenciados em index.html existem.');
+          NODE
+      - name: Verificar atalhos do painel e abas existentes
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const dashboard = fs.readFileSync('js/dashboard.js', 'utf8');
+          const main = fs.readFileSync('js/render-main.js', 'utf8');
+          const events = fs.readFileSync('js/eventos.js', 'utf8');
+          const expectedTabs = ['vacinas', 'medicacoes', 'historico', 'perfil'];
+          const errors = [];
+          for (const tab of expectedTabs) {
+            if (!dashboard.includes('data-home-tab="' + tab + '"')) {
+              errors.push('Atalho ausente no painel: ' + tab);
+            }
+            if (!main.includes('data-tab="' + tab + '"')) {
+              errors.push('Aba correspondente ausente na navegação: ' + tab);
+            }
+          }
+          if (!events.includes("document.querySelectorAll('[data-home-tab]')")) {
+            errors.push('Não foi encontrado o manipulador dos atalhos do painel.');
+          }
+          if (errors.length) {
+            console.error(errors.join('\n'));
+            process.exit(1);
+          }
+          console.log('Os quatro atalhos do painel correspondem a abas existentes e possuem manipulador de eventos.');
+          NODE
+      - name: Verificar tratamento de falha e salvamento no Firebase
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const state = fs.readFileSync('js/estado.js', 'utf8');
+          const auth = fs.readFileSync('js/auth-ui.js', 'utf8');
+          const errors = [];
+          if (!state.includes("db.collection('usuarios').doc(currentUser.uid).get()")) {
+            errors.push('O carregamento dos dados do usuário não consulta o documento esperado.');
+          }
+          if (!state.includes("db.collection('usuarios').doc(currentUser.uid).set({ animals: ownAnimals }, { merge:true })")) {
+            errors.push('O salvamento principal não preserva os demais campos do documento (merge).');
+          }
+          if (!state.includes('loadError =') || !state.includes('loaded = true;') || !state.includes('render();')) {
+            errors.push('O fluxo de carregamento não aparenta tratar erro e finalizar a renderização.');
+          }
+          if (!auth.includes("if(!loaded)")) {
+            errors.push('A tela não possui estado de carregamento antes de exibir os dados.');
+          }
+          if (errors.length) {
+            console.error(errors.join('\n'));
+            process.exit(1);
+          }
+          console.log('Fluxos essenciais de carregamento, erro e salvamento encontrados.');
+          NODE
+      - name: Verificar proteção de exclusões durante carregamento
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const events = fs.readFileSync('js/eventos.js', 'utf8');
+          const errors = [];
+          const animalDelete = events.slice(events.indexOf("const delAnimalBtn"), events.indexOf("document.querySelectorAll('[data-action=\"add-record\"]')"));
+          const recordDelete = events.slice(events.indexOf("document.querySelectorAll('[data-action=\"delete-record\"]')"), events.indexOf("document.querySelectorAll('[data-action=\"close-modal\"]')"));
+          if (!animalDelete.includes('if(!loaded || loadError)') || !animalDelete.includes('onConfirm')) {
+            errors.push('A exclusão do prontuário não possui proteção de carregamento e confirmação.');
+          }
+          if (!recordDelete.includes('if(!loaded || loadError)') || !recordDelete.includes('onConfirm')) {
+            errors.push('A exclusão de registros não possui proteção de carregamento e confirmação.');
+          }
+          if (errors.length) {
+            console.error(errors.join('\\n'));
+            process.exit(1);
+          }
+          console.log('Exclusões de prontuários e registros verificam o estado de carregamento e exigem confirmação.');
+          NODE
+      - name: Verificar proteção do compartilhamento de prontuários
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const state = fs.readFileSync('js/estado.js', 'utf8');
+          const shareStart = state.indexOf('async function shareAnimal(');
+          const unshareStart = state.indexOf('async function unshareAnimal(');
+          const accountStart = state.indexOf('function openEditAccount(');
+          const share = state.slice(shareStart, unshareStart);
+          const unshare = state.slice(unshareStart, accountStart);
+          const errors = [];
+          if (shareStart < 0 || !share.includes('if(!loaded || loadError)') || !share.includes('if(!animal)')) {
+            errors.push('O compartilhamento não verifica carregamento e existência do prontuário.');
+          }
+          if (unshareStart < 0 || !unshare.includes('if(!loaded || loadError)') || !unshare.includes('if(!animal)')) {
+            errors.push('A interrupção do compartilhamento não verifica carregamento e existência do prontuário.');
+          }
+          if (errors.length) {
+            console.error(errors.join('\\n'));
+            process.exit(1);
+          }
+          console.log('Compartilhar e interromper compartilhamento verificam o carregamento e a existência do prontuário.');
+          NODE
+      - name: Verificar retorno de falhas no salvamento e compartilhamento
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const state = fs.readFileSync('js/estado.js', 'utf8');
+          const events = fs.readFileSync('js/eventos.js', 'utf8');
+          const errors = [];
+          const saveStart = state.indexOf('async function saveData()');
+          const lookupStart = state.indexOf('async function lookupUidByEmail(');
+          const save = state.slice(saveStart, lookupStart);
+          const unshareStart = state.indexOf('async function unshareAnimal(');
+          const accountStart = state.indexOf('function openEditAccount(');
+          const unshare = state.slice(unshareStart, accountStart);
+          if (!save.includes('return true;') || !save.includes('return false;')) {
+            errors.push('saveData deve informar sucesso e falha para as ações que dependem do salvamento.');
+          }
+          if (!unshare.includes('if(!saved)') || !unshare.includes('catch(e)')) {
+            errors.push('A remoção do compartilhamento deve tratar falhas de salvamento e exclusão remota.');
+          }
+          if (!events.includes('const result = await unshareAnimal(shareState.animalId)') || !events.includes('if(result && result.ok)')) {
+            errors.push('A interface deve aguardar e verificar o resultado da remoção do compartilhamento.');
+          }
+          if (errors.length) {
+            console.error(errors.join('\\n'));
+            process.exit(1);
+          }
+          console.log('Salvamento e remoção do compartilhamento comunicam falhas às ações e à interface.');
+          NODE

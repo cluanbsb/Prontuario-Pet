@@ -139,6 +139,12 @@ async function loadUserData(){
   render();
 }
 async function saveData(){
+  // Nunca grave uma lista incompleta após falha no carregamento do Firestore.
+  if(!loaded || loadError){
+    toastMessage = 'Aguarde o carregamento dos seus dados. Se houver erro, toque em “Tentar de novo” antes de salvar para evitar substituir informações existentes.';
+    render();
+    return false;
+  }
   try{
     const ownAnimals = animals.filter(a => !a.isShared);
     await db.collection('usuarios').doc(currentUser.uid).set({ animals: ownAnimals }, { merge:true });
@@ -148,10 +154,12 @@ async function saveData(){
     // Recebi compartilhado: minhas edições vão direto pro documento compartilhado
     const sharedWithMeEdited = animals.filter(a => a.isShared);
     await Promise.all(sharedWithMeEdited.map(a => updateSharedAsRecipient(a)));
+    return true;
   }catch(e){
     console.error('Falha ao salvar dados', e);
     toastMessage = 'Ops, não conseguimos salvar agora. Respira fundo, confere a conexão e tenta de novo? 🐾';
     render();
+    return false;
   }
 }
 
@@ -187,6 +195,9 @@ async function updateSharedAsRecipient(animal){
   }catch(e){ console.error('Falha ao salvar edição no prontuário compartilhado', e); }
 }
 async function shareAnimal(animalId, email){
+  if(!loaded || loadError){ toastMessage = 'Aguarde o carregamento dos dados antes de compartilhar um prontuário.'; render(); return { ok:false, error:toastMessage }; }
+  const animal = getAnimal(animalId);
+  if(!animal) return { ok:false, error:'Não foi possível localizar este prontuário. Atualize a tela e tente novamente.' };
   const targetUid = await lookupUidByEmail(email);
   if(!targetUid){
     return { ok:false, error:'E-mail não encontrado. A pessoa precisa ter uma conta e já ter feito login pelo menos uma vez no app.' };
@@ -194,7 +205,7 @@ async function shareAnimal(animalId, email){
   if(targetUid === currentUser.uid){
     return { ok:false, error:'Você não pode compartilhar consigo mesmo(a).' };
   }
-  const animal = getAnimal(animalId);
+  if(!loaded || loadError){ toastMessage = 'O carregamento dos dados foi interrompido. Tente novamente antes de compartilhar.'; render(); return { ok:false, error:toastMessage }; }
   animal.sharedWithUid = targetUid;
   animal.sharedWithEmail = email;
   await syncSharedCopy(animal);
@@ -202,13 +213,29 @@ async function shareAnimal(animalId, email){
   return { ok:true };
 }
 async function unshareAnimal(animalId){
+  if(!loaded || loadError){ toastMessage = 'Aguarde o carregamento dos dados antes de alterar o compartilhamento.'; render(); return { ok:false, error:toastMessage }; }
   const animal = getAnimal(animalId);
-  if(!animal) return;
+  if(!animal) return { ok:false, error:'Não foi possível localizar este prontuário. Atualize a tela e tente novamente.' };
   const shareId = `${currentUser.uid}_${animal.id}`;
-  try{ await db.collection('compartilhados').doc(shareId).delete(); }catch(e){ /* ignora */ }
+  const previousUid = animal.sharedWithUid;
+  const previousEmail = animal.sharedWithEmail;
   delete animal.sharedWithUid;
   delete animal.sharedWithEmail;
-  saveData();
+  const saved = await saveData();
+  if(!saved){
+    if(previousUid) animal.sharedWithUid = previousUid;
+    if(previousEmail) animal.sharedWithEmail = previousEmail;
+    return { ok:false, error:toastMessage || 'Não foi possível salvar a alteração.' };
+  }
+  try{
+    await db.collection('compartilhados').doc(shareId).delete();
+    return { ok:true };
+  }catch(e){
+    console.error('Falha ao remover a cópia compartilhada', e);
+    toastMessage = 'A alteração foi salva, mas não foi possível remover a cópia compartilhada. Verifique a conexão e tente novamente.';
+    render();
+    return { ok:false, error:toastMessage };
+  }
 }
 
 function openEditAccount(){
