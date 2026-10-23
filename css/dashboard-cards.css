@@ -237,3 +237,24 @@ html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card .pet-add-plu
   .pet-home-wrap .pet-home-card:not(.active),
   .pet-home-wrap .pet-add-card{height:112px!important;min-height:112px!important;max-height:112px!important;}
 }
+
+
+/* Reduz a altura de todos os cards de pets, mantendo dimensões iguais. */
+.pet-home-wrap .pet-home-card:not(.active),
+.pet-home-wrap .pet-add-card{
+  height:100px!important;
+  min-height:100px!important;
+  max-height:100px!important;
+  box-sizing:border-box!important;
+}
+.pet-home-wrap .pet-home-card:not(.active){padding:9px 12px!important;}
+.pet-home-wrap .pet-home-card:not(.active) .pet-avatar{width:46px!important;height:46px!important;font-size:22px!important;}
+.pet-home-wrap .pet-home-card:not(.active) .pet-card-top{gap:9px!important;}
+.pet-home-wrap .pet-home-card:not(.active) .pet-status{margin-top:5px!important;padding:3px 7px!important;font-size:10px!important;}
+.pet-home-wrap .pet-add-card{padding:8px 10px!important;gap:5px!important;}
+.pet-home-wrap .pet-add-card .pet-add-plus{width:34px!important;height:34px!important;font-size:21px!important;}
+.pet-home-wrap .pet-add-card strong{font-size:13px!important;line-height:1.15!important;}
+@media(max-width:760px){
+  .pet-home-wrap .pet-home-card:not(.active),
+  .pet-home-wrap .pet-add-card{height:100px!important;min-height:100px!important;max-height:100px!important;}
+}
