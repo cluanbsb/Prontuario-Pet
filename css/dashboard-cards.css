@@ -399,3 +399,56 @@ html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card .pet-add-plu
   align-self:flex-start!important;
 }
 .sidebar .brand .brand-top .eyebrow{margin-top:0!important;}
+
+
+/* Mantém o cabeçalho do animal no mesmo padrão ao abrir o prontuário. */
+.pet-home-wrap .pet-home-card.active .pet-home-card-select{
+  width:100%!important;
+  display:block!important;
+  box-sizing:border-box!important;
+  background:transparent!important;
+  color:inherit!important;
+  text-align:left!important;
+}
+.pet-home-wrap .pet-home-card.active .pet-card-top{
+  align-items:center!important;
+  gap:10px!important;
+}
+.pet-home-wrap .pet-home-card.active .pet-avatar{
+  width:80px!important;
+  height:80px!important;
+  min-width:80px!important;
+  min-height:80px!important;
+  flex:0 0 80px!important;
+  border-radius:12px!important;
+  border:2px solid rgba(255,255,255,.9)!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+  font-size:30px!important;
+}
+.pet-home-wrap .pet-home-card.active .pet-avatar img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  border-radius:9px!important;
+}
+.pet-home-wrap .pet-home-card.active .pet-name{
+  font-size:19px!important;
+  font-weight:750!important;
+  line-height:1.2!important;
+  color:var(--forest-dark,#1f4d39)!important;
+}
+.pet-home-wrap .pet-home-card.active .pet-breed{
+  font-size:12.5px!important;
+  line-height:1.45!important;
+}
+.pet-home-wrap .pet-home-card.active{
+  background:linear-gradient(145deg,#fff 12%,var(--pet-card-tint,#fff) 100%)!important;
+}
+@media(max-width:760px){
+  .pet-home-wrap .pet-home-card.active .pet-avatar{
+    width:80px!important;height:80px!important;min-width:80px!important;min-height:80px!important;flex-basis:80px!important;
+  }
+  .pet-home-wrap .pet-home-card.active .pet-name{font-size:19px!important;}
+}
