@@ -546,3 +546,18 @@ html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card .pet-add-plu
   max-height:none!important;
   overflow:visible!important;
 }
+
+
+/* Ações e avisos ficam no card fechado, fora da foto do pet. */
+.pet-home-card:not(.active) .pet-closed-tools{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:7px 2px 1px;margin-top:4px;border-top:1px solid rgba(80,110,100,.12)}
+.pet-home-card:not(.active) .pet-closed-action{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;flex:0 0 28px;padding:0;border:1px solid rgba(80,110,100,.18);border-radius:8px;background:rgba(255,255,255,.78);color:var(--ink,#243746);font-size:14px;line-height:1;cursor:pointer}
+.pet-home-card:not(.active) .pet-closed-action.is-active{background:rgba(57,137,204,.13);border-color:rgba(57,137,204,.3)}
+.pet-home-card:not(.active) .pet-closed-alert{display:inline-flex;align-items:center;gap:3px;min-height:25px;padding:3px 7px;border-radius:8px;font-size:10px;font-weight:700;line-height:1.2;white-space:nowrap}
+.pet-home-card:not(.active) .pet-closed-alert.overdue{background:#fde8e6;color:#a33e35}
+.pet-home-card:not(.active) .pet-closed-alert.soon{background:#fff3d7;color:#8a5a00}
+.pet-home-card:not(.active) .pet-closed-alert.meds{background:#e7f4ed;color:#286c50}
+.pet-home-card:not(.active) .pet-closed-tools .pet-profile-color-control{margin:0;flex:0 0 auto}
+.pet-home-card:not(.active) .pet-closed-tools .pet-profile-color-control>summary{width:28px;height:28px;min-width:28px;padding:5px;box-sizing:border-box}
+.pet-home-card:not(.active) .pet-closed-tools .pet-profile-color-picker{z-index:30}
+.pet-home-card.active>.pet-closed-tools{display:none!important}
+@media(max-width:520px){.pet-home-card:not(.active) .pet-closed-tools{gap:5px;padding-top:6px}.pet-home-card:not(.active) .pet-closed-action{width:26px;height:26px;flex-basis:26px;font-size:13px}.pet-home-card:not(.active) .pet-closed-alert{font-size:9px;padding:3px 5px}}
