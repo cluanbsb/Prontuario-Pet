@@ -272,6 +272,9 @@ function renderCopyModal(){
 
 function renderCustomizeModal(){
   const s = pendingSettings || settings;
+  const sortedThemes = COLOR_THEMES.slice().sort((a,b)=>a.name.localeCompare(b.name,'pt-BR',{sensitivity:'base'}));
+  const sortedFonts = FONTS.slice().sort((a,b)=>a.name.localeCompare(b.name,'pt-BR',{sensitivity:'base'}));
+  const sortedWallpapers = WALLPAPERS.slice().sort((a,b)=>a.name.localeCompare(b.name,'pt-BR',{sensitivity:'base'}));
   const wrap = document.createElement('div');
   wrap.className = 'overlay';
   wrap.id = 'customize-overlay';
@@ -294,7 +297,7 @@ function renderCustomizeModal(){
       <div class="customize-section">
         <h3 class="customize-section-title">Paleta de cores</h3>
         <div class="customize-grid">
-          ${COLOR_THEMES.map(t => `
+          ${sortedThemes.map(t => `
             <button type="button" class="swatch ${s.colorTheme===t.id?'selected':''}" data-action="set-theme" data-value="${t.id}">
               <div class="preview theme-preview">
                 <span style="background:${t.vars['--forest']}"></span>
@@ -310,7 +313,7 @@ function renderCustomizeModal(){
       <div class="customize-section">
         <h3 class="customize-section-title">Tipografia</h3>
         <div class="customize-grid">
-          ${FONTS.map(f => `
+          ${sortedFonts.map(f => `
             <button type="button" class="swatch ${s.font===f.id?'selected':''}" data-action="set-font" data-value="${f.id}">
               <div class="preview font-preview" style="font-family:${f.display}">Aa</div>
               ${f.name}
@@ -322,7 +325,7 @@ function renderCustomizeModal(){
       <div class="customize-section">
         <h3 class="customize-section-title">Papel de parede</h3><p class="customize-section-help">Escolha um fundo e ajuste sua opacidade para deixar os textos confortáveis de ler.</p>
         <div class="customize-grid">
-          ${WALLPAPERS.map(w => `
+          ${sortedWallpapers.map(w => `
             <button type="button" class="swatch ${s.wallpaper===w.id?'selected':''}" data-action="set-wallpaper" data-value="${w.id}">
               <div class="preview" style="background-color:${w.color};background-image:${w.image};background-size:${w.size};background-position:${w.position};"></div>
               ${w.name}
