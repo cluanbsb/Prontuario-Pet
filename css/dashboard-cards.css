@@ -586,3 +586,8 @@ html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card .pet-add-plu
 
 /* No prontuário aberto, ocultar a foto de capa grande; manter apenas o avatar compacto do cabeçalho do card. */
 .pet-home-wrap .pet-inline-detail .profile-cover{display:none!important;}
+
+
+/* Tag compacta de medicação abaixo do nome do pet. */
+.pet-home-wrap .pet-medication-tag{display:inline-flex;align-items:center;gap:4px;width:max-content;max-width:100%;margin-top:3px;padding:2px 7px;border-radius:999px;background:#e7f4ed;color:#286c50;font-size:11px;font-weight:700;line-height:1.35;white-space:nowrap;}
+html[data-appearance-mode="dark"] .pet-home-wrap .pet-medication-tag{background:#234b3b;color:#d6f4e4;}
