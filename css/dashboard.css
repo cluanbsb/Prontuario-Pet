@@ -200,3 +200,8 @@
 /* Aumenta a separação entre o cartão de adicionar pet e "Informações do prontuário". */
 .detail.home-detail .pet-quick-section{margin-top:24px!important}
 @media(max-width:760px){.detail.home-detail .pet-quick-section{margin-top:24px!important}}
+
+
+/* Aumenta a marca "PRONTUÁRIO PET" e o ícone de pata para 35 px. */
+.brand .eyebrow{font-size:35px!important}
+.brand .eyebrow span{font-size:35px!important}
