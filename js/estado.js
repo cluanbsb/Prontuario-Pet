@@ -243,17 +243,40 @@ async function unshareAnimal(animalId){
   }
 }
 
-function openEditAccount(){
-  editAccountState = { loading: false, currentEmail: currentUser.email || '' };
+async function openEditAccount(){
+  editAccountState = { loading: true, currentEmail: currentUser.email || '', fullName:'', nickname:'' };
   editAccountError = '';
+  render();
+  try{
+    const doc = await db.collection('usuarios').doc(currentUser.uid).get();
+    const data = doc.exists ? doc.data() : {};
+    editAccountState = {
+      loading: false,
+      currentEmail: currentUser.email || '',
+      fullName: data.fullName || '',
+      nickname: data.nickname || currentUser.displayName || ''
+    };
+  }catch(e){
+    console.error('Falha ao carregar dados do cadastro', e);
+    editAccountState = { loading:false, currentEmail:currentUser.email || '', fullName:'', nickname:currentUser.displayName || '' };
+    editAccountError = 'Não foi possível carregar os dados do cadastro. Você pode preencher os campos novamente.';
+  }
   render();
 }
 
 async function saveEditAccount(){
+  const fullName = document.getElementById('edit-account-full-name').value.trim();
+  const nickname = document.getElementById('edit-account-nickname').value.trim();
   const newEmailRaw = document.getElementById('edit-account-email').value.trim();
   const newPassword = document.getElementById('edit-account-new-password').value;
   const newPasswordConfirm = document.getElementById('edit-account-new-password-confirm').value;
   const currentPassword = document.getElementById('edit-account-password').value;
+  if(!fullName){
+    editAccountError = 'Informe seu nome completo.'; render(); return;
+  }
+  if(!nickname){
+    editAccountError = 'Informe um apelido.'; render(); return;
+  }
   if(!newEmailRaw){
     editAccountError = 'Informe um e-mail.'; render(); return;
   }
@@ -277,20 +300,29 @@ async function saveEditAccount(){
     await currentUser.reauthenticateWithCredential(cred);
 
     const emailChanged = newEmailRaw !== currentUser.email;
+    const profileChanged = fullName !== (editAccountState.fullName || '') || nickname !== (editAccountState.nickname || '');
     if(emailChanged){
       await currentUser.verifyBeforeUpdateEmail(newEmailRaw);
       await db.collection('email_lookup').doc(newEmailRaw.toLowerCase()).set({ uid: currentUser.uid });
+    }
+    if(profileChanged){
+      await db.collection('usuarios').doc(currentUser.uid).set({ fullName, nickname }, { merge:true });
+      await currentUser.updateProfile({ displayName: nickname });
     }
     if(wantsPasswordChange){
       await currentUser.updatePassword(newPassword);
     }
 
     if(emailChanged && wantsPasswordChange){
-      toastMessage = `Senha alterada. Enviamos um link de confirmação para ${newEmailRaw} — confirme por lá para concluir a troca de e-mail.`;
+      toastMessage = `Cadastro atualizado. Senha alterada. Enviamos um link de confirmação para ${newEmailRaw} — confirme por lá para concluir a troca de e-mail.`;
     }else if(emailChanged){
-      toastMessage = `Enviamos um link de confirmação para ${newEmailRaw}. Confirme por lá para concluir — pode levar alguns minutos até funcionar no login.`;
+      toastMessage = `Cadastro atualizado. Enviamos um link de confirmação para ${newEmailRaw}. Confirme por lá para concluir a troca de e-mail.`;
+    }else if(wantsPasswordChange && profileChanged){
+      toastMessage = 'Nome, apelido e senha atualizados com sucesso.';
     }else if(wantsPasswordChange){
       toastMessage = 'Senha alterada com sucesso.';
+    }else if(profileChanged){
+      toastMessage = 'Nome e apelido atualizados com sucesso.';
     }else{
       toastMessage = 'Nenhuma alteração para salvar.';
     }
