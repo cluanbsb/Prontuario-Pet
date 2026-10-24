@@ -128,6 +128,14 @@ function renderEditAccountModal(){
         ${editAccountState.loading ? `<p style="font-size:13.5px;color:var(--ink-soft);">Carregando...</p>` : `
           ${editAccountError ? `<div class="login-error">${escapeHtml(editAccountError)}</div>` : ''}
           <div class="field">
+            <label>Nome Completo</label>
+            <input type="text" id="edit-account-full-name" value="${escapeAttr(editAccountState.fullName||'')}" placeholder="Digite seu nome completo" autocomplete="name" maxlength="120">
+          </div>
+          <div class="field">
+            <label>Apelido</label>
+            <input type="text" id="edit-account-nickname" value="${escapeAttr(editAccountState.nickname||'')}" placeholder="Como prefere ser chamado(a)?" autocomplete="nickname" maxlength="40">
+          </div>
+          <div class="field">
             <label>E-mail</label>
             <input type="email" id="edit-account-email" value="${escapeAttr(editAccountState.currentEmail||'')}" placeholder="seu@email.com" autocomplete="email">
             <p style="font-size:12px;color:var(--ink-soft);margin:6px 0 0;">Ao trocar, você vai receber um e-mail de confirmação no novo endereço — clique no link recebido para concluir.</p>
