@@ -851,3 +851,12 @@ html[data-appearance-mode="dark"] #customize-overlay .opacity-row{background:var
 .user-menu .menu-item,.user-menu .logout-link{gap:6px!important;padding-left:0!important;padding-right:0!important}
 .user-menu .menu-item-icon,.user-menu .logout-link .menu-item-icon{width:24px!important;height:24px!important;flex-basis:24px!important;font-size:13px!important;border-radius:7px!important}
 @media(max-width:520px){.user-menu{width:225px!important;max-width:calc(100vw - 8px)!important;padding:7px 5px!important}}
+
+
+/* Correção mobile: impedir que textos longos imponham largura mínima ao menu. */
+.user-menu{width:190px!important;min-width:0!important;max-width:190px!important;box-sizing:border-box!important;overflow:hidden!important}
+.user-menu .user-menu-heading,.user-menu .menu-item,.user-menu .logout-link{min-width:0!important;box-sizing:border-box!important}
+.user-menu .user-menu-account{min-width:0!important;max-width:100%!important;overflow:hidden!important}
+.user-menu .user-menu-account .user-email{white-space:normal!important;overflow-wrap:anywhere!important;word-break:break-word!important}
+.user-menu .menu-item>span:last-child,.user-menu .logout-link>span:last-child{min-width:0!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important}
+@media(max-width:520px){.user-menu{width:180px!important;min-width:0!important;max-width:180px!important;right:8px!important;padding:7px 5px!important}}
