@@ -60,8 +60,18 @@ function renderLoginScreen(){
       <p class="sub">${subs[authMode]}</p>
       ${authError ? `<div class="login-error">${escapeHtml(authError)}</div>` : ''}
       ${authInfo ? `<div class="login-info">${escapeHtml(authInfo)}</div>` : ''}
+      ${authMode==='signup' ? `
+        <div class="field">
+          <label for="auth-full-name">Nome Completo</label>
+          <input type="text" id="auth-full-name" placeholder="Digite seu nome completo" autocomplete="name" maxlength="120">
+        </div>
+        <div class="field">
+          <label for="auth-nickname">Apelido</label>
+          <input type="text" id="auth-nickname" placeholder="Como prefere ser chamado(a)?" autocomplete="nickname" maxlength="40">
+        </div>
+      ` : ''}
       <div class="field">
-        <label>E-mail</label>
+        <label for="auth-email">E-mail</label>
         <input type="email" id="auth-email" placeholder="seu@email.com" autocomplete="email">
       </div>
       ${authMode==='forgotpw' ? `
@@ -112,8 +122,12 @@ function attachLoginEvents(){
 async function handleAuthSubmit(){
   const email = document.getElementById('auth-email').value.trim();
   const password = document.getElementById('auth-password').value;
+  const fullName = authMode==='signup' ? (document.getElementById('auth-full-name')?.value || '').trim() : '';
+  const nickname = authMode==='signup' ? (document.getElementById('auth-nickname')?.value || '').trim() : '';
+  if(authMode==='signup' && !fullName){ authError = 'Informe seu nome completo.'; render(); return; }
+  if(authMode==='signup' && !nickname){ authError = 'Informe um apelido.'; render(); return; }
   if(!email || !password){ authError = 'Preencha e-mail e senha.'; render(); return; }
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ authError = 'E-mail inválido.'; render(); return; }
+  if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)){ authError = 'E-mail inválido.'; render(); return; }
   if(password.length < 6){ authError = 'A senha deve ter pelo menos 6 caracteres.'; render(); return; }
   authError = '';
   try{
@@ -121,7 +135,18 @@ async function handleAuthSubmit(){
       await auth.signInWithEmailAndPassword(email, password);
     }else{
       const cred = await auth.createUserWithEmailAndPassword(email, password);
-      db.collection('email_lookup').doc(email.toLowerCase()).set({ uid: cred.user.uid }).catch(()=>{});
+      try{
+        await cred.user.updateProfile({ displayName: nickname });
+        await db.collection('usuarios').doc(cred.user.uid).set({
+          fullName,
+          nickname,
+          settings: { colorTheme:'flamingo', font:'divertido', wallpaper:'estrelinhas', wallpaperOpacity:0.5, appearanceMode:'light' }
+        }, { merge:true });
+        await db.collection('email_lookup').doc(email.toLowerCase()).set({ uid: cred.user.uid });
+      }catch(profileError){
+        console.error('A conta foi criada, mas não foi possível salvar todos os dados do perfil.', profileError);
+        authInfo = 'Sua conta foi criada. Entre no aplicativo e confira os dados do perfil; alguns detalhes podem precisar ser salvos novamente.';
+      }
     }
   }catch(e){
     authError = translateAuthError(e.code);
