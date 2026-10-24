@@ -11,7 +11,6 @@
  }
  function renderSidebar(){
   const cards=animals.map(a=>{const s=status(a),fallback=(typeof SPECIES_ICON!=='undefined'&&SPECIES_ICON[a.species])||'🐾',photo=a.photo?'<img src="'+escapeAttr(a.photo)+'" alt="Foto de '+escapeAttr(a.name)+'">':fallback;
-   const breed=[a.species,a.breed].filter(Boolean).map(escapeHtml).join(' · ');
    const selected=a.id===selectedId;
    const overdue=(a.vaccines||[]).filter(v=>typeof vaccineStatus==='function'&&vaccineStatus(v)==='overdue').length;
    const soon=(a.vaccines||[]).filter(v=>typeof vaccineStatus==='function'&&vaccineStatus(v)==='soon').length;
