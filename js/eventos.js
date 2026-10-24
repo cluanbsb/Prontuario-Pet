@@ -87,11 +87,9 @@ function attachEvents(){
     }
   }
 
-  const editAnimalBtn = document.querySelector('[data-action="edit-animal"]');
-  if(editAnimalBtn) editAnimalBtn.addEventListener('click', ()=>{ modalState = {entity:'animal', mode:'edit'}; render(); });
+  document.querySelectorAll('[data-action="edit-animal"]').forEach(editAnimalBtn=>editAnimalBtn.addEventListener('click', e=>{e.stopPropagation();if(editAnimalBtn.dataset.animalId) selectedId=editAnimalBtn.dataset.animalId;modalState = {entity:'animal', mode:'edit'}; render(); }));
 
-  const delAnimalBtn = document.querySelector('[data-action="delete-animal"]');
-  if(delAnimalBtn) delAnimalBtn.addEventListener('click', ()=>{
+  document.querySelectorAll('[data-action="delete-animal"]').forEach(delAnimalBtn=>delAnimalBtn.addEventListener('click', e=>{e.stopPropagation();if(delAnimalBtn.dataset.animalId) selectedId=delAnimalBtn.dataset.animalId;
     if(!loaded || loadError){ toastMessage = 'Aguarde o carregamento dos dados antes de excluir um prontuário.'; render(); return; }
     const a = getAnimal(selectedId);
     if(!a) return;
@@ -102,7 +100,7 @@ function attachEvents(){
       saveData();
     }};
     render();
-  });
+  }));
 
   document.querySelectorAll('[data-action="add-record"]').forEach(el=>{
     el.addEventListener('click', ()=>{ modalState = {entity: el.dataset.entity, mode:'add'}; render(); });
@@ -133,8 +131,7 @@ function attachEvents(){
       </div>`;
   });
 
-  const openShareBtn = document.querySelector('[data-action="open-share"]');
-  if(openShareBtn) openShareBtn.addEventListener('click', ()=>{ shareState = { animalId: selectedId }; shareError = ''; render(); });
+  document.querySelectorAll('[data-action="open-share"]').forEach(openShareBtn=>openShareBtn.addEventListener('click', e=>{e.stopPropagation();if(openShareBtn.dataset.animalId) selectedId=openShareBtn.dataset.animalId;shareState = { animalId: selectedId }; shareError = ''; render(); }));
   document.querySelectorAll('[data-action="close-share"]').forEach(el=>{
     el.addEventListener('click', ()=>{ shareState = null; shareError = ''; render(); });
   });
