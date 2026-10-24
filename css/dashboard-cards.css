@@ -537,3 +537,12 @@ html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card .pet-add-plu
   display:none!important;
   visibility:hidden!important;
 }
+
+
+/* Cards com alerta não cortam o aviso quando a foto ocupa quase toda a altura. */
+.pet-home-wrap .pet-home-card:not(.active):has(.pet-card-meta){
+  height:auto!important;
+  min-height:100px!important;
+  max-height:none!important;
+  overflow:visible!important;
+}
