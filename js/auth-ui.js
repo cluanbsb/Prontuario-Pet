@@ -127,7 +127,7 @@ async function handleAuthSubmit(){
   if(authMode==='signup' && !fullName){ authError = 'Informe seu nome completo.'; render(); return; }
   if(authMode==='signup' && !nickname){ authError = 'Informe um apelido.'; render(); return; }
   if(!email || !password){ authError = 'Preencha e-mail e senha.'; render(); return; }
-  if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)){ authError = 'E-mail inválido.'; render(); return; }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ authError = 'E-mail inválido.'; render(); return; }
   if(password.length < 6){ authError = 'A senha deve ter pelo menos 6 caracteres.'; render(); return; }
   authError = '';
   try{
