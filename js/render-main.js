@@ -119,20 +119,8 @@ function renderDetail(){
     <div class="profile-cover">
       <img src="${a.photo}" alt="">
       <div class="profile-cover-scrim"></div>
-      <div class="profile-cover-actions">
-        ${typeof window.renderPetColorControl==='function' ? window.renderPetColorControl(a,'cover') : ''}
-        <button class="icon-btn-ghost" data-action="edit-animal" aria-label="Editar animal" title="Editar animal">✎</button>
-        ${a.isShared ? `<span class="icon-btn-ghost icon-btn-ghost--active" style="cursor:default;" aria-label="Compartilhado por ${escapeAttr(a.ownerEmail||'outro usuário')}" title="Compartilhado por ${escapeAttr(a.ownerEmail||'outro usuário')} · vocês dois podem editar">🔗</span>` : ''}
-        ${!a.isShared ? `<button class="icon-btn-ghost ${a.sharedWithUid ? 'icon-btn-ghost--active' : ''}" data-action="open-share" aria-label="${a.sharedWithUid ? `Compartilhado com ${a.sharedWithEmail||''}` : 'Compartilhar com outro usuário'}" title="${a.sharedWithUid ? `Compartilhado com ${a.sharedWithEmail||''} · toque para gerenciar` : 'Compartilhar com outro usuário'}">🔗</button>` : ''}
-        ${!a.isShared ? `<button class="icon-btn-ghost" data-action="delete-animal" aria-label="Excluir animal" title="Excluir animal">🗑</button>` : ''}
-      </div>
       <div class="profile-cover-name">
         <h2>${escapeHtml(a.name)}</h2>
-        <div class="profile-title-row">
-          ${overdueCount ? `<span class="badge overdue">${overdueCount} vacina(s) atrasada(s)</span>` : ''}
-          ${!overdueCount && soonCount ? `<span class="badge soon">${soonCount} vacina(s) em breve</span>` : ''}
-          ${activeMedsCount ? `<span class="badge active">${activeMedsCount} medicação(ões) em uso</span>` : ''}
-        </div>
       </div>
     </div>` : ''}
     ${(() => {
