@@ -191,3 +191,7 @@
 
 /* Reduz o espaço entre o título "Seus pets" e os cartões dos animais. */
 .pet-home-wrap .pet-section-head{margin-bottom:5px!important}
+
+
+/* Aproxima o título "Informações do prontuário" dos cartões logo abaixo. */
+.detail.home-detail .pet-quick-section h2{margin-bottom:4px!important}
