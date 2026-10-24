@@ -1,7 +1,7 @@
 /* Nova home: preserva os fluxos existentes de autenticação e prontuário. */
 (function(){
  const originalDetail=window.renderDetail;
- const cardColors=[{id:'menta',label:'Verde menta',value:'#dff1e7'},{id:'azul',label:'Azul',value:'#dceff5'},{id:'pessego',label:'Pêssego',value:'#fbe7d8'},{id:'lilas',label:'Lilás',value:'#eee8fa'},{id:'amarelo',label:'Amarelo suave',value:'#fff2c9'},{id:'rosa',label:'Rosa',value:'#f9e0e8'},{id:'branco',label:'Branco',value:'#ffffff'}];
+ const cardColors=[{id:'menta',label:'Verde menta',value:'#dff1e7'},{id:'azul',label:'Azul',value:'#dceff5'},{id:'pessego',label:'Pêssego',value:'#fbe7d8'},{id:'lilas',label:'Lilás',value:'#eee8fa'},{id:'amarelo',label:'Amarelo suave',value:'#fff2c9'},{id:'rosa',label:'Rosa',value:'#f9e0e8'},{id:'branco',label:'Branco',value:'#ffffff'},{id:'lavanda',label:'Lavanda',value:'#e4ddff'},{id:'coral',label:'Coral suave',value:'#ffd9d2'},{id:'ceu',label:'Azul céu',value:'#cfe8ff'},{id:'sage',label:'Verde sálvia',value:'#dce8d2'},{id:'areia',label:'Areia',value:'#f3e5c8'},{id:'menta_intensa',label:'Menta fresca',value:'#c5eadb'},{id:'limao',label:'Limão suave',value:'#eef4bd'},{id:'pessego_rosa',label:'Rosa antigo',value:'#efd0d8'}];
  function cardColorValue(id){const c=cardColors.find(x=>x.id===id);return c?c.value:'#ffffff';}
  function status(a){
   const v=a.vaccines||[], overdue=v.filter(x=>typeof vaccineStatus==='function'&&vaccineStatus(x)==='overdue').length, soon=v.filter(x=>typeof vaccineStatus==='function'&&vaccineStatus(x)==='soon').length;
