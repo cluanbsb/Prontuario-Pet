@@ -810,3 +810,17 @@ html[data-appearance-mode="dark"] #customize-overlay .opacity-row{background:var
 @media(prefers-reduced-motion:reduce){
   #customize-overlay .swatch{transition:none!important}
 }
+
+
+/* Menu de configurações mais compacto, sem reduzir a área clicável dos itens. */
+.user-menu{min-width:184px!important;width:max-content!important;max-width:min(270px,calc(100vw - 24px))!important;padding:9px 11px!important;border-radius:12px!important}
+.user-menu-heading{gap:8px!important;margin-bottom:5px!important}
+.user-menu-avatar{width:30px!important;height:30px!important;font-size:15px!important;flex:0 0 30px!important}
+.user-menu-account strong{font-size:12.5px!important;line-height:1.25!important}
+.user-menu-account .user-email{font-size:10.5px!important;line-height:1.3!important;margin-bottom:3px!important}
+.user-menu .menu-group-label{font-size:9px!important;margin:8px 0 2px!important}
+.user-menu .menu-item{font-size:12px!important;padding:4px 0!important;line-height:1.3!important}
+.user-menu .menu-item-icon{width:25px!important;height:25px!important;font-size:14px!important;flex:0 0 25px!important}
+.user-menu .menu-divider{margin:7px 0 5px!important}
+.user-menu .logout-link{font-size:12px!important;padding:4px 0!important;line-height:1.3!important}
+@media(max-width:520px){.user-menu{right:8px!important;min-width:176px!important;max-width:calc(100vw - 16px)!important;padding:8px 10px!important}}
