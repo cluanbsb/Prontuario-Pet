@@ -181,3 +181,9 @@
 
 /* Assinatura curta abaixo da marca no cabeçalho. */
 .brand .brand-tagline{font-size:12px!important;line-height:1.35;color:var(--ink-soft);font-weight:500;letter-spacing:.01em;margin:3px 0 0!important;}
+
+
+/* Aproxima a seção de informações dos cartões de pets. */
+.detail.home-detail .pet-quick-section{margin-top:10px!important}
+.detail.home-detail .pet-quick-section h2{margin-bottom:9px!important}
+@media(max-width:760px){.detail.home-detail .pet-quick-section{margin-top:8px!important}}
