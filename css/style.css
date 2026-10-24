@@ -860,3 +860,12 @@ html[data-appearance-mode="dark"] #customize-overlay .opacity-row{background:var
 .user-menu .user-menu-account .user-email{white-space:normal!important;overflow-wrap:anywhere!important;word-break:break-word!important}
 .user-menu .menu-item>span:last-child,.user-menu .logout-link>span:last-child{min-width:0!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important}
 @media(max-width:520px){.user-menu{width:180px!important;min-width:0!important;max-width:180px!important;right:8px!important;padding:7px 5px!important}}
+
+
+/* Menu dimensionado para manter cada opção em uma única linha. */
+.user-menu{width:240px!important;min-width:240px!important;max-width:240px!important;overflow:visible!important}
+.user-menu .menu-item,.user-menu .logout-link{white-space:nowrap!important;flex-wrap:nowrap!important}
+.user-menu .menu-item>span:last-child,.user-menu .logout-link>span:last-child{white-space:nowrap!important;overflow-wrap:normal!important;word-break:normal!important}
+.user-menu .user-menu-heading{min-width:0!important}
+.user-menu .user-menu-account .user-email{white-space:nowrap!important;overflow-wrap:normal!important;word-break:normal!important;text-overflow:ellipsis!important;overflow:hidden!important}
+@media(max-width:520px){.user-menu{width:240px!important;min-width:240px!important;max-width:calc(100vw - 16px)!important;right:8px!important;padding:7px 8px!important}}
