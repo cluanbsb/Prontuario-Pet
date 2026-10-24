@@ -1,4 +1,6 @@
 /* Dashboard acolhedor e responsivo */
+.brand .eyebrow{font-size:13px!important;letter-spacing:.09em!important;display:flex;align-items:center;gap:6px;}
+.brand .eyebrow span{font-size:15px;line-height:1;}
 :root{--pet-blue:#dceff5;--pet-mint:#dff1e7;--pet-peach:#fbe7d8;--pet-lilac:#eee8fa;--pet-radius:22px;--pet-shadow:0 12px 32px rgba(35,75,68,.08),0 2px 8px rgba(35,75,68,.04)}
 #app{display:block!important;min-height:100vh;padding-bottom:40px}
 .sidebar{width:100%!important;min-width:0!important;position:relative!important;top:auto!important;border:0!important;background:transparent!important;padding:0 clamp(18px,4vw,64px)!important}
