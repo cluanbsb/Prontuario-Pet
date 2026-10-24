@@ -561,3 +561,24 @@ html[data-appearance-mode="dark"] .detail.home-detail .pet-add-card .pet-add-plu
 .pet-home-card:not(.active) .pet-closed-tools .pet-profile-color-picker{z-index:30}
 .pet-home-card.active>.pet-closed-tools{display:none!important}
 @media(max-width:520px){.pet-home-card:not(.active) .pet-closed-tools{gap:5px;padding-top:6px}.pet-home-card:not(.active) .pet-closed-action{width:26px;height:26px;flex-basis:26px;font-size:13px}.pet-home-card:not(.active) .pet-closed-alert{font-size:9px;padding:3px 5px}}
+
+
+/* Correção: o card fechado precisa crescer para acomodar a faixa de ações e avisos.
+   A altura fixa anterior de 100px e overflow:hidden cortavam os ícones abaixo do cabeçalho. */
+.pet-home-wrap .pet-home-card:not(.active){
+  height:auto!important;
+  min-height:100px!important;
+  max-height:none!important;
+  overflow:visible!important;
+  align-self:start!important;
+}
+.pet-home-wrap .pet-home-card:not(.active) .pet-closed-tools{
+  display:flex!important;
+  position:relative!important;
+  visibility:visible!important;
+  opacity:1!important;
+  width:100%!important;
+  min-height:30px!important;
+  box-sizing:border-box!important;
+  overflow:visible!important;
+}
