@@ -323,8 +323,8 @@ function renderCustomizeModal(){
         </div>
         ${s.wallpaper !== 'none' ? `
         <div class="opacity-row">
-          <label for="wallpaper-opacity-slider">Intensidade</label>
-          <input type="range" id="wallpaper-opacity-slider" min="0.1" max="1" step="0.05" value="${s.wallpaperOpacity != null ? s.wallpaperOpacity : 1}">
+          <label for="wallpaper-opacity-slider">Opacidade do papel de parede</label>
+          <input type="range" id="wallpaper-opacity-slider" min="0" max="1" step="0.05" value="${s.wallpaperOpacity != null ? s.wallpaperOpacity : 1}">
           <span class="mono" id="wallpaper-opacity-value">${Math.round((s.wallpaperOpacity != null ? s.wallpaperOpacity : 1) * 100)}%</span>
         </div>` : ''}
       </div>
