@@ -275,7 +275,7 @@ function attachEvents(){
   }
   const resetCustomizeBtn = document.querySelector('[data-action="reset-customize"]');
   if(resetCustomizeBtn) resetCustomizeBtn.addEventListener('click', ()=>{
-    pendingSettings = { colorTheme:'sapo', font:'classico', wallpaper:'none', wallpaperOpacity:1, appearanceMode:'light' };
+    pendingSettings = { colorTheme:'flamingo', font:'divertido', wallpaper:'estrelinhas', wallpaperOpacity:0.5, appearanceMode:'light' };
     applySettings(pendingSettings); render();
   });
   const saveCustomizeBtn = document.querySelector('[data-action="save-customize"]');
