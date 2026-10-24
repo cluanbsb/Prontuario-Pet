@@ -187,3 +187,7 @@
 .detail.home-detail .pet-quick-section{margin-top:10px!important}
 .detail.home-detail .pet-quick-section h2{margin-bottom:9px!important}
 @media(max-width:760px){.detail.home-detail .pet-quick-section{margin-top:8px!important}}
+
+
+/* Reduz o espaço entre o título "Seus pets" e os cartões dos animais. */
+.pet-home-wrap .pet-section-head{margin-bottom:5px!important}
