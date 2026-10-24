@@ -40,18 +40,18 @@
 <!-- data.js: configurações de campos, temas, fontes e papéis de parede -->
 <script src="js/data.js?v=15"></script>
 <!-- app.js dividido em módulos temáticos (mesma lógica de antes, só organizada) -->
-<script src="js/estado.js?v=17"></script>
+<script src="js/estado.js?v=18"></script>
 <script src="js/auth-ui.js?v=15"></script>
 <script src="js/render-main.js?v=16"></script>
 <script src="js/dashboard.js?v=24"></script>
 <script src="js/render-modals.js?v=18"></script>
-<script src="js/eventos.js?v=16"></script>
+<script src="js/eventos.js?v=17"></script>
 
 <!-- Registro do Service Worker (permite instalar como app / uso offline básico) -->
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js?v=44').catch(() => {});
+      navigator.serviceWorker.register('./sw.js?v=45').catch(() => {});
     });
   }
 </script>
