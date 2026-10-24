@@ -617,3 +617,61 @@ html[data-appearance-mode="dark"] #customize-overlay .swatch{background:var(--pa
  #customize-overlay .opacity-row label{grid-column:1/-1}
  #customize-overlay .modal-foot{padding:12px 14px!important;flex-wrap:wrap}
 }
+
+
+/* Revisão de acessibilidade: texto e botões mantêm contraste entre paletas. */
+html:not([data-appearance-mode="dark"]) .brand .eyebrow,
+html:not([data-appearance-mode="dark"]) .login-card .eyebrow,
+html:not([data-appearance-mode="dark"]) .link-btn,
+html:not([data-appearance-mode="dark"]) .field-section-label,
+html:not([data-appearance-mode="dark"]) .highlight-green .hc-label{
+  color:var(--forest-dark)!important;
+}
+.badge.soon,
+.highlight-amber .hc-label,
+.shared-banner:not(.shared-banner-owner){
+  color:#754700!important;
+}
+.btn-primary,
+.btn-new{
+  background:var(--forest-dark);
+  border-color:var(--forest-dark);
+}
+.btn-primary:hover,
+.btn-new:hover{background:var(--forest-dark);filter:brightness(.92)}
+html[data-appearance-mode="dark"] .btn-primary,
+html[data-appearance-mode="dark"] .btn-new{
+  background:#285D43!important;
+  border-color:#8CC9A8!important;
+  color:#FFFFFF!important;
+}
+html[data-appearance-mode="dark"] .btn-primary:hover,
+html[data-appearance-mode="dark"] .btn-new:hover{
+  background:#1F4D39!important;
+  filter:none;
+}
+html[data-appearance-mode="dark"] .badge.soon,
+html[data-appearance-mode="dark"] .highlight-amber .hc-label,
+html[data-appearance-mode="dark"] .shared-banner:not(.shared-banner-owner){
+  color:#F4C96F!important;
+}
+
+/* O controle de opacidade também vale para a tela de login. */
+.login-screen{
+  background-color:var(--paper)!important;
+  background-image:none!important;
+}
+.login-screen::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background-color:var(--wallpaper-color);
+  background-image:var(--wallpaper-image);
+  background-size:var(--wallpaper-size);
+  background-position:var(--wallpaper-position);
+  opacity:var(--wallpaper-opacity);
+}
+.login-screen::before{z-index:1}
+.login-screen .login-card{z-index:2}
