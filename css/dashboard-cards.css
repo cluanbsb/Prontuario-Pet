@@ -835,3 +835,73 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-arrow{
 .pet-home-wrap .pet-card-menu-row.color-row .pet-profile-color-inline{display:grid!important;grid-template-columns:repeat(5,minmax(22px,1fr))!important;gap:7px!important;width:100%!important;flex:1 1 100%!important;margin:2px 0 4px!important;order:1!important;}
 .pet-home-wrap .pet-card-menu-row.color-row .pet-profile-color-inline .pet-color-swatch{display:block!important;width:22px!important;height:22px!important;min-width:22px!important;min-height:22px!important;border-radius:50%!important;border:1px solid rgba(50,60,50,.28)!important;background:var(--swatch)!important;cursor:pointer!important;pointer-events:auto!important;}
 .pet-home-wrap .pet-card-menu-row.color-row .pet-profile-color-inline .pet-color-swatch.chosen{outline:2px solid var(--ink,#333)!important;outline-offset:2px!important;}
+
+
+/* Janela de apresentação das cores: painel contido na tela, com rolagem própria e alinhamento consistente. */
+.pet-home-wrap .pet-home-card .pet-card-quick-menu-panel{
+  box-sizing:border-box!important;
+  width:260px!important;
+  min-width:0!important;
+  max-width:calc(100vw - 28px)!important;
+  max-height:min(68vh,520px)!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain!important;
+  padding:14px!important;
+  gap:9px!important;
+  border:1px solid rgba(71,112,93,.22)!important;
+  border-radius:15px!important;
+  background:var(--paper-card,#fff)!important;
+  box-shadow:0 12px 32px rgba(28,55,43,.2)!important;
+}
+.pet-home-wrap .pet-home-card .pet-card-quick-menu-panel .pet-card-menu-row.color-row{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  align-items:start!important;
+  justify-items:stretch!important;
+  gap:8px!important;
+  width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+  padding:10px 0!important;
+}
+.pet-home-wrap .pet-home-card .pet-card-quick-menu-panel .pet-card-menu-row.color-row>span:first-child{
+  order:0!important;
+  width:100%!important;
+  max-width:100%!important;
+  font-size:12px!important;
+  line-height:1.4!important;
+}
+.pet-home-wrap .pet-home-card .pet-card-quick-menu-panel .pet-card-menu-row.color-row .pet-profile-color-inline{
+  order:1!important;
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:9px!important;
+  width:100%!important;
+  min-width:0!important;
+  margin:2px 0 4px!important;
+  box-sizing:border-box!important;
+}
+.pet-home-wrap .pet-home-card .pet-card-quick-menu-panel .pet-card-menu-row.color-row .pet-profile-color-inline .pet-color-swatch{
+  justify-self:center!important;
+  width:24px!important;
+  height:24px!important;
+  min-width:24px!important;
+  min-height:24px!important;
+  box-sizing:border-box!important;
+}
+@media(max-width:520px){
+  .pet-home-wrap .pet-home-card .pet-card-quick-menu-panel{
+    width:min(260px,calc(100vw - 24px))!important;
+    max-width:calc(100vw - 24px)!important;
+    max-height:62vh!important;
+    padding:12px!important;
+  }
+  .pet-home-wrap .pet-home-card .pet-card-quick-menu-panel .pet-card-menu-row.color-row .pet-profile-color-inline{
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    gap:7px!important;
+  }
+  .pet-home-wrap .pet-home-card .pet-card-quick-menu-panel .pet-card-menu-row.color-row .pet-profile-color-inline .pet-color-swatch{
+    width:22px!important;height:22px!important;min-width:22px!important;min-height:22px!important;
+  }
+}
