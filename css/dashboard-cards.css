@@ -780,3 +780,17 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-arrow{
   .pet-home-wrap .pet-name-alerts .pet-status.alert,
   .pet-home-wrap .pet-name-alerts .pet-medication-tag{min-height:20px!important;padding:3px 7px!important;font-size:10px!important;}
 }
+
+
+/* Menu aberto deve ficar acima dos cards vizinhos e sobrepor seus ícones. */
+.pet-home-wrap .pet-grid{isolation:isolate!important;}
+.pet-home-wrap .pet-home-card{position:relative!important;z-index:1!important;}
+.pet-home-wrap .pet-home-card:has(.pet-card-quick-menu[open]),
+.pet-home-wrap .pet-home-card.active:has(.pet-card-quick-menu[open]){
+  z-index:999!important;isolation:isolate!important;
+}
+.pet-home-wrap .pet-home-card .pet-card-quick-menu{position:relative!important;z-index:1000!important;}
+.pet-home-wrap .pet-home-card .pet-card-quick-menu[open]{z-index:1001!important;}
+.pet-home-wrap .pet-home-card .pet-card-quick-menu-panel{
+  position:absolute!important;z-index:1002!important;
+}
