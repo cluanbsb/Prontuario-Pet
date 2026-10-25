@@ -23,7 +23,7 @@ let editAccountError = '';
 let toastMessage = null;
 let toastTimer = null;
 
-let settings = { colorTheme:'flamingo', font:'divertido', wallpaper:'estrelinhas', wallpaperOpacity:0.5, appearanceMode:'light' };
+let settings = { colorTheme:'flamingo', font:'divertido', wallpaper:'estrelinhas', wallpaperOpacity:0.5, appearanceMode:'light', fontColor:'#26352d' };
 let pendingSettings = null;
 let customizeOpen = false;
 let animals = [];
@@ -45,6 +45,7 @@ function applySettings(s){
   if(appearanceVars) Object.entries(appearanceVars).forEach(([k,v])=>root.setProperty(k,v));
   document.documentElement.dataset.appearanceMode = darkMode ? 'dark' : 'light';
   root.setProperty('--font-display', font.display);
+  root.setProperty('--user-font-color', s.fontColor || (darkMode ? '#F1F5F2' : '#26352d'));
   root.setProperty('--font-body', font.body);
   root.setProperty('--wallpaper-color', wallpaper.color);
   root.setProperty('--wallpaper-image', wallpaper.image);
