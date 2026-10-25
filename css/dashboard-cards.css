@@ -1032,3 +1032,11 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-quick-
   color:#23352d!important;
   font-weight:400!important;
 }
+
+/* Borda do agrupador "Cor do card" em branco. */
+.pet-home-wrap .pet-home-card .pet-card-quick-menu-panel .pet-card-menu-row.color-row > button.pet-card-color-group-toggle[data-color-group-toggle],
+.pet-home-wrap .pet-home-card .pet-card-quick-menu-panel .pet-card-menu-row.color-row > button.pet-card-color-group-toggle[data-color-group-toggle]:hover,
+.pet-home-wrap .pet-home-card .pet-card-quick-menu-panel .pet-card-menu-row.color-row > button.pet-card-color-group-toggle[data-color-group-toggle]:focus-visible,
+html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-quick-menu-panel .pet-card-menu-row.color-row > button.pet-card-color-group-toggle[data-color-group-toggle]{
+  border-color:#fff!important;
+}
