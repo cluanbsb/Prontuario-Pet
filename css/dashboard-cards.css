@@ -983,3 +983,9 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-color-
     width:25px!important;height:25px!important;min-width:25px!important;min-height:25px!important;
   }
 }
+
+
+/* Cor do card: texto do agrupador sem negrito. */
+.pet-home-wrap .pet-home-card .pet-card-color-group-toggle{
+  font-weight:400!important;
+}
