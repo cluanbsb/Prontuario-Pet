@@ -827,3 +827,11 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-arrow{
 .pet-home-wrap .pet-card-quick-menu-panel .pet-color-swatch{
   position:relative!important;z-index:10014!important;pointer-events:auto!important;
 }
+
+
+/* Seletor de cores no menu: amostras visíveis diretamente, sem details aninhado. */
+.pet-home-wrap .pet-card-menu-row.color-row{align-items:flex-start!important;flex-wrap:wrap!important;}
+.pet-home-wrap .pet-card-menu-row.color-row>span:first-child{flex:1 1 100%!important;order:0!important;}
+.pet-home-wrap .pet-card-menu-row.color-row .pet-profile-color-inline{display:grid!important;grid-template-columns:repeat(5,minmax(22px,1fr))!important;gap:7px!important;width:100%!important;flex:1 1 100%!important;margin:2px 0 4px!important;order:1!important;}
+.pet-home-wrap .pet-card-menu-row.color-row .pet-profile-color-inline .pet-color-swatch{display:block!important;width:22px!important;height:22px!important;min-width:22px!important;min-height:22px!important;border-radius:50%!important;border:1px solid rgba(50,60,50,.28)!important;background:var(--swatch)!important;cursor:pointer!important;pointer-events:auto!important;}
+.pet-home-wrap .pet-card-menu-row.color-row .pet-profile-color-inline .pet-color-swatch.chosen{outline:2px solid var(--ink,#333)!important;outline-offset:2px!important;}
