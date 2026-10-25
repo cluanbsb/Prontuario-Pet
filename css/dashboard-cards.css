@@ -1100,7 +1100,7 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-quick-
   font-size:12px!important;
 }
 
-/* Cor neutra cinza-claro para o card do pet recolhido e expandido. */
+/* Cor cinza-claro consistente para o prontuário fechado e aberto. */
 .pet-home-wrap .pet-home-card,
 .pet-home-wrap .pet-home-card:not(.active),
 .pet-home-wrap .pet-home-card.active{
