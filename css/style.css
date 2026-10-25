@@ -889,11 +889,11 @@ html[data-appearance-mode="dark"] #customize-overlay .opacity-row{background:var
 #customize-overlay #font-color-value{grid-column:1!important;font-size:12px!important;font-weight:700!important;letter-spacing:.04em!important;color:var(--ink-soft)!important;}
 #customize-overlay [data-action="reset-font-color"]{grid-column:1 / -1!important;justify-self:start!important;margin-top:2px!important;}
 
-/* A cor de fonte personalizada afeta somente os títulos autorizados da tela inicial. */
-.brand .eyebrow,
-.brand h1,
-.pet-home-wrap .pet-section-head h2,
-.pet-home-wrap .pet-home-card .pet-name,
-.pet-quick-section h2{
- color:var(--user-font-color,var(--ink))!important;
+/* A cor de fonte personalizada afeta exclusivamente os cinco textos definidos na personalização. */
+header.sidebar .brand > .brand-top .eyebrow,
+header.sidebar .brand > .brand-top h1,
+header.sidebar .pet-home-wrap > .pet-section-head h2,
+header.sidebar .pet-home-wrap .pet-home-card .pet-card-top .pet-name,
+main.home-detail > .pet-quick-section > h2{
+  color:var(--user-font-color,var(--ink))!important;
 }
