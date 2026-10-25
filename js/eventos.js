@@ -317,7 +317,7 @@ function attachEvents(){
   }
   const resetCustomizeBtn = document.querySelector('[data-action="reset-customize"]');
   if(resetCustomizeBtn) resetCustomizeBtn.addEventListener('click', ()=>{
-    pendingSettings = { colorTheme:'flamingo', font:'divertido', wallpaper:'estrelinhas', wallpaperOpacity:0.5, appearanceMode:'light', fontColor:'#26352d' };
+    pendingSettings = { colorTheme:'arara', font:'divertido', wallpaper:'none', wallpaperOpacity:1, appearanceMode:'light', fontColor:'#000000' };
     applySettings(pendingSettings); render();
   });
   const saveCustomizeBtn = document.querySelector('[data-action="save-customize"]');
