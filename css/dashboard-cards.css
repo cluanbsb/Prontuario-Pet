@@ -1084,3 +1084,10 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-quick-
     padding-right:6px!important;
   }
 }
+
+/* No prontuário aberto, manter "Data de nascimento" em uma única linha. */
+.pet-home-wrap .pet-inline-detail .profile-data-row:nth-child(3) > .rec-line{
+  white-space:nowrap!important;
+  overflow-wrap:normal!important;
+  word-break:keep-all!important;
+}
