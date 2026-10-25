@@ -1110,3 +1110,10 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-quick-
 .pet-home-wrap .pet-home-card .content-panel .tab[title="Medicações"]{
   border-color:#d6d6d6!important;
 }
+
+/* Borda cinza-clara em cards abertos e fechados; o fundo respeita a cor escolhida. */
+.pet-home-wrap .pet-home-card,
+.pet-home-wrap .pet-home-card.active{
+  border-color:#d6d6d6!important;
+  background:var(--pet-card-tint,#ffffff)!important;
+}
