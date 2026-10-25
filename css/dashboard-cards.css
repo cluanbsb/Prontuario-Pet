@@ -668,3 +668,13 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-card-menu-row.danger{color
   .pet-home-wrap .pet-home-card:not(.active) .pet-card-arrow{bottom:6px!important;}
   .pet-home-wrap .pet-home-card:not(.active) .pet-home-card-select{padding-bottom:32px!important;}
 }
+
+
+/* Menu: a ação de cor usa apenas o seletor de paleta, sem um segundo ícone. */
+.pet-home-wrap .pet-card-menu-row.color-row{justify-content:space-between!important;gap:10px!important;}
+.pet-home-wrap .pet-card-menu-row.color-row>span:first-child{flex:1 1 auto!important;text-align:left!important;font-size:12px!important;}
+.pet-home-wrap .pet-card-menu-row.color-row .pet-profile-color-control{margin-left:auto!important;flex:0 0 auto!important;}
+/* Indicador de abrir/fechar em formato + / -, alinhado ao centro inferior. */
+.pet-home-wrap .pet-home-card .pet-card-arrow{font-family:Arial,sans-serif!important;font-size:25px!important;font-weight:400!important;line-height:1!important;color:var(--forest,#2d6a4f)!important;}
+.pet-home-wrap .pet-home-card.active .pet-card-arrow{font-size:27px!important;}
+html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-arrow{color:#d6eadc!important;background:#26382f!important;border-color:#53675b!important;}
