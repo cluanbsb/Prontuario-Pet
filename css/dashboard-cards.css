@@ -1106,3 +1106,14 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-quick-
 .pet-home-wrap .pet-home-card.active{
   border-color:#d6d6d6!important;
 }
+
+/* Borda cinza-clara apenas nos cinco quadros solicitados; sem alterar fundo ou texto. */
+.pet-home-wrap .pet-add-card,
+.pet-home-wrap .pet-quick-link[aria-label="Dados básicos"],
+.pet-home-wrap .pet-quick-link[aria-label="Histórico médico"],
+.pet-home-wrap .pet-quick-link[aria-label="Medicações"],
+.pet-home-wrap .pet-quick-link[aria-label="Vacinas"],
+.pet-home-wrap .pet-home-card .content-panel .tab[title="Vacinas"],
+.pet-home-wrap .pet-home-card .content-panel .tab[title="Medicações"]{
+  border-color:#d6d6d6!important;
+}
