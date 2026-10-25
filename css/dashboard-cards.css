@@ -725,3 +725,29 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-arrow{
 .pet-home-wrap .pet-home-card:has(.pet-card-quick-menu[open]){z-index:95!important;}
 .pet-home-wrap .pet-home-card.active:has(.pet-card-quick-menu[open]){z-index:96!important;}
 .pet-home-wrap .pet-home-card.active .pet-card-quick-menu{display:block!important;}
+
+
+/* Alinhamento uniforme dos ícones e rótulos no menu do card. */
+.pet-home-wrap .pet-card-quick-menu-panel .pet-card-menu-row{
+  display:flex!important;align-items:center!important;gap:8px!important;text-align:left!important;
+}
+.pet-home-wrap .pet-card-quick-menu-panel .pet-card-menu-row>span:first-child{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  flex:0 0 22px!important;width:22px!important;min-width:22px!important;
+  margin:0!important;text-align:center!important;line-height:1!important;
+}
+.pet-home-wrap .pet-card-quick-menu-panel .pet-card-menu-row>span:nth-child(2){
+  flex:1 1 auto!important;min-width:0!important;text-align:left!important;
+}
+.pet-home-wrap .pet-card-quick-menu-panel .pet-card-menu-row.color-row{gap:8px!important;}
+.pet-home-wrap .pet-card-quick-menu-panel .pet-card-menu-row.color-row .pet-profile-color-control{
+  order:-1!important;display:flex!important;align-items:center!important;justify-content:center!important;
+  flex:0 0 22px!important;width:22px!important;min-width:22px!important;margin:0!important;
+}
+.pet-home-wrap .pet-card-quick-menu-panel .pet-card-menu-row.color-row .pet-profile-color-control>summary{
+  display:grid!important;place-items:center!important;width:22px!important;height:22px!important;
+  min-width:22px!important;padding:0!important;font-size:16px!important;line-height:1!important;
+}
+.pet-home-wrap .pet-card-quick-menu-panel .pet-card-menu-row.color-row>span:first-child{
+  order:0!important;flex:1 1 auto!important;width:auto!important;min-width:0!important;text-align:left!important;font-size:12px!important;
+}
