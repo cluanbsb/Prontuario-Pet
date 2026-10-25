@@ -941,3 +941,14 @@ body .settings-section h3, body .settings-label,
 body .record-card h3, body .record-card p:not(.status):not(.error){
   color:var(--user-font-color,var(--ink));
 }
+
+/* Personalização: aplicar a cor escolhida aos textos principais em todas as áreas.
+   Mantém cores de alertas, estados e botões de ação que comunicam significado. */
+body :is(h1,h2,h3,h4,h5,h6,p,label,legend,summary,li,dt,dd,th,td,
+  .title,.subtitle,.section-title,.card-title,.card-subtitle,.section-label,
+  .pet-name,.pet-meta,.animal-name,.animal-species,.field-label,
+  .settings-label,.settings-section-title,.tab-btn:not(.active),
+  .pet-home-card .pet-card-title,.pet-home-card .pet-card-subtitle,
+  .record-card .record-title,.record-card .record-description){
+  color:var(--user-font-color,var(--ink));
+}
