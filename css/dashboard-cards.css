@@ -1064,3 +1064,11 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-quick-
 .pet-home-wrap .pet-home-card .pet-card-quick-menu-panel .pet-card-menu-row.color-row .pet-profile-color-inline{
   margin-bottom:0!important;
 }
+
+/* Remover do painel inicial o quadro de lembrete de vacina, mantendo os dados no prontuário. */
+.pet-home-wrap .pet-vaccine-reminder,
+.pet-home-wrap .vaccine-reminder,
+.pet-home-wrap .vaccine-alert-card,
+.pet-home-wrap .vaccine-reminder-card{
+  display:none!important;
+}
