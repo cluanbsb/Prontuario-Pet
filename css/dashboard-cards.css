@@ -940,3 +940,46 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-arrow{
 .pet-home-wrap .pet-home-card .pet-card-color-group-content .pet-color-swatch{
   width:23px!important;height:23px!important;min-width:23px!important;min-height:23px!important;
 }
+
+
+/* Revisão do agrupador de cores: estados claros, escuros e foco acessível. */
+.pet-home-wrap .pet-home-card .pet-card-color-group-toggle{
+  flex-direction:row!important;justify-content:flex-start!important;
+  min-height:42px!important;line-height:1.25!important;
+}
+.pet-home-wrap .pet-home-card .pet-card-color-group-toggle>span:nth-child(2){
+  flex:1 1 auto!important;min-width:0!important;
+}
+.pet-home-wrap .pet-home-card .pet-card-color-group-toggle:hover{
+  background:rgba(220,239,228,.95)!important;border-color:rgba(71,112,93,.42)!important;
+}
+.pet-home-wrap .pet-home-card .pet-card-color-group-toggle:focus-visible,
+.pet-home-wrap .pet-home-card .pet-card-color-group-content .pet-color-swatch:focus-visible{
+  outline:3px solid #4c9470!important;outline-offset:3px!important;
+}
+.pet-home-wrap .pet-home-card .pet-card-color-group-content .pet-color-swatch{
+  display:block!important;cursor:pointer!important;touch-action:manipulation!important;
+}
+.pet-home-wrap .pet-home-card .pet-card-color-group-content .pet-color-swatch.chosen{
+  outline:2px solid var(--ink,#23352d)!important;outline-offset:3px!important;
+  box-shadow:0 0 0 1px rgba(255,255,255,.9)!important;
+}
+html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-color-group-toggle{
+  color:#e4eee7!important;background:#26382f!important;border-color:#53675b!important;
+}
+html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-color-group-toggle:hover{
+  background:#31483a!important;border-color:#789b85!important;
+}
+html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-color-group-content{
+  background:#1f2a24!important;border-color:#53675b!important;
+}
+html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-color-group-content .pet-color-swatch.chosen{
+  outline-color:#e4eee7!important;box-shadow:0 0 0 1px #1f2a24!important;
+}
+@media(max-width:520px){
+  .pet-home-wrap .pet-home-card .pet-card-color-group-content{padding:12px 8px!important;}
+  .pet-home-wrap .pet-home-card .pet-card-color-group-content .pet-profile-color-inline{gap:12px 7px!important;}
+  .pet-home-wrap .pet-home-card .pet-card-color-group-content .pet-color-swatch{
+    width:25px!important;height:25px!important;min-width:25px!important;min-height:25px!important;
+  }
+}
