@@ -644,8 +644,14 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-card-menu-row.danger{color
 }
 
 
-/* Posiciona a seta de abrir/fechar no centro inferior do card fechado. */
-.pet-home-wrap .pet-home-card:not(.active) .pet-card-arrow{
+/* Mantém o + e o − na mesma posição, tanto fechado quanto aberto. */
+.pet-home-wrap .pet-home-card .pet-home-card-select{
+  position:relative!important;
+  padding-right:12px!important;
+  padding-bottom:34px!important;
+  box-sizing:border-box!important;
+}
+.pet-home-wrap .pet-home-card .pet-card-arrow{
   position:absolute!important;
   left:50%!important;
   right:auto!important;
@@ -659,14 +665,10 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-card-menu-row.danger{color
   border-radius:999px!important;
   z-index:3!important;
 }
-.pet-home-wrap .pet-home-card:not(.active) .pet-home-card-select{
-  padding-right:12px!important;
-  padding-bottom:34px!important;
-}
-.pet-home-wrap .pet-home-card:not(.active) .pet-card-top{padding-bottom:0!important;}
+.pet-home-wrap .pet-home-card .pet-card-top{padding-bottom:0!important;}
 @media(max-width:520px){
-  .pet-home-wrap .pet-home-card:not(.active) .pet-card-arrow{bottom:6px!important;}
-  .pet-home-wrap .pet-home-card:not(.active) .pet-home-card-select{padding-bottom:32px!important;}
+  .pet-home-wrap .pet-home-card .pet-card-arrow{bottom:6px!important;}
+  .pet-home-wrap .pet-home-card .pet-home-card-select{padding-bottom:32px!important;}
 }
 
 
