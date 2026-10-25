@@ -1054,3 +1054,26 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-quick-
 .pet-home-wrap .pet-card-quick-menu-panel > button.pet-card-menu-row:not(.color-row){
   margin:0!important;
 }
+
+/* Compactação adicional do menu: opções de ação mais próximas entre si. */
+.pet-home-wrap .pet-home-card .pet-card-quick-menu .pet-card-quick-menu-panel{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:0!important;
+  row-gap:0!important;
+  padding:4px!important;
+}
+.pet-home-wrap .pet-home-card .pet-card-quick-menu .pet-card-quick-menu-panel > button.pet-card-menu-row:not(.color-row){
+  min-height:25px!important;
+  height:auto!important;
+  padding:3px 6px!important;
+  margin:0!important;
+  line-height:1.15!important;
+  gap:6px!important;
+}
+.pet-home-wrap .pet-home-card .pet-card-quick-menu .pet-card-quick-menu-panel > .pet-card-menu-row.is-disabled{
+  min-height:25px!important;
+  padding:3px 6px!important;
+  margin:0!important;
+  line-height:1.15!important;
+}
