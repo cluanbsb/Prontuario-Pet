@@ -897,3 +897,9 @@ header.sidebar .pet-home-wrap .pet-home-card .pet-card-top .pet-name,
 main.home-detail > .pet-quick-section > h2{
   color:var(--user-font-color,var(--ink))!important;
 }
+
+/* Personalização: criar respiro entre o cabeçalho do modal e o primeiro quadro. */
+#customize-overlay .modal-head + .customize-section,
+#customize-overlay .modal-head ~ .customize-section:first-of-type{
+  margin-top:14px!important;
+}
