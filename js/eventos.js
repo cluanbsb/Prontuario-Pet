@@ -288,6 +288,23 @@ function attachEvents(){
   document.querySelectorAll('[data-action="set-wallpaper"]').forEach(el=>{
     el.addEventListener('click', ()=>{ pendingSettings.wallpaper = el.dataset.value; applySettings(pendingSettings); render(); });
   });
+  const fontColorPicker = document.getElementById('font-color-picker');
+  if(fontColorPicker){
+    fontColorPicker.addEventListener('input', ()=>{
+      const val = fontColorPicker.value;
+      pendingSettings.fontColor = val;
+      document.documentElement.style.setProperty('--user-font-color', val);
+      const label = document.getElementById('font-color-value');
+      if(label) label.textContent = val.toUpperCase();
+    });
+  }
+  const resetFontColorBtn = document.querySelector('[data-action="reset-font-color"]');
+  if(resetFontColorBtn) resetFontColorBtn.addEventListener('click', ()=>{
+    const val = pendingSettings.appearanceMode === 'dark' ? '#F1F5F2' : '#26352d';
+    pendingSettings.fontColor = val;
+    applySettings(pendingSettings);
+    render();
+  });
   const opacitySlider = document.getElementById('wallpaper-opacity-slider');
   if(opacitySlider){
     opacitySlider.addEventListener('input', ()=>{
@@ -300,7 +317,7 @@ function attachEvents(){
   }
   const resetCustomizeBtn = document.querySelector('[data-action="reset-customize"]');
   if(resetCustomizeBtn) resetCustomizeBtn.addEventListener('click', ()=>{
-    pendingSettings = { colorTheme:'flamingo', font:'divertido', wallpaper:'estrelinhas', wallpaperOpacity:0.5, appearanceMode:'light' };
+    pendingSettings = { colorTheme:'flamingo', font:'divertido', wallpaper:'estrelinhas', wallpaperOpacity:0.5, appearanceMode:'light', fontColor:'#26352d' };
     applySettings(pendingSettings); render();
   });
   const saveCustomizeBtn = document.querySelector('[data-action="save-customize"]');
