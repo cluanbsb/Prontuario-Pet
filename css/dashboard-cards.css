@@ -1100,13 +1100,6 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-quick-
   font-size:12px!important;
 }
 
-/* Alterar somente a borda dos cards; o fundo permanece definido pela cor escolhida no menu. */
-.pet-home-wrap .pet-home-card,
-.pet-home-wrap .pet-home-card:not(.active),
-.pet-home-wrap .pet-home-card.active{
-  border-color:#d6d6d6!important;
-}
-
 /* Borda cinza-clara apenas nos cinco quadros solicitados; sem alterar fundo ou texto. */
 .pet-home-wrap .pet-add-card,
 .pet-home-wrap .pet-quick-link[aria-label="Dados básicos"],
