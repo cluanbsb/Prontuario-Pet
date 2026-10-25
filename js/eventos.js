@@ -34,6 +34,23 @@ function attachEvents(){
     userMenuOpen = false;
     render();
   });
+  // Agrupador recolhível da paleta de cores no menu do prontuário.
+  if(!window.__petCardColorGroupHandlerAttached){
+    window.__petCardColorGroupHandlerAttached = true;
+    document.addEventListener('click', e=>{
+      const toggle=e.target.closest('[data-color-group-toggle]');
+      if(!toggle) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const group=toggle.closest('.color-row');
+      const content=group&&group.querySelector('.pet-card-color-group-content');
+      if(!content) return;
+      const opening=content.hidden;
+      content.hidden=!opening;
+      toggle.setAttribute('aria-expanded',String(opening));
+      toggle.classList.toggle('is-open',opening);
+    },true);
+  }
   // Delegação: a paleta é recriada a cada renderização, então os cliques
   // nas amostras de cor precisam ser tratados mesmo após o DOM ser atualizado.
   if(!window.__petCardColorHandlerAttached){
