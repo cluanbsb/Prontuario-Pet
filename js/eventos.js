@@ -34,17 +34,28 @@ function attachEvents(){
     userMenuOpen = false;
     render();
   });
-  document.querySelectorAll('[data-card-color]').forEach(el=>{
-    el.addEventListener('click', e=>{
-      e.preventDefault(); e.stopPropagation();
-      if(!loaded || loadError){ toastMessage='Aguarde o carregamento dos dados antes de alterar a cor.'; render(); return; }
-      const animal=getAnimal(el.dataset.animalId);
+  // Delegação: a paleta é recriada a cada renderização, então os cliques
+  // nas amostras de cor precisam ser tratados mesmo após o DOM ser atualizado.
+  if(!window.__petCardColorHandlerAttached){
+    window.__petCardColorHandlerAttached = true;
+    document.addEventListener('click', async e=>{
+      const swatch=e.target.closest('[data-card-color][data-animal-id]');
+      if(!swatch) return;
+      e.preventDefault();
+      e.stopPropagation();
+      if(!loaded || loadError){
+        toastMessage='Aguarde o carregamento dos dados antes de alterar a cor.';
+        render();
+        return;
+      }
+      const animal=getAnimal(swatch.dataset.animalId);
       if(!animal) return;
-      animal.cardColor=el.dataset.cardColor;
-      saveData();
+      animal.cardColor=swatch.dataset.cardColor;
       render();
-    });
-  });
+      await saveData();
+      render();
+    }, true);
+  }
   document.querySelectorAll('[data-select]').forEach(el=>{
     el.addEventListener('click', ()=>{ selectedId = selectedId === el.dataset.select ? null : el.dataset.select; activeTab='perfil'; recordSearch=''; searchOpen=false; animalPickerOpen=false; render(); });
     el.addEventListener('keydown', e=>{ if(el.tagName==='BUTTON') return; if(e.key==='Enter'||e.key===' '){ if(e.key===' ') e.preventDefault(); selectedId = el.dataset.select; activeTab='perfil'; recordSearch=''; searchOpen=false; animalPickerOpen=false; render(); } });
