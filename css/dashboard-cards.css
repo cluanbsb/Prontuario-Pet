@@ -1072,3 +1072,15 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-quick-
 .pet-home-wrap .vaccine-reminder-card{
   display:none!important;
 }
+
+/* No celular, ampliar a área útil lateral dos dados cadastrais do pet. */
+@media(max-width:600px){
+  .pet-home-wrap .pet-inline-detail .detail{
+    padding-left:0!important;
+    padding-right:0!important;
+  }
+  .pet-home-wrap .pet-inline-detail .content-panel{
+    padding-left:6px!important;
+    padding-right:6px!important;
+  }
+}
