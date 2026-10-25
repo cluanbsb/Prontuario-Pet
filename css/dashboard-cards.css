@@ -642,3 +642,29 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-card-menu-row.danger{color
  .pet-home-wrap .pet-card-quick-menu{top:6px!important;right:7px!important;}
  .pet-home-wrap .pet-card-quick-menu-panel{max-width:calc(100vw - 48px)!important;}
 }
+
+
+/* Posiciona a seta de abrir/fechar no centro inferior do card fechado. */
+.pet-home-wrap .pet-home-card:not(.active) .pet-card-arrow{
+  position:absolute!important;
+  left:50%!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:7px!important;
+  transform:translateX(-50%)!important;
+  width:27px!important;
+  height:22px!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:999px!important;
+  z-index:3!important;
+}
+.pet-home-wrap .pet-home-card:not(.active) .pet-home-card-select{
+  padding-right:12px!important;
+  padding-bottom:34px!important;
+}
+.pet-home-wrap .pet-home-card:not(.active) .pet-card-top{padding-bottom:0!important;}
+@media(max-width:520px){
+  .pet-home-wrap .pet-home-card:not(.active) .pet-card-arrow{bottom:6px!important;}
+  .pet-home-wrap .pet-home-card:not(.active) .pet-home-card-select{padding-bottom:32px!important;}
+}
