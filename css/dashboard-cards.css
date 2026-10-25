@@ -905,3 +905,38 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-arrow{
     width:22px!important;height:22px!important;min-width:22px!important;min-height:22px!important;
   }
 }
+
+
+/* Agrupador recolhível da paleta de cores do prontuário. */
+.pet-home-wrap .pet-home-card .pet-card-quick-menu-panel .pet-card-menu-row.color-row{
+  display:flex!important;flex-direction:column!important;align-items:stretch!important;
+  gap:8px!important;width:100%!important;box-sizing:border-box!important;
+}
+.pet-home-wrap .pet-home-card .pet-card-menu-row.color-row .pet-card-color-group-toggle{
+  display:flex!important;align-items:center!important;gap:9px!important;
+  width:100%!important;min-height:40px!important;padding:9px 10px!important;
+  border:1px solid rgba(71,112,93,.16)!important;border-radius:10px!important;
+  background:rgba(237,246,241,.72)!important;color:var(--ink,#23352d)!important;
+  font:inherit!important;font-size:12px!important;font-weight:700!important;
+  text-align:left!important;cursor:pointer!important;box-sizing:border-box!important;
+}
+.pet-home-wrap .pet-home-card .pet-card-color-group-icon{font-size:15px!important;line-height:1!important;}
+.pet-home-wrap .pet-home-card .pet-card-color-group-chevron{
+  margin-left:auto!important;font-size:17px!important;line-height:1!important;
+  transition:transform .16s ease!important;
+}
+.pet-home-wrap .pet-home-card .pet-card-color-group-toggle.is-open .pet-card-color-group-chevron{transform:rotate(180deg)!important;}
+.pet-home-wrap .pet-home-card .pet-card-color-group-content[hidden]{display:none!important;}
+.pet-home-wrap .pet-home-card .pet-card-color-group-content:not([hidden]){
+  display:block!important;width:100%!important;box-sizing:border-box!important;
+  padding:10px 8px!important;border:1px solid rgba(71,112,93,.14)!important;
+  border-radius:11px!important;background:rgba(255,255,255,.72)!important;
+}
+.pet-home-wrap .pet-home-card .pet-card-color-group-content .pet-profile-color-inline{
+  display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  justify-items:center!important;align-items:center!important;gap:10px 6px!important;
+  width:100%!important;margin:0!important;box-sizing:border-box!important;
+}
+.pet-home-wrap .pet-home-card .pet-card-color-group-content .pet-color-swatch{
+  width:23px!important;height:23px!important;min-width:23px!important;min-height:23px!important;
+}
