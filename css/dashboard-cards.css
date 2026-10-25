@@ -707,3 +707,9 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-arrow{
 .pet-home-wrap .pet-home-card .pet-home-card-select{padding-bottom:0!important;cursor:pointer!important;}
 .pet-home-wrap .pet-home-card .pet-card-top{cursor:pointer!important;}
 @media(max-width:520px){.pet-home-wrap .pet-home-card{padding-bottom:14px!important;}}
+
+
+/* No menu do prontuário, o ícone de cor fica antes do texto "Escolher cor". */
+.pet-home-wrap .pet-card-menu-row.color-row{justify-content:flex-start!important;}
+.pet-home-wrap .pet-card-menu-row.color-row .pet-profile-color-control{order:-1!important;margin-left:0!important;margin-right:2px!important;}
+.pet-home-wrap .pet-card-menu-row.color-row>span:first-child{order:0!important;flex:1 1 auto!important;}
