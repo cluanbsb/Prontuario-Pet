@@ -1100,9 +1100,9 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-quick-
   font-size:12px!important;
 }
 
-/* Cor cinza-claro consistente para o prontuário fechado e aberto. */
+/* Alterar somente a borda dos cards; o fundo permanece definido pela cor escolhida no menu. */
 .pet-home-wrap .pet-home-card,
 .pet-home-wrap .pet-home-card:not(.active),
 .pet-home-wrap .pet-home-card.active{
-  background:#f2f2f2!important;
+  border-color:#d6d6d6!important;
 }
