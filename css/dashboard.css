@@ -222,3 +222,6 @@
   text-decoration:none!important;
   -webkit-text-fill-color:currentColor!important;
 }
+
+/* Pequeno aumento do espaço entre "Prontuário Pet" e a saudação. */
+.brand .eyebrow + h1{margin-top:12px!important;}
