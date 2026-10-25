@@ -680,3 +680,22 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-card-menu-row.danger{color
 .pet-home-wrap .pet-home-card .pet-card-arrow{font-family:Arial,sans-serif!important;font-size:25px!important;font-weight:400!important;line-height:1!important;color:var(--forest,#2d6a4f)!important;}
 .pet-home-wrap .pet-home-card.active .pet-card-arrow{font-size:27px!important;}
 html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-arrow{color:#d6eadc!important;background:#26382f!important;border-color:#53675b!important;}
+
+
+/* O + e o − ficam ancorados à parte inferior do card inteiro, inclusive aberto. */
+.pet-home-wrap .pet-home-card{position:relative!important;padding-bottom:38px!important;}
+.pet-home-wrap .pet-home-card .pet-home-card-select{position:static!important;padding-bottom:0!important;}
+.pet-home-wrap .pet-home-card .pet-card-arrow{
+  position:absolute!important;
+  left:50%!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:8px!important;
+  transform:translateX(-50%)!important;
+  margin:0!important;
+  z-index:5!important;
+}
+@media(max-width:520px){
+  .pet-home-wrap .pet-home-card{padding-bottom:35px!important;}
+  .pet-home-wrap .pet-home-card .pet-card-arrow{bottom:7px!important;}
+}
