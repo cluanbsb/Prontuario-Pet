@@ -69,16 +69,6 @@ function renderSidebar(){
       ⚠️ ${escapeHtml(loadError)}
       <button class="link-btn" data-action="retry-load" style="display:block;margin-top:6px;">Tentar de novo</button>
     </div>` : ''}
-    ${(() => {
-      const alerts = overdueVaccineAlerts();
-      if(!alerts.length) return '';
-      const preview = alerts.slice(0,3).map(al => `${escapeHtml(al.animalName)} — ${escapeHtml(al.vaccineName)}`).join('; ');
-      const extra = alerts.length > 3 ? ` e mais ${alerts.length - 3}` : '';
-      return `
-      <div class="alert-banner" role="alert">
-        🐾 <strong>${alerts.length === 1 ? 'Tem 1 vacina esperando' : `Tem ${alerts.length} vacinas esperando`} uma visita ao vet:</strong> ${preview}${extra}
-      </div>`;
-    })()}
     <div class="animal-picker-wrap">
       <button class="animal-picker-btn" data-action="toggle-animal-picker" aria-label="Selecionar animal" aria-expanded="${animalPickerOpen}">
         ${pickerLabel}
