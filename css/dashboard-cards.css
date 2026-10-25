@@ -794,3 +794,15 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-arrow{
 .pet-home-wrap .pet-home-card .pet-card-quick-menu-panel{
   position:absolute!important;z-index:1002!important;
 }
+
+
+/* Fixa o botão do menu no canto superior direito do card, aberto ou fechado. */
+.pet-home-wrap .pet-home-card .pet-card-quick-menu{
+  position:absolute!important;top:6px!important;right:7px!important;left:auto!important;
+  bottom:auto!important;margin:0!important;z-index:1001!important;
+}
+.pet-home-wrap .pet-home-card .pet-card-quick-menu>summary{margin:0!important;}
+.pet-home-wrap .pet-home-card .pet-card-quick-menu-panel{
+  position:absolute!important;top:calc(100% + 4px)!important;right:0!important;left:auto!important;
+  bottom:auto!important;z-index:1002!important;
+}
