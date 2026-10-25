@@ -756,3 +756,27 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-arrow{
 /* Na tag de vacina atrasada, remover a bolinha decorativa antes do alerta ⚠️. */
 .pet-home-wrap .pet-name-alerts .pet-status.alert::before{content:none!important;display:none!important;}
 .pet-home-wrap .pet-name-alerts .pet-status.alert{gap:4px!important;}
+
+
+/* Padronização de alinhamento e dimensões das tags de status. */
+.pet-home-wrap .pet-name-alerts{
+  display:flex!important;align-items:center!important;justify-content:flex-start!important;
+  flex-wrap:wrap!important;gap:5px!important;min-width:0!important;width:100%!important;
+}
+.pet-home-wrap .pet-name-alerts .pet-status.alert,
+.pet-home-wrap .pet-name-alerts .pet-medication-tag{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  box-sizing:border-box!important;min-height:22px!important;width:fit-content!important;
+  max-width:100%!important;margin:0!important;padding:3px 8px!important;
+  border-radius:999px!important;font-size:11px!important;font-weight:700!important;
+  line-height:1.25!important;letter-spacing:0!important;text-align:center!important;
+  vertical-align:middle!important;white-space:normal!important;overflow-wrap:anywhere!important;
+}
+.pet-home-wrap .pet-name-alerts .pet-status.alert{gap:4px!important;}
+.pet-home-wrap .pet-name-alerts .pet-medication-tag{gap:4px!important;}
+.pet-home-wrap .pet-name-alerts .pet-status.alert::before{display:none!important;content:none!important;}
+@media(max-width:520px){
+  .pet-home-wrap .pet-name-alerts{gap:4px!important;}
+  .pet-home-wrap .pet-name-alerts .pet-status.alert,
+  .pet-home-wrap .pet-name-alerts .pet-medication-tag{min-height:20px!important;padding:3px 7px!important;font-size:10px!important;}
+}
