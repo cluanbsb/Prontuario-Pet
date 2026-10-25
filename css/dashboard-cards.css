@@ -989,3 +989,25 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-color-
 .pet-home-wrap .pet-home-card .pet-card-color-group-toggle{
   font-weight:400!important;
 }
+
+
+/* Agrupador Cor do card: fundo branco e texto sem negrito. */
+.pet-home-wrap .pet-home-card .pet-card-color-group-toggle{
+  background:#fff!important;
+  color:var(--ink,#23352d)!important;
+  font-weight:400!important;
+  border-color:rgba(71,112,93,.22)!important;
+}
+.pet-home-wrap .pet-home-card .pet-card-color-group-toggle:hover{
+  background:#fff!important;
+  border-color:rgba(71,112,93,.42)!important;
+}
+html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-color-group-toggle{
+  background:#fff!important;
+  color:#23352d!important;
+  border-color:rgba(71,112,93,.22)!important;
+}
+html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-color-group-toggle:hover{
+  background:#fff!important;
+  border-color:rgba(71,112,93,.42)!important;
+}
