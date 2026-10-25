@@ -622,3 +622,23 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-card-quick-menu-panel{back
 html[data-appearance-mode="dark"] .pet-home-wrap .pet-card-menu-row{color:#e4eee7;}
 html[data-appearance-mode="dark"] .pet-home-wrap .pet-card-menu-row.danger{color:#ffb4a9;}
 .pet-home-wrap .pet-home-card.active>.pet-card-quick-menu{display:none;}
+
+
+/* Revisão do card fechado: menu sobreposto ao card, sem colisão com a seta e com ícones consistentes. */
+.pet-home-wrap .pet-home-card:not(.active) .pet-home-card-select{position:relative!important;z-index:1!important;padding-top:2px!important;padding-right:34px!important;box-sizing:border-box!important;}
+.pet-home-wrap .pet-home-card:not(.active) .pet-card-top{align-items:center!important;min-width:0!important;}
+.pet-home-wrap .pet-home-card:not(.active) .pet-card-arrow{position:absolute!important;right:13px!important;top:39px!important;width:25px!important;height:25px!important;display:grid!important;place-items:center!important;font-size:20px!important;z-index:2!important;}
+.pet-home-wrap .pet-home-card:not(.active):has(.pet-card-quick-menu[open]){z-index:90!important;}
+.pet-home-wrap .pet-card-quick-menu{z-index:91!important;top:7px!important;right:9px!important;}
+.pet-home-wrap .pet-card-quick-menu>summary{width:29px!important;height:27px!important;border-radius:9px!important;font-size:0!important;}
+.pet-home-wrap .pet-card-quick-menu>summary svg{width:17px;height:17px;fill:currentColor;display:block;}
+.pet-home-wrap .pet-card-quick-menu-panel{z-index:92!important;min-width:205px!important;}
+.pet-home-wrap .pet-card-menu-row{min-height:36px!important;font-size:12px!important;line-height:1.3!important;}
+.pet-home-wrap .pet-card-menu-row>span:first-child{font-size:16px!important;flex-basis:22px!important;}
+.pet-home-wrap .pet-home-card:not(.active) .pet-closed-tools{display:none!important;}
+@media(max-width:520px){
+ .pet-home-wrap .pet-home-card:not(.active){padding:12px 13px!important;}
+ .pet-home-wrap .pet-home-card:not(.active) .pet-card-arrow{right:11px!important;top:37px!important;}
+ .pet-home-wrap .pet-card-quick-menu{top:6px!important;right:7px!important;}
+ .pet-home-wrap .pet-card-quick-menu-panel{max-width:calc(100vw - 48px)!important;}
+}
