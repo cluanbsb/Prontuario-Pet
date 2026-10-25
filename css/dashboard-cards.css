@@ -600,3 +600,25 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-medication-tag{background:
 .pet-home-wrap .pet-name-alerts .pet-medication-tag{margin-top:0;}
 html[data-appearance-mode="dark"] .pet-home-wrap .pet-name-alerts .pet-status{background:#553f20;color:#ffe3a6;}
 @media(max-width:520px){.pet-home-wrap .pet-name-alerts .pet-status,.pet-home-wrap .pet-name-alerts .pet-medication-tag{font-size:10px;padding:2px 6px;}}
+
+
+/* Menu compacto de ações no topo direito do card fechado, acima da seta. */
+.pet-home-wrap .pet-home-card{position:relative;}
+.pet-home-wrap .pet-card-quick-menu{position:absolute;z-index:40;top:5px;right:7px;}
+.pet-home-wrap .pet-card-quick-menu>summary{list-style:none;display:flex;align-items:center;justify-content:center;width:27px;height:25px;border:1px solid rgba(70,90,78,.2);border-radius:8px;background:rgba(255,255,255,.88);color:#3e5f4d;font-size:21px;font-weight:700;line-height:1;cursor:pointer;}
+.pet-home-wrap .pet-card-quick-menu>summary::-webkit-details-marker{display:none;}
+.pet-home-wrap .pet-card-quick-menu[open]>summary{background:#e7f4ed;border-color:#a8d3bc;}
+.pet-home-wrap .pet-card-quick-menu-panel{position:absolute;top:29px;right:0;display:flex;flex-direction:column;gap:3px;width:205px;max-width:min(205px,78vw);padding:7px;background:var(--surface,#fff);border:1px solid rgba(70,90,78,.2);border-radius:12px;box-shadow:0 8px 24px rgba(20,40,30,.18);}
+.pet-home-wrap .pet-card-menu-row{display:flex;align-items:center;gap:8px;width:100%;min-height:34px;padding:6px 8px;border:0;border-radius:8px;background:transparent;color:var(--text,#26352d);font:inherit;font-size:12px;text-align:left;text-decoration:none;cursor:pointer;box-sizing:border-box;}
+.pet-home-wrap button.pet-card-menu-row:hover{background:rgba(90,130,100,.12);}
+.pet-home-wrap .pet-card-menu-row>span:first-child{flex:0 0 20px;text-align:center;}
+.pet-home-wrap .pet-card-menu-row .pet-profile-color-control{order:0;position:relative;flex:0 0 auto;margin-left:auto;}
+.pet-home-wrap .pet-card-menu-row .pet-profile-color-control>summary{width:27px;height:27px;min-width:27px;padding:5px;box-sizing:border-box;}
+.pet-home-wrap .pet-card-menu-row .pet-profile-color-picker{right:0;left:auto;z-index:60;}
+.pet-home-wrap .pet-card-menu-row.danger{color:#a33e35;}
+.pet-home-wrap .pet-card-menu-row.is-disabled{opacity:.65;cursor:default;}
+html[data-appearance-mode="dark"] .pet-home-wrap .pet-card-quick-menu>summary{background:#26382f;color:#e1f1e7;border-color:#53675b;}
+html[data-appearance-mode="dark"] .pet-home-wrap .pet-card-quick-menu-panel{background:#1f2a24;border-color:#53675b;}
+html[data-appearance-mode="dark"] .pet-home-wrap .pet-card-menu-row{color:#e4eee7;}
+html[data-appearance-mode="dark"] .pet-home-wrap .pet-card-menu-row.danger{color:#ffb4a9;}
+.pet-home-wrap .pet-home-card.active>.pet-card-quick-menu{display:none;}
