@@ -1091,3 +1091,11 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-quick-
   overflow-wrap:normal!important;
   word-break:keep-all!important;
 }
+
+/* Manter o rótulo "Data de nascimento" em uma única linha ao abrir o prontuário. */
+.pet-home-wrap .pet-inline-detail .profile-data-row:nth-child(3) > .rec-line{
+  white-space:nowrap!important;
+  overflow-wrap:normal!important;
+  word-break:keep-all!important;
+  font-size:12px!important;
+}
