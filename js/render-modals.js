@@ -322,6 +322,17 @@ function renderCustomizeModal(){
         </div>
       </div>
 
+      <div class="customize-section font-color-section">
+        <h3 class="customize-section-title">Cor da fonte</h3>
+        <p class="customize-section-help">Escolha a cor principal dos textos do aplicativo.</p>
+        <div class="font-color-controls">
+          <label for="font-color-picker">Sua cor de texto</label>
+          <input type="color" id="font-color-picker" value="${s.fontColor || (s.appearanceMode === 'dark' ? '#F1F5F2' : '#26352d')}" aria-label="Escolher cor da fonte">
+          <span id="font-color-value" class="mono">${s.fontColor || (s.appearanceMode === 'dark' ? '#F1F5F2' : '#26352d')}</span>
+          <button type="button" class="btn-secondary" data-action="reset-font-color">Cor padrão</button>
+        </div>
+      </div>
+
       <div class="customize-section">
         <h3 class="customize-section-title">Papel de parede</h3><p class="customize-section-help">Escolha um fundo e ajuste sua opacidade para deixar os textos confortáveis de ler.</p>
         <div class="customize-grid">
