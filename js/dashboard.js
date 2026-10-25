@@ -34,4 +34,24 @@
  function renderPetColorControl(a,variant){const swatches=cardColors.map(c=>'<button type="button" class="pet-color-swatch '+((a.cardColor||'branco')===c.id?'chosen':'')+'" data-card-color="'+c.id+'" data-animal-id="'+escapeAttr(a.id)+'" style="--swatch:'+c.value+'" aria-label="Cor '+c.label+'" title="'+c.label+'" aria-pressed="'+((a.cardColor||'branco')===c.id)+'"></button>').join('');if(variant==='card')return '<div class="pet-profile-color-control pet-profile-color-inline" role="group" aria-label="Escolher cor do prontuário">'+swatches+'</div>';return '<details class="pet-profile-color-control"><summary class="icon-btn-ghost" aria-label="Alterar cor do prontuário" title="Alterar cor do prontuário"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a9 9 0 1 0 0 18h1.2a1.8 1.8 0 0 0 1.2-3.1 1.6 1.6 0 0 1 1.1-2.8H18a3 3 0 0 0 3-3c0-5-4-9.1-9-9.1Z"/><circle cx="7.5" cy="10" r="1"/><circle cx="11" cy="6.8" r="1"/><circle cx="16" cy="8.5" r="1"/></svg></summary><div class="pet-profile-color-picker" role="group" aria-label="Cor deste prontuário">'+swatches+'</div></details>';}
  window.renderPetColorControl=renderPetColorControl;
  window.renderSidebar=renderSidebar;window.renderDetail=renderDetail;
+
+ // Remove o aviso de vacinas pendentes da tela inicial, sem alterar os registros.
+ function removeVaccineReminder(){
+   document.querySelectorAll('body *').forEach(el=>{
+     if(el.children.length>0) return;
+     const t=(el.textContent||'').trim();
+     if(!/Tem\\s+1\\s+vacina\\s+esperando\\s+uma\\s+visita\\s+ao\\s+vet/i.test(t)) return;
+     let box=el;
+     for(let i=0;i<4&&box.parentElement&&box.parentElement!==document.body;i++){
+       const p=box.parentElement;
+       if(p.textContent.length<500) box=p;
+       else break;
+     }
+     if(box&&box!==document.body) box.remove();
+   });
+ }
+ if(document.body){
+   removeVaccineReminder();
+   new MutationObserver(removeVaccineReminder).observe(document.body,{childList:true,subtree:true});
+ }
 })();
