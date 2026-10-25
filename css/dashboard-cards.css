@@ -1054,3 +1054,13 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-quick-
 .pet-home-wrap .pet-card-quick-menu-panel > button.pet-card-menu-row:not(.color-row){
   margin:0!important;
 }
+
+/* Aproximar "Cor do card" da opção seguinte, sem alterar as demais opções do menu. */
+.pet-home-wrap .pet-home-card .pet-card-quick-menu-panel .pet-card-menu-row.color-row{
+  margin-bottom:-5px!important;
+  padding-bottom:2px!important;
+  gap:4px!important;
+}
+.pet-home-wrap .pet-home-card .pet-card-quick-menu-panel .pet-card-menu-row.color-row .pet-profile-color-inline{
+  margin-bottom:0!important;
+}
