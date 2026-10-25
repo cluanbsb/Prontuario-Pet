@@ -1040,3 +1040,17 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-quick-
 html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-quick-menu-panel .pet-card-menu-row.color-row > button.pet-card-color-group-toggle[data-color-group-toggle]{
   border-color:#fff!important;
 }
+
+/* Menu do card: reduzir o espaçamento vertical entre as opções. */
+.pet-home-wrap .pet-card-quick-menu-panel{
+  gap:1px!important;
+  padding:5px!important;
+}
+.pet-home-wrap .pet-card-quick-menu-panel > .pet-card-menu-row:not(.color-row){
+  min-height:29px!important;
+  padding:4px 7px!important;
+  line-height:1.2!important;
+}
+.pet-home-wrap .pet-card-quick-menu-panel > button.pet-card-menu-row:not(.color-row){
+  margin:0!important;
+}
