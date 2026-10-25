@@ -1,5 +1,5 @@
 /* Prontuário Pet — atualização confiável dos arquivos publicados. */
-const CACHE_NAME = 'prontuario-pet-v104';
+const CACHE_NAME = 'prontuario-pet-v105';
 const APP_SHELL = ['./','./index.html','./manifest.json','./icon-192.png','./icon-512.png'];
 
 self.addEventListener('install', (event) => {
