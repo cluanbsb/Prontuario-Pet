@@ -751,3 +751,8 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-arrow{
 .pet-home-wrap .pet-card-quick-menu-panel .pet-card-menu-row.color-row>span:first-child{
   order:0!important;flex:1 1 auto!important;width:auto!important;min-width:0!important;text-align:left!important;font-size:12px!important;
 }
+
+
+/* Na tag de vacina atrasada, remover a bolinha decorativa antes do alerta ⚠️. */
+.pet-home-wrap .pet-name-alerts .pet-status.alert::before{content:none!important;display:none!important;}
+.pet-home-wrap .pet-name-alerts .pet-status.alert{gap:4px!important;}
