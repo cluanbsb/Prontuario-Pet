@@ -876,3 +876,68 @@ body{color:var(--user-font-color,var(--ink))!important;}
 #customize-overlay .font-color-controls label{font-size:13px;color:var(--ink-soft);}
 #customize-overlay #font-color-picker{width:48px;height:38px;padding:3px;border:1px solid var(--line);border-radius:9px;background:var(--paper-card);cursor:pointer;}
 #customize-overlay #font-color-value{font-size:12px;color:var(--ink-soft);}
+
+/* Personalização da cor da fonte: controle mais claro e aplicação aos textos principais. */
+#customize-overlay .font-color-controls{
+  display:grid!important;
+  grid-template-columns:1fr auto!important;
+  align-items:center!important;
+  gap:8px 12px!important;
+  padding:14px!important;
+  margin-top:12px!important;
+  border:1px solid var(--line)!important;
+  border-radius:14px!important;
+  background:var(--paper-card)!important;
+}
+#customize-overlay .font-color-controls label{
+  grid-column:1!important;
+  font-size:13px!important;
+  font-weight:700!important;
+  color:var(--ink)!important;
+}
+#customize-overlay #font-color-picker{
+  grid-column:2!important;
+  grid-row:1 / span 2!important;
+  width:52px!important;
+  height:44px!important;
+  padding:3px!important;
+  border:1px solid var(--line)!important;
+  border-radius:12px!important;
+  background:var(--paper)!important;
+  box-shadow:0 2px 8px rgba(0,0,0,.08)!important;
+}
+#customize-overlay #font-color-value{
+  grid-column:1!important;
+  font-size:12px!important;
+  font-weight:700!important;
+  letter-spacing:.04em!important;
+  color:var(--ink-soft)!important;
+}
+#customize-overlay [data-action="reset-font-color"]{
+  grid-column:1 / -1!important;
+  justify-self:start!important;
+  margin-top:2px!important;
+}
+
+/* A cor escolhida controla os textos principais, preservando cores semânticas
+   de alertas, botões de ação e estados de sucesso/erro. */
+body,
+body main,
+body h1, body h2, body h3, body h4,
+body p, body label, body legend, body summary,
+body .brand .sub, body .brand .eyebrow,
+body .animal-card .name, body .animal-card .species,
+body .pet-section-head, body .pet-section-head *,
+body .pet-home-card h1, body .pet-home-card h2, body .pet-home-card h3,
+body .pet-home-card p, body .pet-home-card label,
+body .pet-home-card .pet-name, body .pet-home-card .pet-meta,
+body .pet-quick-section h2, body .pet-quick-card h3,
+body .tab-btn:not(.active), body .tab-content h2, body .tab-content h3,
+body .field label, body .field-section-label,
+body .modal-head h3, body .modal-body p,
+body .empty-state h2, body .empty-tab,
+body .user-menu .user-email, body .user-menu .menu-group-label,
+body .settings-section h3, body .settings-label,
+body .record-card h3, body .record-card p:not(.status):not(.error){
+  color:var(--user-font-color,var(--ink));
+}
