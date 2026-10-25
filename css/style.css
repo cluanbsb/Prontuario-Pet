@@ -869,3 +869,10 @@ html[data-appearance-mode="dark"] #customize-overlay .opacity-row{background:var
 .user-menu .user-menu-heading{min-width:0!important}
 .user-menu .user-menu-account .user-email{white-space:nowrap!important;overflow-wrap:normal!important;word-break:normal!important;text-overflow:ellipsis!important;overflow:hidden!important}
 @media(max-width:520px){.user-menu{width:240px!important;min-width:240px!important;max-width:calc(100vw - 16px)!important;right:8px!important;padding:7px 8px!important}}
+
+/* Personalização: cor principal escolhida para os textos do aplicativo. */
+body{color:var(--user-font-color,var(--ink))!important;}
+#customize-overlay .font-color-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;}
+#customize-overlay .font-color-controls label{font-size:13px;color:var(--ink-soft);}
+#customize-overlay #font-color-picker{width:48px;height:38px;padding:3px;border:1px solid var(--line);border-radius:9px;background:var(--paper-card);cursor:pointer;}
+#customize-overlay #font-color-value{font-size:12px;color:var(--ink-soft);}
