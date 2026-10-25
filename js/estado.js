@@ -23,7 +23,7 @@ let editAccountError = '';
 let toastMessage = null;
 let toastTimer = null;
 
-let settings = { colorTheme:'flamingo', font:'divertido', wallpaper:'estrelinhas', wallpaperOpacity:0.5, appearanceMode:'light', fontColor:'#26352d' };
+let settings = { colorTheme:'arara', font:'divertido', wallpaper:'none', wallpaperOpacity:1, appearanceMode:'light', fontColor:'#000000' };
 let pendingSettings = null;
 let customizeOpen = false;
 let animals = [];
