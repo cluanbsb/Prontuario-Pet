@@ -285,6 +285,17 @@ function renderCustomizeModal(){
         <button class="modal-close" data-action="cancel-customize">✕</button>
       </div>
 
+      <div class="customize-section font-color-section">
+        <h3 class="customize-section-title">Cor da fonte</h3>
+        <p class="customize-section-help">Escolha a cor principal dos textos do aplicativo.</p>
+        <div class="font-color-controls">
+          <label for="font-color-picker">Sua cor de texto</label>
+          <input type="color" id="font-color-picker" value="${s.fontColor || (s.appearanceMode === 'dark' ? '#F1F5F2' : '#26352d')}" aria-label="Escolher cor da fonte">
+          <span id="font-color-value" class="mono">${s.fontColor || (s.appearanceMode === 'dark' ? '#F1F5F2' : '#26352d')}</span>
+          <button type="button" class="btn-secondary" data-action="reset-font-color">Cor padrão</button>
+        </div>
+      </div>
+
       <div class="customize-section appearance-mode-section">
         <h3 class="customize-section-title">Modo de aparência</h3>
         <p class="customize-section-help">Escolha a iluminação que fica mais confortável para você.</p>
@@ -311,29 +322,6 @@ function renderCustomizeModal(){
       </div>
 
       <div class="customize-section">
-        <h3 class="customize-section-title">Tipografia</h3>
-        <div class="customize-grid">
-          ${sortedFonts.map(f => `
-            <button type="button" class="swatch ${s.font===f.id?'selected':''}" data-action="set-font" data-value="${f.id}">
-              <div class="preview font-preview" style="font-family:${f.display}">Aa</div>
-              ${f.name}
-            </button>
-          `).join('')}
-        </div>
-      </div>
-
-      <div class="customize-section font-color-section">
-        <h3 class="customize-section-title">Cor da fonte</h3>
-        <p class="customize-section-help">Escolha a cor principal dos textos do aplicativo.</p>
-        <div class="font-color-controls">
-          <label for="font-color-picker">Sua cor de texto</label>
-          <input type="color" id="font-color-picker" value="${s.fontColor || (s.appearanceMode === 'dark' ? '#F1F5F2' : '#26352d')}" aria-label="Escolher cor da fonte">
-          <span id="font-color-value" class="mono">${s.fontColor || (s.appearanceMode === 'dark' ? '#F1F5F2' : '#26352d')}</span>
-          <button type="button" class="btn-secondary" data-action="reset-font-color">Cor padrão</button>
-        </div>
-      </div>
-
-      <div class="customize-section">
         <h3 class="customize-section-title">Papel de parede</h3><p class="customize-section-help">Escolha um fundo e ajuste sua opacidade para deixar os textos confortáveis de ler.</p>
         <div class="customize-grid">
           ${sortedWallpapers.map(w => `
@@ -347,6 +335,18 @@ function renderCustomizeModal(){
           <label for="wallpaper-opacity-slider">Opacidade do papel de parede</label>
           <input type="range" id="wallpaper-opacity-slider" min="0" max="1" step="0.05" value="${s.wallpaperOpacity != null ? s.wallpaperOpacity : 1}">
           <span class="mono" id="wallpaper-opacity-value">${Math.round((s.wallpaperOpacity != null ? s.wallpaperOpacity : 1) * 100)}%</span>
+        </div>
+      </div>
+
+      <div class="customize-section">
+        <h3 class="customize-section-title">Tipografia</h3>
+        <div class="customize-grid">
+          ${sortedFonts.map(f => `
+            <button type="button" class="swatch ${s.font===f.id?'selected':''}" data-action="set-font" data-value="${f.id}">
+              <div class="preview font-preview" style="font-family:${f.display}">Aa</div>
+              ${f.name}
+            </button>
+          `).join('')}
         </div>
       </div>
 
