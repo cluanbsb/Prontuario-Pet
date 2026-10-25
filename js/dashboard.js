@@ -35,23 +35,4 @@
  window.renderPetColorControl=renderPetColorControl;
  window.renderSidebar=renderSidebar;window.renderDetail=renderDetail;
 
- // Remove o aviso de vacinas pendentes da tela inicial, sem alterar os registros.
- function removeVaccineReminder(){
-   document.querySelectorAll('body *').forEach(el=>{
-     if(el.children.length>0) return;
-     const t=(el.textContent||'').trim();
-     if(!/Tem\\s+1\\s+vacina\\s+esperando\\s+uma\\s+visita\\s+ao\\s+vet/i.test(t)) return;
-     let box=el;
-     for(let i=0;i<4&&box.parentElement&&box.parentElement!==document.body;i++){
-       const p=box.parentElement;
-       if(p.textContent.length<500) box=p;
-       else break;
-     }
-     if(box&&box!==document.body) box.remove();
-   });
- }
- if(document.body){
-   removeVaccineReminder();
-   new MutationObserver(removeVaccineReminder).observe(document.body,{childList:true,subtree:true});
- }
 })();
