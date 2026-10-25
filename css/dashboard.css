@@ -209,3 +209,16 @@
 
 /* Aumenta o espaço entre a assinatura e a saudação do usuário. */
 .brand .brand-tagline+h1{margin-top:35px!important}
+
+/* O nome do pet mantém cor, família e tamanho ao abrir/fechar o prontuário. */
+.pet-home-wrap .pet-home-card .pet-card-top .pet-name,
+.pet-home-wrap .pet-home-card.active .pet-card-top .pet-name,
+.pet-home-wrap .pet-home-card .pet-card-top .pet-home-card-select .pet-name{
+  color:var(--ink,#26352d)!important;
+  font-family:inherit!important;
+  font-size:17px!important;
+  font-weight:750!important;
+  line-height:1.15!important;
+  text-decoration:none!important;
+  -webkit-text-fill-color:currentColor!important;
+}
