@@ -713,3 +713,15 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-arrow{
 .pet-home-wrap .pet-card-menu-row.color-row{justify-content:flex-start!important;}
 .pet-home-wrap .pet-card-menu-row.color-row .pet-profile-color-control{order:-1!important;margin-left:0!important;margin-right:2px!important;}
 .pet-home-wrap .pet-card-menu-row.color-row>span:first-child{order:0!important;flex:1 1 auto!important;}
+
+
+/* Ícone de escolher cor sem moldura e menu do prontuário disponível também aberto. */
+.pet-home-wrap .pet-card-menu-row.color-row .pet-profile-color-control>summary,
+.pet-home-wrap .pet-card-menu-row.color-row .pet-profile-color-control>summary.icon-btn{
+  border:0!important;outline:0!important;box-shadow:none!important;background:transparent!important;
+  border-radius:0!important;
+}
+.pet-home-wrap .pet-home-card.active>.pet-card-quick-menu{display:block!important;}
+.pet-home-wrap .pet-home-card:has(.pet-card-quick-menu[open]){z-index:95!important;}
+.pet-home-wrap .pet-home-card.active:has(.pet-card-quick-menu[open]){z-index:96!important;}
+.pet-home-wrap .pet-home-card.active .pet-card-quick-menu{display:block!important;}
