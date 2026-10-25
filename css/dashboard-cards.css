@@ -699,3 +699,11 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-arrow{
   .pet-home-wrap .pet-home-card{padding-bottom:35px!important;}
   .pet-home-wrap .pet-home-card .pet-card-arrow{bottom:7px!important;}
 }
+
+
+/* A abertura e o fechamento são feitos clicando no cabeçalho do card; não mostrar + ou −. */
+.pet-home-wrap .pet-home-card .pet-card-arrow{display:none!important;}
+.pet-home-wrap .pet-home-card{padding-bottom:18px!important;}
+.pet-home-wrap .pet-home-card .pet-home-card-select{padding-bottom:0!important;cursor:pointer!important;}
+.pet-home-wrap .pet-home-card .pet-card-top{cursor:pointer!important;}
+@media(max-width:520px){.pet-home-wrap .pet-home-card{padding-bottom:14px!important;}}
