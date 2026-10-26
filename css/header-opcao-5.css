@@ -32,3 +32,17 @@
  .sidebar .brand-pets-art{width:min(72%,340px)!important;height:auto!important;aspect-ratio:360/230!important;right:auto!important;bottom:auto!important;opacity:.98}
 }
 @media(max-width:390px){.sidebar .brand-top{min-height:320px!important}.sidebar .brand .brand-name{white-space:normal!important}.sidebar .brand-pets-art{width:min(82%,300px)!important;height:auto!important;right:auto!important}}
+
+/* Neutraliza regras antigas do cabeçalho que adicionavam decoração e alteravam a tipografia. */
+.sidebar>.brand>.brand-top:before,
+.sidebar>.brand>.brand-top:after{content:none!important;display:none!important}
+.sidebar>.brand>.brand-top>div:first-child{max-width:none!important;padding-right:0!important}
+.sidebar>.brand .brand-top .eyebrow>span{letter-spacing:normal!important}
+.sidebar>.brand .brand-top .brand-name{font-size:inherit!important;line-height:inherit!important;letter-spacing:.045em!important;transform:none!important;text-shadow:none!important}
+.sidebar>.brand .brand-top h1{font-size:clamp(36px,4.2vw,58px)!important;line-height:1.08!important;letter-spacing:-.025em!important;word-spacing:normal!important;text-shadow:none!important;transform:none!important}
+.sidebar>.brand .brand-top .sub{font-size:clamp(15px,1.65vw,21px)!important;line-height:1.5!important;letter-spacing:normal!important;word-spacing:normal!important;text-shadow:none!important;transform:none!important}
+@media(max-width:760px){
+ .sidebar>.brand>.brand-top>div:first-child{max-width:100%!important;padding-right:0!important}
+ .sidebar>.brand .brand-top h1{font-size:clamp(34px,8.2vw,48px)!important;line-height:1.08!important;letter-spacing:-.025em!important}
+ .sidebar>.brand .brand-top .sub{font-size:clamp(14px,3.7vw,18px)!important;line-height:1.45!important;max-width:100%!important}
+}
