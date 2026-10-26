@@ -50,7 +50,7 @@ jobs:
           }
           console.log('Todos os ' + refs.length + ' recursos locais referenciados em index.html existem.');
           NODE
-      - name: Verificar atalhos do painel e abas existentes
+      - name: Verificar cabeçalho, menu e navegação existente
         shell: bash
         run: |
           node <<'NODE'
@@ -58,24 +58,24 @@ jobs:
           const dashboard = fs.readFileSync('js/dashboard.js', 'utf8');
           const main = fs.readFileSync('js/render-main.js', 'utf8');
           const events = fs.readFileSync('js/eventos.js', 'utf8');
-          const expectedTabs = ['vacinas', 'medicacoes', 'historico', 'perfil'];
           const errors = [];
-          for (const tab of expectedTabs) {
-            if (!dashboard.includes('data-home-tab="' + tab + '"')) {
-              errors.push('Atalho ausente no painel: ' + tab);
-            }
-            if (!main.includes('data-tab="' + tab + '"')) {
-              errors.push('Aba correspondente ausente na navegação: ' + tab);
-            }
+          if (!dashboard.includes('class="brand-menu-btn"') || !dashboard.includes('data-action="toggle-user-menu"')) {
+            errors.push('O cabeçalho não apresenta o botão de menu esperado.');
           }
-          if (!events.includes("document.querySelectorAll('[data-home-tab]')")) {
-            errors.push('Não foi encontrado o manipulador dos atalhos do painel.');
+          if (!events.includes("document.querySelector('[data-action=\"toggle-user-menu\"]')")) {
+            errors.push('O botão do menu não possui manipulador de evento.');
+          }
+          for (const tab of ['perfil', 'vacinas', 'medicacoes', 'historico']) {
+            if (!main.includes('data-tab="' + tab + '"')) errors.push('A aba existente não foi encontrada: ' + tab);
+          }
+          if (!events.includes("document.querySelectorAll('[data-tab]')")) {
+            errors.push('O manipulador da navegação por abas não foi encontrado.');
           }
           if (errors.length) {
-            console.error(errors.join('\n'));
+            console.error(errors.join('\\n'));
             process.exit(1);
           }
-          console.log('Os quatro atalhos do painel correspondem a abas existentes e possuem manipulador de eventos.');
+          console.log('Cabeçalho, botão de menu e abas existentes verificados.');
           NODE
       - name: Verificar tratamento de falha e salvamento no Firebase
         shell: bash
