@@ -110,7 +110,9 @@ jobs:
           const fs = require('node:fs');
           const events = fs.readFileSync('js/eventos.js', 'utf8');
           const errors = [];
-          const animalDelete = events.slice(events.indexOf("const delAnimalBtn"), events.indexOf("document.querySelectorAll('[data-action=\"add-record\"]')"));
+          const animalStart = events.indexOf("document.querySelectorAll('[data-action=\"delete-animal\"]')");
+          const animalEnd = events.indexOf("document.querySelectorAll('[data-action=\"add-record\"]')", animalStart);
+          const animalDelete = events.slice(animalStart, animalEnd);
           const recordDelete = events.slice(events.indexOf("document.querySelectorAll('[data-action=\"delete-record\"]')"), events.indexOf("document.querySelectorAll('[data-action=\"close-modal\"]')"));
           if (!animalDelete.includes('if(!loaded || loadError)') || !animalDelete.includes('onConfirm')) {
             errors.push('A exclusão do prontuário não possui proteção de carregamento e confirmação.');
