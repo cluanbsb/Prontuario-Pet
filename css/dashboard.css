@@ -389,3 +389,78 @@ html[data-appearance-mode="dark"] .sidebar>.brand .brand-menu-btn{background:#f7
  .sidebar>.brand .brand-menu-btn{top:14px!important;right:14px!important;width:54px!important;height:54px!important;border-radius:17px!important;}
  .sidebar>.brand .brand-menu-btn svg{width:28px!important;height:28px!important;}
 }
+
+/* Opção 5 — cabeçalho humanizado, com foco na leitura e ilustrações discretas. */
+.sidebar>.brand{max-width:1240px!important;padding:18px 0 20px!important;}
+.sidebar>.brand .brand-top{
+  min-height:238px!important;padding:28px 34px!important;align-items:center!important;
+  border-radius:24px!important;border:1px solid #d7e6f5!important;
+  background:linear-gradient(120deg,#f8fbff 0%,#edf5ff 62%,#e8f6f5 100%)!important;
+  box-shadow:0 4px 14px rgba(38,78,135,.055)!important;
+}
+.sidebar>.brand .brand-top:before{
+  width:220px!important;height:160px!important;right:-28px!important;bottom:-72px!important;
+  border-radius:58% 42% 0 0!important;background:#d9f0e8!important;opacity:.7!important;
+}
+.sidebar>.brand .brand-top:after{
+  content:"🐾"!important;right:30%!important;bottom:20px!important;width:auto!important;
+  font-size:20px!important;letter-spacing:0!important;opacity:.24!important;filter:none!important;
+}
+.sidebar>.brand .brand-copy{max-width:68%!important;padding:0!important;}
+.sidebar>.brand .brand-top .eyebrow{
+  gap:9px!important;margin:0 0 13px!important;font-size:clamp(13px,1.5vw,17px)!important;
+  letter-spacing:.07em!important;color:#245aa0!important;
+}
+.sidebar>.brand .brand-top .eyebrow>span:first-child{font-size:clamp(27px,3vw,36px)!important;}
+.sidebar>.brand .brand-divider{height:28px!important;background:#a8c5e6!important;}
+.sidebar>.brand .brand-top h1{
+  color:#164b91!important;font-size:clamp(30px,4vw,45px)!important;
+  line-height:1.12!important;letter-spacing:-.02em!important;font-weight:800!important;
+}
+.sidebar>.brand .brand-top .sub{
+  max-width:480px!important;margin:9px 0 0!important;color:#526b87!important;
+  font-family:Inter,Arial,sans-serif!important;font-size:clamp(14px,1.4vw,17px)!important;line-height:1.5!important;
+}
+.sidebar>.brand .brand-pets-art{
+  position:absolute!important;z-index:1!important;right:clamp(82px,11vw,150px)!important;bottom:10px!important;
+  display:flex!important;align-items:flex-end!important;gap:2px!important;
+  font-size:clamp(50px,6vw,78px)!important;line-height:1!important;
+  filter:saturate(.78)!important;pointer-events:none!important;
+}
+.sidebar>.brand .brand-pets-art span:first-child{transform:rotate(-4deg)!important;}
+.sidebar>.brand .brand-pets-art span:last-child{font-size:.88em!important;transform:translateY(-2px) rotate(4deg)!important;}
+.sidebar>.brand .brand-menu-btn{
+  top:20px!important;right:20px!important;width:50px!important;height:50px!important;
+  min-width:50px!important;border-radius:15px!important;background:#fff!important;
+  border:1px solid #dbe7f5!important;box-shadow:none!important;
+}
+.sidebar>.brand .brand-menu-btn svg{width:25px!important;height:25px!important;stroke:#245aa0!important;stroke-width:2!important;}
+html[data-appearance-mode="dark"] .sidebar>.brand .brand-top{
+  background:linear-gradient(120deg,#1e2d42 0%,#22364d 62%,#203d3d 100%)!important;
+  border-color:#405a73!important;
+}
+html[data-appearance-mode="dark"] .sidebar>.brand .brand-top h1{color:#e7f1ff!important;}
+html[data-appearance-mode="dark"] .sidebar>.brand .brand-top .eyebrow{color:#a9ccff!important;}
+html[data-appearance-mode="dark"] .sidebar>.brand .brand-top .sub{color:#c1d0e2!important;}
+html[data-appearance-mode="dark"] .sidebar>.brand .brand-divider{background:#587ca6!important;}
+html[data-appearance-mode="dark"] .sidebar>.brand .brand-menu-btn{background:#f8fbff!important;border-color:#dbe7f5!important;}
+@media(max-width:700px){
+ .sidebar>.brand{padding:12px 0 18px!important;}
+ .sidebar>.brand .brand-top{min-height:215px!important;padding:22px 18px!important;align-items:flex-start!important;border-radius:21px!important;}
+ .sidebar>.brand .brand-copy{max-width:100%!important;padding:44px 0 0!important;}
+ .sidebar>.brand .brand-top .eyebrow{font-size:12px!important;gap:7px!important;margin-bottom:12px!important;letter-spacing:.04em!important;}
+ .sidebar>.brand .brand-top .eyebrow>span:first-child{font-size:28px!important;}
+ .sidebar>.brand .brand-divider{height:25px!important;}
+ .sidebar>.brand .brand-top h1{font-size:clamp(29px,7.5vw,38px)!important;max-width:100%!important;}
+ .sidebar>.brand .brand-top .sub{font-size:13px!important;line-height:1.4!important;max-width:75%!important;margin-top:7px!important;}
+ .sidebar>.brand .brand-pets-art{right:10px!important;bottom:8px!important;font-size:47px!important;gap:0!important;}
+ .sidebar>.brand .brand-top:after{right:42%!important;bottom:14px!important;font-size:15px!important;}
+ .sidebar>.brand .brand-menu-btn{top:12px!important;right:12px!important;width:44px!important;height:44px!important;min-width:44px!important;border-radius:13px!important;}
+ .sidebar>.brand .brand-menu-btn svg{width:23px!important;height:23px!important;}
+}
+@media(max-width:360px){
+ .sidebar>.brand .brand-top{min-height:220px!important;padding:18px 14px!important;}
+ .sidebar>.brand .brand-copy{padding-top:44px!important;}
+ .sidebar>.brand .brand-top .sub{max-width:78%!important;font-size:12px!important;}
+ .sidebar>.brand .brand-pets-art{font-size:39px!important;right:7px!important;}
+}
