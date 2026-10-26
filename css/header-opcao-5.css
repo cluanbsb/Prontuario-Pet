@@ -13,9 +13,9 @@
 .sidebar .brand-menu-btn{grid-area:menu!important;align-self:start!important;z-index:5!important;width:86px!important;height:86px!important;flex:0 0 86px!important;margin:0!important;border-radius:24px!important;background:#fff!important;border:1px solid #e2eaf2!important;box-shadow:0 5px 16px rgba(35,72,115,.12)!important;color:#2862ad!important}
 .sidebar .brand .brand-menu-btn svg{width:42px!important;height:42px!important;stroke-width:2.2!important}
 .sidebar .brand-pets-art{grid-area:art!important;position:absolute!important;right:clamp(0px,3vw,38px)!important;bottom:0!important;width:min(44%,420px)!important;height:auto!important;aspect-ratio:360/230!important;z-index:1!important;pointer-events:none!important}
-.sidebar .brand-pets-svg{width:100%!important;height:100%!important;display:block!important;overflow:visible!important;preserveAspectRatio:xMidYMax meet!important}
+.sidebar .brand-pets-svg{width:100%!important;height:auto!important;aspect-ratio:360/230!important;display:block!important;overflow:visible!important;object-fit:contain!important}
 .sidebar .brand-pets-art~.brand-menu-btn{position:relative!important}
-.sidebar .brand:after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle at 53% 28%,rgba(191,217,242,.55) 0 3px,transparent 4px),radial-gradient(circle at 57% 24%,rgba(191,217,242,.55) 0 3px,transparent 4px),radial-gradient(circle at 60% 28%,rgba(191,217,242,.55) 0 3px,transparent 4px);opacity:.45;z-index:0}
+.sidebar .brand:after{content:none!important}
 .sidebar .brand .user-menu{z-index:10!important}
 .sidebar>.sidebar-actions{max-width:1240px!important;margin:0 auto!important}
 @media(max-width:760px){
