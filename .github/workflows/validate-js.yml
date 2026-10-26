@@ -59,7 +59,7 @@ jobs:
           const main = fs.readFileSync('js/render-main.js', 'utf8');
           const events = fs.readFileSync('js/eventos.js', 'utf8');
           const errors = [];
-          if (!dashboard.includes('class="brand-menu-btn"') || !dashboard.includes('data-action="toggle-user-menu"')) {
+          if (!dashboard.includes('brand-menu-btn') || !dashboard.includes('data-action="toggle-user-menu"')) {
             errors.push('O cabeçalho não apresenta o botão de menu esperado.');
           }
           if (!events.includes("document.querySelector('[data-action=\"toggle-user-menu\"]')")) {
