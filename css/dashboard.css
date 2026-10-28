@@ -233,3 +233,7 @@
   .sidebar .brand .eyebrow{margin-bottom:18px!important}
   .sidebar .brand h1{margin-top:0!important}
 }
+
+
+/* Igualar o ícone de patinhas após a saudação ao ícone da marca. */
+.brand .brand-top h1 .greeting-paw{display:inline-flex!important;align-items:center!important;justify-content:center!important;font-size:35px!important;line-height:1!important;vertical-align:middle!important;transform:scale(1.25)!important;transform-origin:center!important;}
