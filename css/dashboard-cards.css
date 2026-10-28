@@ -1117,3 +1117,34 @@ html[data-appearance-mode="dark"] .pet-home-wrap .pet-home-card .pet-card-quick-
   border-color:#d6d6d6!important;
   background:var(--pet-card-tint,#ffffff)!important;
 }
+
+
+/* Ajuste final: reduzir a altura real dos quadros "Informações do prontuário".
+   Estas regras ficam no fim do arquivo para prevalecer sobre estilos anteriores. */
+.detail.home-detail .pet-quick-grid{
+  grid-auto-rows:88px!important;
+}
+.detail.home-detail .pet-quick-link{
+  height:88px!important;
+  min-height:88px!important;
+  max-height:88px!important;
+  padding:9px!important;
+}
+@media(max-width:760px){
+  .detail.home-detail .pet-quick-grid{grid-auto-rows:78px!important;}
+  .detail.home-detail .pet-quick-link{
+    height:78px!important;
+    min-height:78px!important;
+    max-height:78px!important;
+    padding:7px!important;
+  }
+}
+@media(max-width:360px){
+  .detail.home-detail .pet-quick-grid{grid-auto-rows:82px!important;}
+  .detail.home-detail .pet-quick-link{
+    height:82px!important;
+    min-height:82px!important;
+    max-height:82px!important;
+    padding:6px!important;
+  }
+}
