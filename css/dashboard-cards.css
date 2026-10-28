@@ -3,7 +3,7 @@
 .pet-quick-grid{
   display:grid!important;
   grid-template-columns:repeat(4,minmax(0,1fr))!important;
-  grid-auto-rows:96px!important;
+  grid-auto-rows:80px!important;
   align-items:stretch!important;
   gap:14px!important;
 }
@@ -15,12 +15,12 @@
   gap:12px!important;
   width:100%!important;
   min-width:0!important;
-  min-height:96px!important;
-  height:96px!important;
-  max-height:96px!important;
+  min-height:80px!important;
+  height:80px!important;
+  max-height:80px!important;
   overflow:hidden!important;
   box-sizing:border-box!important;
-  padding:12px!important;
+  padding:9px!important;
   cursor:default!important;
   user-select:text!important;
   transform:none!important;
@@ -40,17 +40,17 @@
   line-height:1.4!important;overflow-wrap:anywhere;
 }
 @media(max-width:760px){
-  .pet-quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:86px!important;gap:10px!important}
+  .pet-quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:72px!important;gap:10px!important}
   .pet-quick-link{
     grid-template-columns:36px minmax(0,1fr)!important;
-    min-height:86px!important;height:86px!important;max-height:86px!important;
+    min-height:72px!important;height:72px!important;max-height:72px!important;
     padding:9px!important;gap:7px!important;
   }
   .pet-quick-icon{width:36px!important;height:36px!important;font-size:20px!important}
 }
 @media(max-width:360px){
-  .pet-quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:92px!important}
-  .pet-quick-link{min-height:92px!important;height:92px!important;max-height:92px!important;padding:9px!important;gap:7px!important;grid-template-columns:30px minmax(0,1fr)!important}
+  .pet-quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:78px!important}
+  .pet-quick-link{min-height:78px!important;height:78px!important;max-height:78px!important;padding:9px!important;gap:7px!important;grid-template-columns:30px minmax(0,1fr)!important}
   .pet-quick-icon{width:30px!important;height:30px!important;font-size:18px!important}
   .pet-quick-copy strong{font-size:12px!important}
   .pet-quick-copy small{font-size:10px!important}
