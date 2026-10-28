@@ -290,3 +290,87 @@
   .brand-menu-btn{width:42px;height:42px}
 }
 
+/* Correção de layout da Opção 5: marca à esquerda, saudação à direita.
+   Mantém o botão de menu existente e não cria ações decorativas sem funcionalidade. */
+.brand{
+  display:block!important;
+  width:min(100% - 36px,1240px)!important;
+  margin:18px auto 22px!important;
+  padding:30px clamp(18px,3vw,34px) 24px!important;
+  overflow:visible!important;
+  border:1px solid rgba(45,106,79,.16)!important;
+  border-radius:18px!important;
+  background:#fff!important;
+  box-shadow:0 8px 24px rgba(31,77,57,.07)!important;
+}
+.brand::before{border-radius:18px 18px 0 0}
+.brand-top{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:clamp(18px,3vw,36px)!important;
+}
+.brand-identity{min-width:0;flex:1 1 auto}
+.brand .eyebrow{
+  display:flex!important;
+  align-items:center;
+  gap:10px!important;
+  margin:0!important;
+  color:var(--forest)!important;
+  font-size:clamp(22px,2.3vw,30px)!important;
+  line-height:1.15!important;
+  letter-spacing:0!important;
+}
+.brand .eyebrow span{font-size:1.15em!important}
+.brand .sub{
+  margin:8px 0 0 2px!important;
+  max-width:46ch;
+  color:var(--ink-soft)!important;
+  font-size:14px!important;
+  line-height:1.5!important;
+}
+.brand-actions{
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:clamp(12px,2vw,26px);
+  padding-left:clamp(16px,2.5vw,30px);
+  border-left:1px solid #d9e3df;
+}
+.brand .brand-greeting{
+  margin:0!important;
+  color:var(--ink)!important;
+  font-family:var(--font-body)!important;
+  font-size:clamp(16px,1.8vw,21px)!important;
+  font-weight:600!important;
+  line-height:1.3!important;
+  white-space:nowrap;
+}
+.brand .brand-menu-btn{
+  width:46px!important;height:46px!important;
+  display:grid!important;place-items:center!important;
+  border-radius:50%!important;
+  border:1px solid #dce6e1!important;
+  background:#f8fbf9!important;
+  box-shadow:none!important;
+  position:relative!important;
+  font-size:inherit!important;
+}
+.brand .brand-menu-btn::before,.brand .brand-menu-btn::after{content:none!important;display:none!important}
+.brand .brand-menu-btn svg{
+  display:block!important;width:22px!important;height:22px!important;
+  fill:none!important;stroke:var(--forest)!important;stroke-width:1.8!important;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+@media(max-width:640px){
+  .brand{width:calc(100% - 24px)!important;margin:12px auto 18px!important;padding:25px 16px 18px!important}
+  .brand-top{align-items:flex-start!important;flex-direction:column!important;gap:16px!important}
+  .brand-identity{width:100%}
+  .brand .eyebrow{font-size:21px!important}
+  .brand .sub{font-size:13px!important;margin-top:7px!important}
+  .brand-actions{width:100%;justify-content:space-between;border-left:0;border-top:1px solid #d9e3df;padding:14px 0 0;gap:12px}
+  .brand .brand-greeting{font-size:17px!important;white-space:normal}
+  .brand .brand-menu-btn{width:42px!important;height:42px!important}
+}
+
