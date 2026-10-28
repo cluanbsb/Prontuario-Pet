@@ -520,3 +520,43 @@
   .sidebar .brand .brand-greeting{font-size:24px!important;max-width:76%}
   .sidebar .brand .brand-subtitle{max-width:62%;font-size:12px!important}
 }
+
+
+/* Acabamento de fidelidade — neutraliza regras legadas que aumentavam os spans
+   da marca e garante que apenas o texto do nome use o tamanho tipográfico definido. */
+.sidebar .brand .eyebrow > span:not(.brand-divider){
+  font-size:inherit!important;
+  line-height:1.15!important;
+}
+.sidebar .brand .eyebrow > .brand-divider{
+  display:block!important;
+  width:1px!important;
+  min-width:1px!important;
+  height:28px!important;
+  flex:0 0 1px!important;
+  padding:0!important;
+  margin:0 1px!important;
+  font-size:0!important;
+  line-height:0!important;
+}
+.sidebar .brand .brand-identity{display:block!important}
+.sidebar .brand .brand-hero{display:flex!important}
+.sidebar .brand .brand-copy{width:56%!important;max-width:560px!important}
+.sidebar .brand .brand-greeting{display:block!important}
+.sidebar .brand .brand-subtitle{display:block!important}
+.sidebar .brand .brand-pets-illustration{
+  width:min(44%,320px)!important;
+  right:0!important;
+  bottom:-10px!important;
+}
+@media(max-width:640px){
+  .sidebar .brand .eyebrow > .brand-divider{height:24px!important}
+  .sidebar .brand .brand-copy{width:100%!important;max-width:100%!important}
+  .sidebar .brand .brand-greeting{max-width:68%!important}
+  .sidebar .brand .brand-subtitle{max-width:58%!important}
+  .sidebar .brand .brand-pets-illustration{
+    width:63%!important;
+    right:-6px!important;
+    bottom:-8px!important;
+  }
+}
