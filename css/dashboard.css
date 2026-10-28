@@ -226,7 +226,7 @@
 }
 
 /* Pequeno aumento do espaço entre "Prontuário Pet" e a saudação. */
-.brand .eyebrow + h1{margin-top:18px!important;}
+.brand .eyebrow + h1{margin-top:26px!important;}
 
 /* Cabeçalho mobile: mais respiro entre a marca e a saudação. */
 @media(max-width:760px){
