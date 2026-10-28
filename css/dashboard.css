@@ -205,6 +205,8 @@
 /* Aumenta a marca "PRONTUÁRIO PET" e o ícone de pata para 35 px. */
 .brand .eyebrow{font-size:35px!important}
 .brand .eyebrow span{font-size:35px!important}
+/* Igualar e ampliar o ícone de patinhas do cabeçalho */
+.brand .eyebrow > span[aria-hidden="true"]{font-size:35px!important;line-height:1!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;transform:scale(1.25);transform-origin:center;}
 
 
 /* Aumenta o espaço entre a assinatura e a saudação do usuário. */
