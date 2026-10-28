@@ -374,3 +374,149 @@
   .brand .brand-menu-btn{width:42px!important;height:42px!important}
 }
 
+
+
+/* Opção 5 — composição fiel à referência: marca no topo, saudação à esquerda,
+   menu de duas linhas à direita e ilustrações desenhadas no canto inferior direito. */
+.sidebar .brand{
+  position:relative!important;
+  width:min(calc(100% - 36px),1240px)!important;
+  max-width:1240px!important;
+  min-height:250px;
+  margin:22px auto 24px!important;
+  padding:25px clamp(20px,3vw,38px) 18px!important;
+  overflow:hidden!important;
+  border:1px solid #d9e8ed!important;
+  border-radius:24px!important;
+  background:linear-gradient(112deg,#fff 0%,#f8fcfd 56%,#eaf6f7 100%)!important;
+  box-shadow:0 12px 32px rgba(51,105,119,.09)!important;
+}
+.sidebar .brand::before{
+  height:5px!important;
+  background:linear-gradient(90deg,#83c8d5,#a7d9cf,#d7edf0)!important;
+}
+.sidebar .brand-top{
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:flex-start!important;
+  justify-content:space-between!important;
+  gap:18px!important;
+}
+.sidebar .brand-identity{flex:1 1 auto;min-width:0}
+.sidebar .brand .eyebrow{
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  gap:12px!important;
+  margin:0!important;
+  color:#315d70!important;
+  font-family:var(--font-body)!important;
+  font-size:clamp(18px,2vw,24px)!important;
+  font-weight:800!important;
+  letter-spacing:.08em!important;
+  line-height:1.15!important;
+}
+.sidebar .brand-paw{
+  display:block!important;
+  width:29px!important;
+  height:29px!important;
+  flex:0 0 29px;
+  fill:#70b9cb!important;
+}
+.sidebar .brand-divider{
+  display:block!important;
+  width:1px!important;
+  height:28px!important;
+  background:#b7d7df!important;
+}
+.sidebar .brand-menu-btn{
+  width:44px!important;
+  height:44px!important;
+  flex:0 0 44px!important;
+  display:grid!important;
+  place-items:center!important;
+  border:1px solid #d9e8ed!important;
+  border-radius:14px!important;
+  background:#fff!important;
+  box-shadow:0 4px 12px rgba(48,94,106,.08)!important;
+}
+.sidebar .brand-menu-btn::before,.sidebar .brand-menu-btn::after{display:none!important;content:none!important}
+.sidebar .brand-menu-btn svg{
+  display:block!important;
+  width:23px!important;
+  height:23px!important;
+  fill:none!important;
+  stroke:#4d93a4!important;
+  stroke-width:2!important;
+  stroke-linecap:round!important;
+}
+.sidebar .brand-hero{
+  position:relative;
+  display:flex;
+  align-items:flex-end;
+  min-height:168px;
+  padding-top:15px;
+}
+.sidebar .brand-copy{
+  position:relative;
+  z-index:2;
+  width:60%;
+  max-width:650px;
+  padding:0 0 8px;
+}
+.sidebar .brand .brand-greeting{
+  margin:0!important;
+  color:#244f68!important;
+  font-family:var(--font-display)!important;
+  font-size:clamp(27px,3.2vw,42px)!important;
+  font-weight:600!important;
+  letter-spacing:-.025em!important;
+  line-height:1.15!important;
+  white-space:normal!important;
+}
+.sidebar .brand .brand-subtitle{
+  max-width:42ch;
+  margin:11px 0 0!important;
+  color:#567681!important;
+  font-family:var(--font-body)!important;
+  font-size:clamp(14px,1.5vw,17px)!important;
+  line-height:1.55!important;
+}
+.sidebar .brand-pets-illustration{
+  position:absolute;
+  right:0;
+  bottom:-18px;
+  width:min(46%,340px);
+  height:auto;
+  max-height:190px;
+  overflow:visible;
+  z-index:1;
+}
+.sidebar .brand .user-menu{
+  z-index:30;
+}
+@media(max-width:640px){
+  .sidebar .brand{
+    width:calc(100% - 24px)!important;
+    min-height:245px;
+    margin:12px auto 18px!important;
+    padding:20px 16px 12px!important;
+    border-radius:19px!important;
+  }
+  .sidebar .brand-top{align-items:center!important;gap:10px!important}
+  .sidebar .brand .eyebrow{font-size:17px!important;gap:8px!important;letter-spacing:.045em!important}
+  .sidebar .brand-paw{width:25px!important;height:25px!important;flex-basis:25px!important}
+  .sidebar .brand-divider{height:24px!important}
+  .sidebar .brand-menu-btn{width:40px!important;height:40px!important;flex-basis:40px!important;border-radius:12px!important}
+  .sidebar .brand-hero{min-height:190px;align-items:flex-start;padding-top:20px}
+  .sidebar .brand-copy{width:100%;max-width:100%;padding:0;z-index:2}
+  .sidebar .brand .brand-greeting{max-width:70%;font-size:27px!important;line-height:1.15!important}
+  .sidebar .brand .brand-subtitle{max-width:58%;font-size:13px!important;line-height:1.45!important;margin-top:8px!important}
+  .sidebar .brand-pets-illustration{width:65%;max-width:255px;right:-8px;bottom:-10px;max-height:150px}
+}
+@media(max-width:380px){
+  .sidebar .brand .eyebrow{font-size:15px!important;gap:6px!important}
+  .sidebar .brand-paw{width:22px!important;height:22px!important;flex-basis:22px!important}
+  .sidebar .brand .brand-greeting{font-size:24px!important;max-width:76%}
+  .sidebar .brand .brand-subtitle{max-width:62%;font-size:12px!important}
+}
