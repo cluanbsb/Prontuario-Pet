@@ -237,3 +237,8 @@
 
 /* Igualar o ícone de patinhas após a saudação ao ícone da marca. */
 .brand .brand-top .sub .greeting-paw{display:inline-flex!important;align-items:center!important;justify-content:center!important;font-size:25px!important;line-height:1!important;vertical-align:middle!important;transform:none!important;transform-origin:center!important;}
+
+/* Ícone de patinha com coração: substitui o emoji sem alterar o espaço reservado. */
+.brand .eyebrow .brand-paw-heart{display:inline-flex!important;align-items:center!important;justify-content:center!important;flex:none;line-height:1!important;}
+.brand .eyebrow .brand-paw-heart svg{display:block;width:1em;height:1em;}
+.brand .brand-top .sub .paw-heart-icon svg{display:block;width:1em;height:1em;}
